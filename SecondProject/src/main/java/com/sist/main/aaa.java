@@ -1,5 +1,5 @@
 package com.sist.main;
 
-public class Test {
+public class aaa {
 
 }
