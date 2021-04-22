@@ -1,4 +1,4 @@
-package com.sist.vo;
+package com.sist.foreign;
 /*
  * 	NO           NOT NULL NUMBER         
 	CNO          NOT NULL NUMBER         

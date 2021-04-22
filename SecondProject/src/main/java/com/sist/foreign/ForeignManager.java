@@ -1,11 +1,11 @@
-package com.sist.dao;
+package com.sist.foreign;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.sist.vo.ForeignVO;
+import com.sist.foreign.ForeignVO;
 
 public class ForeignManager {
 	

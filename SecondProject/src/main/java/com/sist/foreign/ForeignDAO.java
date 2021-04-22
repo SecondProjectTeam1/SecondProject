@@ -1,10 +1,10 @@
-package com.sist.dao;
+package com.sist.foreign;
 import java.sql.*;
 import java.util.*;
 
 
 import com.sist.jdbc.*;
-import com.sist.vo.ForeignVO;
+import com.sist.foreign.ForeignVO;
 
 public class ForeignDAO {
 	private DAOManager dm=new DAOManager();
