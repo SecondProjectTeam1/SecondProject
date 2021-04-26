@@ -76,7 +76,7 @@
 
   <main class="site-main">
     
-    <jsp:include page="${main_jsp }"></jsp:include>
+   <tiles:insertAttribute name="home"/>
     
 
   </main>

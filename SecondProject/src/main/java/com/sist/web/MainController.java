@@ -1,17 +1,13 @@
 package com.sist.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-
-	@GetMapping("main/main.do")
-	public String main_main(Model model)
+	@RequestMapping("main/main.do")
+	public String main_main()
 	{
-		
-		model.addAttribute("main_jsp","../main/home.jsp");
-		return "main/main";
+		return "main";
 	}
 }
