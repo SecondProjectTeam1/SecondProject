@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,10 +76,10 @@
     </div>
   </header>
 	<!--================ End Header Menu Area =================-->
-
+<tiles:insertAttribute name="home"></tiles:insertAttribute>
   <main class="site-main">
     
-   <tiles:insertAttribute name="home"/>
+   <%-- <tiles:insertAttribute name="home"/> --%>
     
 
   </main>
