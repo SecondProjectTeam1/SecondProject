@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="../vendors/owl-carousel/owl.carousel.min.css">
 
   <link rel="stylesheet" href="../css/style.css">
+  
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css'>
+   <link rel="stylesheet" href="../css/maincard_style.css">
 </head>
 <body>
   <!--================ Start Header Menu Area =================-->
