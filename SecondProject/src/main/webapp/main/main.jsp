@@ -79,11 +79,8 @@
     </div>
   </header>
 	<!--================ End Header Menu Area =================-->
-<tiles:insertAttribute name="home"></tiles:insertAttribute>
-  <main class="site-main">
-    
-   <%-- <tiles:insertAttribute name="home"/> --%>
-    
+
+ <jsp:include page="${main_jsp }"></jsp:include>  
 
   </main>
 
