@@ -14,5 +14,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
 		<mapper resource="com/sist/mapper/bookf-mapper.xml"/>
 		<mapper resource="com/sist/mapper/books-mapper.xml"/>
+		<mapper resource="com/sist/mapper/video-mapper.xml"/>
 	</mappers>
 </configuration>

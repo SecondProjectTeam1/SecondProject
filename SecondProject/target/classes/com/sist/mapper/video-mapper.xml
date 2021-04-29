@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.video-mapper">
+<select id="viedoListData" resultType="com.sist.vo.VideoVO" parameterType="hashmap">
+SELECT no, cno, category, title, teacher, poster, price, content1, content2, content3, content4, content5, num
+FROM (SELECT no, cno, category, title, teacher, poster, price, content1, content2, content3, content4, content5, rownum as num
+FROM (SELECT no, cno, category, title, teacher, poster, price, content1, content2, content3, content4, content5
+FROM video WHERE cno=#{cno} ORDER BY no ASC))
+WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="videoTotalPage" resultType="int" parameterType="int">
+SELECT CEIL(COUNT(*)/9.0) FROM video
+WHERE cno=#{cno}
+</select>
+<select id="videoCategoryData" resultType="com.sist.vo.VideoCategoryVO">
+SELECT * FROM video_category
+</select>
+<select id="videoDetailData" resultType="com.sist.vo.VideoVO" parameterType="int">
+SELECT * FROM video
+WHERE no=#{no}
+</select>
+</mapper>
