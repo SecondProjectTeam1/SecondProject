@@ -203,7 +203,7 @@
                     </nav> --%>
 	 
 	
-	 		 <div class="blog-pagination justify-content-center d-flex">
+	 		 <%-- <div class="blog-pagination justify-content-center d-flex">
                           <ul class="pagination">      
                             <c:forEach var="i" begin="${startPage}" end="${endPage} ">
                              <c:if test="${curpage==i} ">
@@ -217,7 +217,7 @@
                               </li>
                             </c:forEach>
                           </ul>
-                      </div> 
+                      </div>  --%>
 
 	<!-- ================ top product area start ================= -->	
 	<section class="related-product-area">

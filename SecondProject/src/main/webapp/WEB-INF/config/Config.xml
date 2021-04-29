@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BookVO" alias="BookVO"/>
 		<typeAlias type="com.sist.vo.BookfVO" alias="BookfVO"/>
 		<typeAlias type="com.sist.vo.BooksVO" alias="BooksVO"/>
+		<typeAlias type="com.sist.vo.BooksCategoryVO" alias="BooksCategoryVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
