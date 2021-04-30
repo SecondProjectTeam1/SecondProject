@@ -12,14 +12,54 @@ public class NewsController {
 	@Autowired
 	private NewsManager mgr;
 	
+	@RequestMapping("news/main.do")
+	public String news_main() {
+		return "news/main";
+	}
 	@RequestMapping("news/news.do")
-	public String news_list(String fd,Model model) {
-		if(fd==null)
-			fd="IT";
+	public String news_list(String fd,String word,String page,Model model) {
+		if (page == null) page = "1";
+		int curpage = Integer.parseInt(page);
+		if(fd==null) fd="IT";
 		List<Item> list=mgr.naverNeswData(fd);
+		List<Item> res = new ArrayList<Item>();
+		
+		int count;
+		if(word!=null){
+			List<Item> temp = new ArrayList<Item>();
+			for(Item i:list){
+				if(i.getTitle().contains(word)) temp.add(i);
+				else if(i.getAuthor().contains(word)) temp.add(i);
+			}
+			count = temp.size();
+			int i=0;
+			if(curpage!=1) i=8*(curpage-1);
+			for(;i<8*curpage;i++){
+				res.add(list.get(i));
+			}
+		}
+		else{
+			count = list.size();
+			int i=0;
+			if(curpage!=1) i=8*(curpage-1);
+			for(;i<8*curpage;i++){
+				res.add(list.get(i));
+			}
+		}
+		final int BLOCK = 5;
+		int totalPage = (int) (Math.ceil(count / 8.0));
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		if (endPage > totalPage) endPage = totalPage;
+		
+		model.addAttribute("block", BLOCK);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totalpage", totalPage);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("list", res);
 		model.addAttribute("fd", fd.toUpperCase());
-		model.addAttribute("list", list);
-		return "news/news";
+		return "news/content";
 	}
 }
 
