@@ -135,6 +135,7 @@
                
                   <div class="card-product__img">
                    <a href="video_detail.do?no=${vo.no}">
+                   <input type=hidden name=page value="${curpage }">
                     <img class="card-img" src="${vo.poster }" alt="">
                     </a> 
                     <ul class="card-product__imgOverlay">
@@ -166,11 +167,12 @@
 
 	<!-- ==============페이지 처리=================== -->
 	
-			<%-- <nav class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">
+			<nav class="blog-pagination justify-content-center d-flex">
+			    
+                         <ul class="pagination">
                            <c:if test="${startPage>1 }">
                               <li class="page-item">
-                                  <a href="junggo_list.do?cno=${curcno}&page=${startPage-1}" class="page-link" aria-label="Previous"> 이전
+                                  <a href="video_list.do?cno=${curcno}&page=${startPage-1}" class="page-link" aria-label="Previous"> 이전
                                       <span aria-hidden="true">
                                           <span class="lnr lnr-chevron-left"></span>
                                       </span>
@@ -178,7 +180,7 @@
                               </li>
                              </c:if> 
                               
-                            <c:forEach var="i" begin="${startPage}" end="${endPage} ">
+                            <c:forEach var="i" begin="${startPage}" end="${endPage}">
                              <c:if test="${curpage==i} ">
                              	<c:set var="type" value="page-item active"/>
                              </c:if>                            
@@ -186,39 +188,21 @@
                                	<c:set var="type" value="page-item"/>
                                </c:if>
                              <li ${type }>
-                                  <a href="#" class="page-link">${i }</a>
+                                  <a href="video_list.do?cno=${curcno}&page=${i}" class="page-link">${i }</a>
                               </li>
                             </c:forEach>
                             
                            <c:if test="${endPage<totalpage}">
                               <li class="page-item">
-                                  <a href="junggo_list.do?cno=${curcno}&page=${endPage+1}" class="page-link" aria-label="Next"> 다음
+                                  <a href="video_list.do?cno=${curcno}&page=${endPage+1}" class="page-link" aria-label="Next"> 다음
                                       <span aria-hidden="true">
                                           <span class="lnr lnr-chevron-right"></span>
                                       </span>
                                   </a>
                               </li>
                              </c:if> 
-                          </ul>
-                    </nav> --%>
-	 
-	
-	 		 <%-- <div class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">      
-                            <c:forEach var="i" begin="${startPage}" end="${endPage} ">
-                             <c:if test="${curpage==i} ">
-                             	<c:set var="type" value="page-item active"/>
-                             </c:if>                            
-                               <c:if test="${curpage!=i} ">
-                               	<c:set var="type" value="page-item"/>
-                               </c:if>
-                             <li ${type }>
-                                  <a href="#" class="page-link">${i }</a>
-                              </li>
-                            </c:forEach>
-                          </ul>
-                      </div>  --%>
-
+                          </ul> 
+                    </nav> 
 	<!-- ================ top product area start ================= -->	
 	<section class="related-product-area">
 		<div class="container">

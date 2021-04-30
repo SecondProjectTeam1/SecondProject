@@ -57,6 +57,7 @@ public class BooksController {
       model.addAttribute("allPage", allPage);
       model.addAttribute("startPage", startPage);
       model.addAttribute("endPage", endPage);
+      model.addAttribute("test", "hello");
       model.addAttribute("BLOCK", BLOCK);
       
       model.addAttribute("main_jsp", "../junggo/junggo_list.jsp");

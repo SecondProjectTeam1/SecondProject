@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,10 @@
 .main_img{
 	width:450px;
 	height:450px;
+}
+.icon{
+	width:20px;
+	height:20px;
 }
 </style>
 </head>
@@ -104,21 +109,38 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures feature women of all shapes
-						and sizes enjoying themselves .Born between the two world wars, Beryl Cook eventually left Kendrick School in
-						Reading at the age of 15, where she went to secretarial school and then into an insurance office. After moving to
-						London and then Hampton, she eventually married her next door neighbour from Reading, John Cook. He was an
-						officer in the Merchant Navy and after he left the sea in 1956, they bought a pub for a year before John took a
-						job in Southern Rhodesia with a motor company. Beryl bought their young son a box of watercolours, and when
-						showing him how to use it, she decided that she herself quite enjoyed painting. John subsequently bought her a
-						child’s painting set for her birthday and it was with this that she produced her first significant work, a
-						half-length portrait of a dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-						named ‘Hangover’ by Beryl’s husband and</p>
-					<p>It is often frustrating to attempt to plan meals that are designed for one. Despite this fact, we are seeing
-						more and more recipe books and Internet websites that are dedicated to the act of cooking for one. Divorce and
-						the death of spouses or grown children leaving for college are all reasons that someone accustomed to cooking for
-						more than one would suddenly need to learn how to adjust all the cooking practices utilized before into a
-						streamlined plan of cooking that is more efficient for one person creating less</p>
+					<p>${vo.content2 }</p>
+					<table class="table">
+					 <tr>
+					  <td>✍️ 이런 걸 배워요!</td>
+					  <td colspan="2">
+					  <c:forTokens items="${vo.content3 }" delims="^" var="content3">
+					  <img src="clipboards.png" class="icon"> &nbsp;${content3}<br>
+					  </c:forTokens>
+					  </td>
+					 </tr>
+					 <tr>
+					  <td>🎓 이런 분들께 추천드려요!</td>
+					  <td colspan="2">
+					  <c:forTokens items="${vo.content4 }" delims="^" var="content4">
+					  <img src="clipboards.png" class="icon"> &nbsp;${content4}<br>
+					  </c:forTokens>
+					  </td>
+					 </tr>
+					 <tr>
+					  <td>📚 선수 지식, 필요한가요?</td>
+					  <td colspan="2">
+					  <c:forTokens items="${vo.content5 }" delims="^" var="content5">
+					  <img src="clipboards.png" class="icon"> &nbsp;${content5}<br>
+					  </c:forTokens>
+					  </td>
+					 </tr>
+					 <tr>
+					  <td colspan="3" class="text-right"><a href="javascript:history.back();">목록</a>
+					  </td>
+					 </tr>
+					</table>
+					<p></p>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">

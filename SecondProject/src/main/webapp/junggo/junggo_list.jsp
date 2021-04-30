@@ -166,8 +166,9 @@
 
 	<!-- ==============페이지 처리=================== -->
 	
-			<%-- <nav class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">
+			<nav class="blog-pagination justify-content-center d-flex">
+			    
+                         <ul class="pagination">
                            <c:if test="${startPage>1 }">
                               <li class="page-item">
                                   <a href="junggo_list.do?cno=${curcno}&page=${startPage-1}" class="page-link" aria-label="Previous"> 이전
@@ -178,7 +179,7 @@
                               </li>
                              </c:if> 
                               
-                            <c:forEach var="i" begin="${startPage}" end="${endPage} ">
+                            <c:forEach var="i" begin="${startPage}" end="${endPage}">
                              <c:if test="${curpage==i} ">
                              	<c:set var="type" value="page-item active"/>
                              </c:if>                            
@@ -186,11 +187,11 @@
                                	<c:set var="type" value="page-item"/>
                                </c:if>
                              <li ${type }>
-                                  <a href="#" class="page-link">${i }</a>
+                                  <a href="junggo_list.do?cno=${curcno}&page=${i}" class="page-link">${i }</a>
                               </li>
                             </c:forEach>
                             
-                           <c:if test="${endPage<totalpage}">
+                           <c:if test="${endPage<allPage}">
                               <li class="page-item">
                                   <a href="junggo_list.do?cno=${curcno}&page=${endPage+1}" class="page-link" aria-label="Next"> 다음
                                       <span aria-hidden="true">
@@ -199,8 +200,8 @@
                                   </a>
                               </li>
                              </c:if> 
-                          </ul>
-                    </nav> --%>
+                          </ul> 
+                    </nav> 
 	 
 	
 	 		 <%-- <div class="blog-pagination justify-content-center d-flex">

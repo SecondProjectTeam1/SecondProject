@@ -34,8 +34,19 @@ public class VideoController {
 	     
 	    List<VideoVO> list=dao.viedoListData(map);
 	    List<VideoCategoryVO> cList=dao.videoCategoryData();
-	     
-		
+	    int totalpage=dao.videoTotalPage(curcno);
+	
+	    int BLOCK=10;
+	    int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+	    int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	    
+	    if(endPage>totalpage)
+	    	endPage=totalpage;
+	    
+	    model.addAttribute("curcno", curcno);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("totalpage", totalpage);
+	    model.addAttribute("endPage", endPage);	
 	    model.addAttribute("cList", cList);
 	    model.addAttribute("curpage", curpage);
 	    model.addAttribute("list", list);
@@ -46,9 +57,11 @@ public class VideoController {
 	@GetMapping("video/video_detail.do")
 	public String video_detail(String no, Model model)
 	{
+		
 		int vno=Integer.parseInt(no);
 		VideoVO vo=dao.videoDetailData(vno);
-		
+
+	
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../video/video_detail.jsp");
 		return "main/main";
