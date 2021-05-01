@@ -11,12 +11,12 @@ import com.sist.news.*;
 public class NewsController {
 	@Autowired
 	private NewsManager mgr;
-	
+//	
+//	@RequestMapping("news/main.do")
+//	public String news_main() {
+//		return "news/main";
+//	}
 	@RequestMapping("news/main.do")
-	public String news_main() {
-		return "news/main";
-	}
-	@RequestMapping("news/news.do")
 	public String news_list(String fd,String word,String page,Model model) {
 		if (page == null) page = "1";
 		int curpage = Integer.parseInt(page);
@@ -34,17 +34,23 @@ public class NewsController {
 			count = temp.size();
 			int i=0;
 			if(curpage!=1) i=8*(curpage-1);
-			for(;i<8*curpage;i++){
-				res.add(list.get(i));
-			}
+			try{
+				for(;i<8*curpage;i++){
+					res.add(temp.get(i));
+				}
+			}catch (Exception e) {}
+			
 		}
 		else{
 			count = list.size();
 			int i=0;
 			if(curpage!=1) i=8*(curpage-1);
-			for(;i<8*curpage;i++){
-				res.add(list.get(i));
-			}
+			try{
+				for(;i<8*curpage;i++){
+					res.add(list.get(i));
+				}
+			}catch (Exception e) {}
+			
 		}
 		final int BLOCK = 5;
 		int totalPage = (int) (Math.ceil(count / 8.0));
@@ -59,7 +65,7 @@ public class NewsController {
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("list", res);
 		model.addAttribute("fd", fd.toUpperCase());
-		return "news/content";
+		return "news/main";
 	}
 }
 

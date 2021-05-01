@@ -19,42 +19,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-   let page = $('#pageNum');
-   let fd = $('#fd').val();
-   console.log(fd, page);
-   $.ajax({
-		  type:'get',
-		  url:'../news/news.do',
-		  success:function(result) {
-			  $('#news').html(result);
-		  }
-	  })
    $('#searchBtn').click(function(){
-	   let word = $('#word').val();
-	   console.log(word);
-	   $.ajax({
-		    type:'get',
-		    url:'../news/news.do',
-		    data:{"word":word},
-		    success:function(result) {
-			    $('#news').html(result);
-		    }
-	    })
-   })  
-   $('#page').click(function(){
-	   let page = $('#pageNum').val();
+	   let word = $('#searchword').val();
 	   let fd = $('#fd').val();
-	   let word = $('#word').val();
-	   console.log(word,fd,page);
-	   console.log("click");
-	   /* $.ajax({
-		    type:'get',
-		    url:'../news/news.do',
-		    data:{"word":word},
-		    success:function(result) {
-			    $('#news').html(result);
-		    }
-	    }) */
+	   console.log(word);
+	   window.location.href="../news/main.do?fd="+fd+"&word="+word;
    })  
 })
 </script>
@@ -147,7 +116,7 @@ $(function(){
                 <img class="card-img rounded-0" src="../img/blog/cat-post/cat-post-3.jpg" alt="post">
                 <div class="categories_details">
                     <div class="categories_text">
-                        <a href="news.do?fd=IT">
+                        <a href="main.do?fd=IT">
                             <h5>IT</h5>
                         </a>
                         <div class="border_line"></div>
@@ -161,7 +130,7 @@ $(function(){
             <img class="card-img rounded-0" src="../img/blog/cat-post/cat-post-2.jpg" alt="post">
             <div class="categories_details">
               <div class="categories_text">
-                <a href="news.do?fd=sport">
+                <a href="main.do?fd=sport">
                     <h5>Sport</h5>
                 </a>
                 <div class="border_line"></div>
@@ -195,14 +164,92 @@ $(function(){
           <div class="row">
               <div class="col-lg-8">
                   <div class="blog_left_sidebar" id="news">
-                  
+                  <c:if test="${list.size()==0 }">
+					<div class="text-center" style="height:200px">
+					일치하는 검색 결과가 없습니다
+					</div>
+				</c:if>
+				<c:forEach var="vo" items="${list}">
+				  <article class="row blog_item">
+				      <div class="col-md-3">
+				          <div class="blog_info text-right">
+				              <div class="post_tag">
+				                  Category: &nbsp;&nbsp;<a class="active" href="#">${fd}</a>
+				              </div>
+				              <ul class="blog_meta list">
+				                  <li>
+				                      <a href="#">${vo.author}
+				                          <i class="lnr lnr-user"></i>
+				                      </a>
+				                  </li>
+				                  <li>
+				                      <a href="#">${vo.pubDate}
+				                          <i class="lnr lnr-calendar-full"></i>
+				                      </a>
+				                  </li>
+				              </ul>
+				          </div>
+				      </div>
+				      <div class="col-md-9">
+				          <div class="blog_post">
+				              <div class="blog_details">
+				                  <a href="${vo.link}">
+				                      <h2>${vo.title}</h2>
+				                  </a>
+				                  <p>${vo.description}</p>
+				                  <a class="button button-blog" href="${vo.link}">View More</a>
+				              </div>
+				          </div>
+				      </div>
+				  </article>
+				  </c:forEach>
+				  
+				  <input type="hidden" id="fd" value="${fd}">
+				  <input type="hidden" id="word" value="${word}">
+				  <nav class="blog-pagination justify-content-center d-flex">
+					<ul class="pagination">
+				         <c:if test="${startPage>1} ">
+				         <li class="page-item">
+				              <a href="../news/main.do?fd=${fd}&word=${word}&page=${startPage-1}" class="page-link" aria-label="Previous">
+				                  <span aria-hidden="true">
+				                      <span class="lnr lnr-chevron-left"></span>
+				                  </span>
+				              </a>
+				          </li>
+				         </c:if>
+				         
+				         <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+				           <c:if test="${i==curpage}">
+				            <c:set var="type" value="active"/>
+				           </c:if>
+				           <c:if test="${i!=curpage}">
+				            <c:set var="type" value=""/>
+				           </c:if>
+				           <li class="page-item ${type}">
+				              <a href="../news/main.do?fd=${fd}&word=${word}&page=${i}" class="page-link">${i}</a>
+				          </li>
+				         </c:forEach>
+				         
+				         <c:if test="${endPage<totalpage }">
+				         <li class="page-item">
+				              <a href="../news/main.do?fd=${fd}&word=${word}&page=${endPage+1}" class="page-link" aria-label="Next">
+				                  <span aria-hidden="true">
+				                      <span class="lnr lnr-chevron-right"></span>
+				                  </span>
+				              </a>
+				          </li>
+				         </c:if>
+				       </ul>
+				  </nav>
                   </div>
               </div>
+              
+              
               <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                       <aside class="single_sidebar_widget search_widget">
                           <div class="input-group">
-                              <input type="text" class="form-control" id="word" placeholder="Search Posts">
+                              <input type="text" class="form-control" id="searchword" placeholder="Search Posts">
                               <span class="input-group-btn">
                                   <button class="btn btn-default" type="button" id="searchBtn">
                                       <i class="lnr lnr-magnifier"></i>
