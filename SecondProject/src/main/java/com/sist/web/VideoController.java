@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -12,7 +14,9 @@ import com.sist.vo.*;
 @Controller
 public class VideoController {
 	@Autowired
-	private VideoDAO dao;
+	private VideoService service;
+	
+
 	
 	@GetMapping("video/video_list.do")
 	public String video_list(String cno, String page, Model model)
@@ -32,9 +36,9 @@ public class VideoController {
 	     map.put("start", start);
 	     map.put("end", end);
 	     
-	    List<VideoVO> list=dao.viedoListData(map);
-	    List<VideoCategoryVO> cList=dao.videoCategoryData();
-	    int totalpage=dao.videoTotalPage(curcno);
+	    List<VideoVO> list=service.viedoListData(map);
+	    List<VideoCategoryVO> cList=service.videoCategoryData();
+	    int totalpage=service.videoTotalPage(curcno);
 	
 	    int BLOCK=10;
 	    int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -59,11 +63,27 @@ public class VideoController {
 	{
 		
 		int vno=Integer.parseInt(no);
-		VideoVO vo=dao.videoDetailData(vno);
-
-	
+		VideoVO vo=service.videoDetailData(vno);
+		List<VideoReviewVO> list=service.videoReviewListData(vno);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("vno", no);
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../video/video_detail.jsp");
 		return "main/main";
+	}
+	
+	@PostMapping("video/review_insert_ok.do")
+	public String video_review_insert(String no, String name, String msg, String star, Model model, RedirectAttributes ra)
+	{
+		VideoReviewVO vo=new VideoReviewVO();
+		vo.setVno(Integer.parseInt(no));
+		vo.setMsg(msg);
+		vo.setName(name);
+		vo.setStar(Integer.parseInt(star));
+		
+		service.videoReviewInsert(vo);
+		ra.addAttribute("no", Integer.parseInt(no));
+		return "redirect:video_detail.do";
 	}
 }

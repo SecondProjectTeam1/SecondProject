@@ -181,10 +181,10 @@
                              </c:if> 
                               
                             <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                             <c:if test="${curpage==i} ">
+                             <c:if test="${curpage==i}">
                              	<c:set var="type" value="page-item active"/>
                              </c:if>                            
-                               <c:if test="${curpage!=i} ">
+                               <c:if test="${curpage!=i}">
                                	<c:set var="type" value="page-item"/>
                                </c:if>
                              <li ${type }>

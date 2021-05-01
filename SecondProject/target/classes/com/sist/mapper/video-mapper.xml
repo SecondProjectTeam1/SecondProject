@@ -18,7 +18,7 @@ WHERE cno=#{cno}
 SELECT * FROM video_category
 </select>
 <select id="videoDetailData" resultType="com.sist.vo.VideoVO" parameterType="int">
-SELECT * FROM video
+SELECT  no, cno, category, title, teacher, poster, price, content1, content2, content3, content4, NVL(content5, '선수지식 필요없음') as content5 FROM video
 WHERE no=#{no}
 </select>
 </mapper>

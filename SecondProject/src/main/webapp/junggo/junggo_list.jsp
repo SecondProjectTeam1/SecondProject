@@ -11,6 +11,10 @@
 	width:250px;
 	height:300px;
 }
+#price{
+	text-decoration : line-through;
+	size:5px;
+}
 </style>
 </head>
 <body>
@@ -147,7 +151,8 @@
                   <div class="card-body">
                     <p>${vo.category }</p>
                     <h4 class="card-product__title"><a href="#">${vo.title }</a></h4>
-                    <p class="card-product__price">${vo.price }</p>
+                    <p id="price">${vo.price }</p>
+                    <p class="card-product__price">${vo.sale_price }</p>
                   </div>
                 </div>
               </div>

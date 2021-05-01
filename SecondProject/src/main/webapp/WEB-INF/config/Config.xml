@@ -9,11 +9,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BookfVO" alias="BookfVO"/>
 		<typeAlias type="com.sist.vo.BooksVO" alias="BooksVO"/>
 		<typeAlias type="com.sist.vo.BooksCategoryVO" alias="BooksCategoryVO"/>
+		<typeAlias type="com.sist.vo.VideoReviewVO" alias="VideoReviewVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
 		<mapper resource="com/sist/mapper/bookf-mapper.xml"/>
 		<mapper resource="com/sist/mapper/books-mapper.xml"/>
 		<mapper resource="com/sist/mapper/video-mapper.xml"/>
+		<mapper resource="com/sist/mapper/video-review-mapper.xml"/>
 	</mappers>
 </configuration>
