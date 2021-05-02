@@ -4,5 +4,24 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.sist.mapper.bookf-mapper">
-
+	<select id="bookfListData" resultType="BookfVO" parameterType="hashmap">
+	SELECT no, cno, category, title, poster, price, num
+	FROM (SELECT no, category, cno, title, poster, price, rownum as num
+	FROM (SELECT no, category, cno, title, poster, price
+	FROM book_f WHERE cno=#{cno} ORDER BY no ASC))
+	WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="bookfCategoryListData" resultType="BooksCategoryVO">
+	select table1.cno, table1.category, table2.count
+	from (select distinct cno as cno, category from book_f order by cno asc) table1
+	join (select count(category) as count, category from book_f group by category) table2
+	on table1.category=table2.category
+	order by table1.cno asc
+	</select>
+	
+	<select id="bookfTotalPage" resultType="int" parameterType="int">
+	SELECT CEIL(count(*)/9.0) FROM book_f
+	WHERE cno = #{cno}
+	</select>
 </mapper>
