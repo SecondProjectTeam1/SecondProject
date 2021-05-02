@@ -65,7 +65,10 @@ public class VideoController {
 		int vno=Integer.parseInt(no);
 		VideoVO vo=service.videoDetailData(vno);
 		List<VideoReviewVO> list=service.videoReviewListData(vno);
+		List<VideoVO> sList=service.videoSameCategoryData(vo.getCategory());
 		
+		
+		model.addAttribute("sList", sList);
 		model.addAttribute("list", list);
 		model.addAttribute("vno", no);
 		model.addAttribute("vo", vo);

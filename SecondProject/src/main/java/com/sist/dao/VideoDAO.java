@@ -57,6 +57,20 @@ public class VideoDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("videoDetailData", no);
 	}
+	/*
+	 * 	<select id="videoSameCategoryData" resultType="com.sist.vo.VideoVO" parameterType="String">
+		SELECT no, poster, title, category, price FROM 
+		(SELECT * FROM video 
+		WHERE category LIKE '%'||#{category}||'%'
+		ORDER BY dbms_random.value)
+		WHERE rownum <= 5
+		</select>
+	 * 
+	 */
+	public List<VideoVO> videoSameCategoryData(String category)
+	{
+		return getSqlSession().selectList("videoSameCategoryData", category);
+	}
 }
 
 

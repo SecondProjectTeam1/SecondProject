@@ -13,6 +13,7 @@ public class VideoVO {
 	private String content3;
 	private String content4;
 	private String content5;
+	private int rownum;
 	public int getNo() {
 		return no;
 	}
@@ -84,6 +85,12 @@ public class VideoVO {
 	}
 	public void setContent5(String content5) {
 		this.content5 = content5;
+	}
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 	
 	

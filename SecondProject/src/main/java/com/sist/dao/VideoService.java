@@ -36,6 +36,11 @@ public class VideoService {
 	{
 		return vDao.videoDetailData(no);
 	}
+	public List<VideoVO> videoSameCategoryData(String category)
+	{
+		return vDao.videoSameCategoryData(category);
+	}
+	
 	
 	// 댓글관련
 	public List<VideoReviewVO> videoReviewListData(int vno)

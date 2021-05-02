@@ -21,4 +21,14 @@ SELECT * FROM video_category
 SELECT  no, cno, category, title, teacher, poster, price, content1, content2, content3, content4, NVL(content5, '선수지식 필요없음') as content5 FROM video
 WHERE no=#{no}
 </select>
+<!-- 비슷한 다른 강의  -->
+<select id="videoSameCategoryData" resultType="com.sist.vo.VideoVO" parameterType="String">
+SELECT no, poster, title, category, price, rownum FROM 
+(SELECT * FROM video 
+WHERE category LIKE '%'||#{category}||'%'
+ORDER BY dbms_random.value)
+WHERE rownum <![CDATA[
+<=3
+]]>
+</select>
 </mapper>
