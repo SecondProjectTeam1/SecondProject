@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,7 +184,7 @@ $(function(){
 				                      </a>
 				                  </li>
 				                  <li>
-				                      <a href="#">${vo.pubDate}
+				                      <a href="#"><fmt:formatDate value="${vo.pubDate}" pattern="yyyy-MM-dd"/>
 				                          <i class="lnr lnr-calendar-full"></i>
 				                      </a>
 				                  </li>
@@ -193,7 +194,7 @@ $(function(){
 				      <div class="col-md-9">
 				          <div class="blog_post">
 				              <div class="blog_details">
-				                  <a href="${vo.link}">
+				                  <a href="${vo.link}" target=_blank>
 				                      <h2>${vo.title}</h2>
 				                  </a>
 				                  <p>${vo.description}</p>
@@ -208,7 +209,8 @@ $(function(){
 				  <input type="hidden" id="word" value="${word}">
 				  <nav class="blog-pagination justify-content-center d-flex">
 					<ul class="pagination">
-				         <c:if test="${startPage>1} ">
+					
+				         <c:if test="${startPage>1}">
 				         <li class="page-item">
 				              <a href="../news/main.do?fd=${fd}&word=${word}&page=${startPage-1}" class="page-link" aria-label="Previous">
 				                  <span aria-hidden="true">
@@ -452,12 +454,12 @@ $(function(){
         <a class="btn theme_btn" href="#">Follow us on instagram</a>
       </div>
       <div class="instagram_image row m0">
-        <a href="#"><img src="img/instagram/ins-1.jpg" alt=""></a>
-        <a href="#"><img src="img/instagram/ins-2.jpg" alt=""></a>
-        <a href="#"><img src="img/instagram/ins-3.jpg" alt=""></a>
-        <a href="#"><img src="img/instagram/ins-4.jpg" alt=""></a>
-        <a href="#"><img src="img/instagram/ins-5.jpg" alt=""></a>
-        <a href="#"><img src="img/instagram/ins-6.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-1.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-2.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-3.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-4.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-5.jpg" alt=""></a>
+        <a href="#"><img src="../temp/img/instagram/ins-6.jpg" alt=""></a>
       </div>
     </div>
   </section>
