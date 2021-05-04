@@ -46,4 +46,35 @@ public class BooksDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("booksDetailData", no);
 	}
+	/*
+	 * 	<select id="booksFindListData" resultType="BooksVO" parameterType="String">
+		SELECT * FROM book_s
+		WHERE 
+		<include refid="dsql"/>
+		</select>
+		<!-- 검색결과 갯수 -->
+		<select id="booksFindDataCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*)
+		FROM book_s
+		WHERE 
+		<include refid="dsql"/>
+		</select>
+	 * 
+	 */
+	public List<BooksVO> booksFindListData(Map map)
+	{
+		List<BooksVO> list=null;
+		try
+		{
+			list=getSqlSession().selectList("booksFindListData", map);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return list;
+	}
+	public int booksFindDataCount(Map map)
+	{
+		return getSqlSession().selectOne("booksFindDataCount", map);
+	}
 }

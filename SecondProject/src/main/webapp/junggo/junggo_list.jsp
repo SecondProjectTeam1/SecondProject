@@ -16,6 +16,15 @@
 	size:5px;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#keyword').keyup(function(){
+		let k=$(this).val();
+		$('#bookList > div').hide();
+	})
+});
+</script> 
 </head>
 <body>
 	<!-- ================ start banner area ================= -->	
@@ -38,7 +47,7 @@
 
 
 	<!-- ================ category section start ================= -->		  
-  <section class="section-margin--small mb-5">
+    <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
@@ -103,35 +112,31 @@
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           <!-- Start Filter Bar -->
+          <form method="post" action="junggo_find.do">
+         	<input type=hidden name=page value="${curpage }">
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting">
-              <select>
-                <option value="1">Default sorting</option>
-                <option value="1">Default sorting</option>
-                <option value="1">Default sorting</option>
-              </select>
-            </div>
-            <div class="sorting mr-auto">
-              <select>
-                <option value="1">Show 12</option>
-                <option value="1">Show 12</option>
-                <option value="1">Show 12</option>
-              </select>
+               <select name="findTitle">
+                <option value="T">책 제목</option>
+                <option value="A">저자</option>
+                <option value="TA">책 제목+저자</option>
+              </select>   
             </div>
             <div>
               <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" id="keyword">
                 <div class="input-group-append">
                   <button type="button"><i class="ti-search"></i></button>
                 </div>
               </div>
             </div>
           </div>
+          </form>
           <!-- End Filter Bar -->
           
           
           <!-- Start Best Seller -->
-           <section class="lattest-product-area pb-40 category-list">
+           <section class="lattest-product-area pb-40 category-list" id="bookList">
             <div class="row">
             <c:forEach var="vo" items="${list }">
               <div class="col-md-6 col-lg-4">
@@ -206,7 +211,7 @@
                               </li>
                              </c:if> 
                           </ul> 
-                    </nav> 
+                    </nav>  
 	 
 	
 	 		 <%-- <div class="blog-pagination justify-content-center d-flex">

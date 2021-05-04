@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 import com.sist.dao.*;
@@ -19,7 +21,7 @@ public class BooksController {
    @GetMapping("junggo/junggo_list.do")
    public String junggo_list(String page, String cno, Model model)
    {
-      System.out.println("junggo_list실행");
+      
       if(page==null)
          page="1";
       if(cno==null)
@@ -41,9 +43,7 @@ public class BooksController {
       int BLOCK=10;
       int startPage=((curpage-1)/BLOCK*BLOCK)+1;
       int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-        System.out.println("s="+startPage);
-        System.out.println("e="+endPage);
-       int allPage=totalpage;
+      int allPage=totalpage;
       if(endPage>allPage)
          endPage=allPage;
       
@@ -75,5 +75,20 @@ public class BooksController {
       
       model.addAttribute("main_jsp", "../junggo/junggo_detail.jsp");
       return "main/main";
+   }
+   
+   @PostMapping("junggo/junggo_find.do")
+   public String junggo_find(Model model, String page, String findTitle, String userFind)
+   {
+	   Map map=new HashMap();
+	   map.put("findTitle", findTitle);
+	   map.put("userFing", userFind);
+	   List<BooksVO> fList=dao.booksFindListData(map);
+	   int fCount=dao.booksFindDataCount(map);
+	   
+	   model.addAttribute("fList", fList);
+	   model.addAttribute("fCount", fCount);
+	   model.addAttribute("main_jsp", "../junggo/junggo_find.jsp");
+	   return "main/main";
    }
 }
