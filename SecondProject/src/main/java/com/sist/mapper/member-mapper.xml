@@ -37,7 +37,7 @@
 	    #{addr2},
 	    #{tel},
 	    #{content},
-	    #{admin},
+	    'n'
 	    )
 	</insert>
 	<!-- 
