@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.board.ReplyVO" alias="ReplyVO"/>
 		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
-		<typeAlias type="com.sist.vo.OrderVO" alias="OrderVO"/>
+		<typeAlias type="com.sist.vo.OrderVO" alias="OrderVO"/> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
