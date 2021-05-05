@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.board-mapper">
+<select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,title,id,content,regdate,hit,num
+   FROM (SELECT no,title,id,content,regdate,hit,rownum as num 
+   FROM (SELECT /*+ INDEX_DESC(board) */ no,title,content,id,regdate,hit
+   FROM board))
+   WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="boardFreeListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,title,id,regdate,hit,num
+   FROM (SELECT no,title,id,regdate,hit,rownum as num 
+   FROM (SELECT /*+ INDEX_DESC(board) */ no,title,id,regdate,hit
+   FROM board where isfree=1))
+   WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="boardQAListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,title,id,regdate,hit,num
+   FROM (SELECT no,title,id,regdate,hit,rownum as num 
+   FROM (SELECT /*+ INDEX_DESC(board) */ no,title,id,regdate,hit
+   FROM board where isfree=0))
+   WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="boardTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/10.0) FROM board
+</select>
+<insert id="boardInsert" parameterType="BoardVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM board
+    </selectKey>
+    INSERT INTO board VALUES(
+      #{no},
+      #{title},
+      #{content},
+      #{id},
+      SYSDATE,
+      0
+    )
+</insert>
+  <!-- 상세보기 -->
+  <update id="boardHitIncrement" parameterType="int">
+   UPDATE board SET hit=hit+1 WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+   SELECT no,title,content,id,regdate,hit FROM board WHERE no=#{no}
+  </select>
+  <!-- 찾기 -->
+  <sql id="dsql">
+   <trim prefix="(" suffix=")" prefixOverrides="OR">
+     <foreach collection="fsArr" item="fs">
+       <trim prefix="OR">
+        <choose>
+          <when test="fs=='N'.toString()">
+            name LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='S'.toString()">
+            subject LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='C'.toString()">
+            content LIKE '%'||#{ss}||'%'
+          </when>
+        </choose>
+       </trim>
+     </foreach>
+   </trim>
+  </sql>
+  <select id="boardFindData" resultType="BoardVO" parameterType="hashmap">
+   <bind name="pattern" value="'%'+ss+'%'"/>
+   SELECT no,title,id,regdate,hit,content 
+   FROM board WHERE
+   <!-- WHERE ${fs} LIKE #{pattern}-->
+   <!-- 
+         fs=="name"
+         문자열 :
+            ==
+            equals
+    -->
+   <!-- <if test='fs.equals("name")'>
+     WHERE name LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("subject")'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("content")'>
+     WHERE content LIKE '%'||#{ss}||'%'
+   </if> -->
+   <!-- <choose>
+    <when test='fs=="name"'>
+     WHERE name LIKE #{pattern}
+    </when>
+    <when test='fs=="subject"'>
+     WHERE subject LIKE #{pattern}
+    </when>
+    <when test='fs=="content"'>
+     WHERE content LIKE #{pattern}
+    </when>
+   </choose> -->
+   <!-- 
+         SC
+         OR (name LIKE '%'||#{ss}||'%') OR (content LIKE '%'||#{ss}||'%')
+         
+         S 
+         
+         N
+         (name LIKE '%'||#{ss}||'%')
+         NS
+         (name LIKE '%'||#{ss}||'%') OR (subject LIKE '%'||#{ss}||'%')
+         NSC
+         (name LIKE '%'||#{ss}||'%') OR (subject LIKE '%'||#{ss}||'%') OR(content LIKE '%'||#{ss}||'%')
+    -->
+   <include refid="dsql"/>
+  </select>
+  <select id="boardFindDataCount" resultType="int" parameterType="hashmap">
+   SELECT COUNT(*)
+   FROM board
+   WHERE
+   <!-- WHERE ${fs} LIKE '%'||#{ss}||'%'-->
+   <!-- 
+         fs=="name"
+         문자열 :
+            ==
+            equals
+    -->
+   <!-- <if test='fs.equals("name")'>
+     WHERE name LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("subject")'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("content")'>
+     WHERE content LIKE '%'||#{ss}||'%'
+   </if> -->
+   <!-- <choose>
+    <when test='fs=="name"'>
+     WHERE name LIKE '%'||#{ss}||'%'
+    </when>
+    <when test='fs=="subject"'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+    </when>
+    <when test='fs=="content"'>
+     WHERE content LIKE '%'||#{ss}||'%'
+    </when>
+   </choose> -->
+   <include refid="dsql"/>
+  </select>
+  <!-- 수정 -->
+  <update id="boardUpdate" parameterType="BoardVO">
+   UPDATE board SET title=#{title},content=#{content} WHERE no=#{no}
+  </update>
+  <!-- 삭제 : 트랜잭션 적용-->
+  <delete id="boardDelete" parameterType="int">
+   DELETE FROM board WHERE no=#{no}
+  </delete>
+  <delete id="boardReplyDelete" parameterType="int">
+    DELETE FROM spring_reply
+    WHERE bno=#{bno}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
