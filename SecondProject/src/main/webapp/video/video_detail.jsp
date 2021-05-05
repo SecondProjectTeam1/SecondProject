@@ -201,8 +201,8 @@ $('.update').click(function(){
 								<div class="col-6">
 									<div class="box_total">
 										<h5>Overall</h5>
-										<h4>4.0</h4>
-										<h6>(03 Reviews)</h6>
+										<h4>${avg }</h4>
+										<h6>${revCount } reviews</h6>
 									</div>
 								</div>
 								<div class="col-6">

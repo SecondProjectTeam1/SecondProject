@@ -35,4 +35,15 @@ WHERE no=#{no}
 DELETE FROM video_review
 WHERE no=#{no}
 </delete>
+<!-- 평균 별점 -->
+<select id="starAvgData" parameterType="int" resultType="double">
+select NVL(round(avg(star), 1), 0.0) as avg
+from video_review
+where vno=#{vno}
+</select>
+<!-- 리뷰 갯수 -->
+<select id="revCountData" resultType="int" parameterType="int">
+SELECT NVL(COUNT(*),0) as revCount FROM video_review
+WHERE vno=#{vno}
+</select>
 </mapper>

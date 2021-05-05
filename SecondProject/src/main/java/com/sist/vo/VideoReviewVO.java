@@ -18,6 +18,20 @@ public class VideoReviewVO {
 	private int vno;
 	private Date regdate;
 	private String dbday;
+	private Double avg;
+	private int revCount;
+	public int getRevCount() {
+		return revCount;
+	}
+	public void setRevCount(int revCount) {
+		this.revCount = revCount;
+	}
+	public Double getAvg() {
+		return avg;
+	}
+	public void setAvg(Double avg) {
+		this.avg = avg;
+	}
 	public int getNo() {
 		return no;
 	}

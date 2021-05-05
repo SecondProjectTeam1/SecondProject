@@ -59,5 +59,12 @@ public class VideoService {
 	{
 		rDao.videoReviewDelete(no);
 	}
-	
+	public double starAvgData(int vno)
+	{
+		return rDao.starAvgData(vno);
+	}
+	public int revCountData(int vno)
+	{
+		return rDao.revCountData(vno);
+	}
 }
