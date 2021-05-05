@@ -2,7 +2,7 @@ package com.sist.vo;
 /*
  * 	ODERNO       NOT NULL NUMBER(20)       -- 주문자의 개별 주문 상품을 구분하는 번호
 	ODERNO2               NUMBER(20)       -- 주문자들의 주문을 구분하는 번호
-	ID                    VARCHAR2(20)   
+	ID                    VARCHAR2(20)    
 	DOMBOOKNO             NUMBER          
 	FORBOOKNO             NUMBER         
 	USEDBOOKNO            NUMBER          

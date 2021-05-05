@@ -3,7 +3,7 @@ package com.sist.vo;
  *  CARTNO     NOT NULL NUMBER          
 	ID         NOT NULL VARCHAR2(20)    
 	DOMBOOKNO           NUMBER         
-	FORBOOKNO           NUMBER         
+	FORBOOKNO           NUMBER          
 	USEDBOOKNO          NUMBER         
 	CLASSNO             NUMBER         
 	QTY                 NUMBER         

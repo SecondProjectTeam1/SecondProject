@@ -18,7 +18,7 @@ import com.sist.vo.BooksVO;
 import com.sist.vo.CartVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.OrderVO;
-@Controller 
+@Controller
 public class OrderController {
 	@Autowired
 	private OrderDAO OrderDAO;
