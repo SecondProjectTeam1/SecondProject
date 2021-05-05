@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.vo.CartVO;
 import com.sist.vo.OrderVO;
-@Repository 
+@Repository
 public class OrderDAO extends SqlSessionDaoSupport{
 	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
