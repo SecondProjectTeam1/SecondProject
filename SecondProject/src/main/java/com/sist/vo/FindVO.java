@@ -1,4 +1,4 @@
-package com.sist.board;
+package com.sist.vo;
 
 public class FindVO {
     private String fs;

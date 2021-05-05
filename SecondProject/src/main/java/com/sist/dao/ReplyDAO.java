@@ -1,4 +1,4 @@
-package com.sist.board;
+package com.sist.dao;
 
 import javax.annotation.Resource;
 
@@ -7,6 +7,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.sist.vo.ReplyVO;
 
 import java.util.*;
 @Repository
@@ -18,6 +20,9 @@ public class ReplyDAO extends SqlSessionDaoSupport{
 	}
 	public List<ReplyVO> replyListData(int bno) {
 		return getSqlSession().selectList("replyListData", bno);
+	}
+	public List<ReplyVO> replyReListData(int bno) {
+		return getSqlSession().selectList("replyReListData", bno);
 	}
 	public void replyInsert(ReplyVO vo) {
 		getSqlSession().insert("replyInsert",vo);

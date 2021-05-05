@@ -1,4 +1,4 @@
-package com.sist.board;
+package com.sist.vo;
 /*
  *  NO         NOT NULL NUMBER       
 	BNO                 NUMBER       
@@ -15,8 +15,7 @@ package com.sist.board;
 import java.util.*;
 public class ReplyVO {
     private int no,bno,root;
-    private String id,msg;
-    private Date redate;
+    private String id,msg, redate;
 	public int getNo() {
 		return no;
 	}
@@ -41,17 +40,17 @@ public class ReplyVO {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public Date getRedate() {
-		return redate;
-	}
-	public void setRedate(Date redate) {
-		this.redate = redate;
-	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	public String getRedate() {
+		return redate;
+	}
+	public void setRedate(String redate) {
+		this.redate = redate;
+	}
+	
 }

@@ -1,8 +1,14 @@
-package com.sist.board;
+package com.sist.web;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+
+import com.sist.dao.BoardDAO;
+import com.sist.dao.ReplyDAO;
+import com.sist.vo.BoardVO;
+import com.sist.vo.ReplyVO;
+
 /*
  *    double d=10
  *    int i='A'
@@ -64,9 +70,12 @@ public class BoardService {
    public void boardDelete(int no) {
 	   bDao.boardDelete(no);
    }
-   // ?Œ“ê¸? ê´?? ¨
+   //reply
    public List<ReplyVO> replyListData(int bno) {
 	   return rDao.replyListData(bno);
+   }
+   public List<ReplyVO> replyReListData(int bno) {
+	   return rDao.replyReListData(bno);
    }
    public void replyInsert(ReplyVO vo) {
 	   rDao.replyInsert(vo);

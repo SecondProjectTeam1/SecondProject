@@ -1,4 +1,4 @@
-package com.sist.board;
+package com.sist.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,7 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.sist.dao.*;
+import com.sist.vo.BoardVO;
+import com.sist.vo.FindVO;
+import com.sist.vo.ReplyVO;
+
 import java.util.*;
 import javax.servlet.http.HttpSession;
 
@@ -110,7 +115,6 @@ public class BoardController {
    
    @PostMapping("board/delete_ok.do")
    public String board_delete_ok(int no,int page,Model model) {
-	   // ê²°ê³¼ê°? ?½ê¸? 
 	   service.boardDelete(no);
 	   
 	   model.addAttribute("page", page); // list.jsp => no(X) , page(O)
@@ -122,7 +126,6 @@ public class BoardController {
 	   ReplyVO vo=new ReplyVO();
 	   vo.setBno(bno);
 	   vo.setMsg(msg);
-	   String name=(String)session.getAttribute("name");
 	   String id=(String)session.getAttribute("id");
 	   vo.setId(id);
 	   
@@ -132,29 +135,26 @@ public class BoardController {
    }
    
    @PostMapping("board/reply_update.do")
-   public String board_reply_update(int no,int bno,int page,String msg,RedirectAttributes ra) {
+   public String board_reply_update(int no,int bno,String msg,RedirectAttributes ra) {
 	   // ?ˆ˜? • => DAO
 	   ReplyVO vo=new ReplyVO();
 	   vo.setNo(no);
 	   vo.setMsg(msg);
 	   service.replyUpdate(vo);
 	   ra.addAttribute("bno",bno);
-	   ra.addAttribute("page",page);
 	   return "redirect:reply_list.do";
    }
    
-   @PostMapping("board/reply_to_reply_insert.do")
-   public String board_reply_to_reply(int pno,int bno,String msg,int page,RedirectAttributes ra,HttpSession session) {
-	   // ?Œ“ê¸? ì¶”ê? ?ž‘?—… ==> DAO
+   @PostMapping("board/reReplyinsert.do")
+   public String board_reply_to_reply(int root,int bno,String msg,RedirectAttributes ra,HttpSession session) {
 	   ReplyVO vo=new ReplyVO();
-	   String name=(String)session.getAttribute("name");
 	   String id=(String)session.getAttribute("id");
 	   vo.setId(id);
 	   vo.setBno(bno);
 	   vo.setMsg(msg);
-//	   service.replyToReplyInsert(pno, vo);
+	   vo.setRoot(root);
+	   service.replyInsert(vo);
 	   ra.addAttribute("bno", vo.getBno());
-	   ra.addAttribute("page", page);
 	   return "redirect:reply_list.do";
    }
    
@@ -168,7 +168,9 @@ public class BoardController {
    @GetMapping("board/reply_list.do")
    public String board_reply_list(int bno,Model model) {
 	   List<ReplyVO> rList=service.replyListData(bno);
+	   List<ReplyVO> aList=service.replyReListData(bno);
 	   model.addAttribute("rList", rList);
+	   model.addAttribute("aList", aList);
 	   model.addAttribute("no", bno);
 	   return "board/boardreply";
    }

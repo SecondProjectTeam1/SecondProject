@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.dao.reply-mapper">
   <select id="replyListData" resultType="ReplyVO" parameterType="int">
-    SELECT no,bno,id,msg,TO_CHAR(redate,'YYYY-MM-DD HH24:MI:SS')
+    SELECT no,bno,id,msg,TO_CHAR(redate,'DL HH24:MI:SS') as redate
     FROM board_reply
-    WHERE bno=#{bno}
+    WHERE bno=#{bno} AND root=0
+  </select>
+  <select id="replyReListData" resultType="ReplyVO" parameterType="int">
+    SELECT no,bno,id,msg,TO_CHAR(redate,'DL HH24:MI:SS') as redate,root
+    FROM board_reply
+    WHERE bno=#{bno} AND root>0
   </select>
   <insert id="replyInsert" parameterType="ReplyVO">
    <!-- mybatis 자동 증가 번호 -->

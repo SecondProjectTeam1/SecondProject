@@ -8,67 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let u=0;
-let i=0;
-$(function(){
-	$('.updateBtn').click(function(){
-		$('.updates').hide();
-		$('.inserts').hide();
-		let no=$(this).attr("data-no");
-		if(u==0) {
-			$('#m'+no).show();
-			$(this).text("취소");
-			u=1;
-		}
-		else {
-			$('#m'+no).hide();
-			$(this).text("수정");
-			u=0;
-		}
-	})
-	$('.insertBtn').click(function(){
-		$('.updates').hide();
-		$('.inserts').hide();
-		let no=$(this).attr("data-no");
-		if(i==0)
-		{
-			$(this).text("취소");
-			$('#in'+no).show();
-			i=1;
-		}
-		else
-		{
-			$(this).text("댓글");
-			$('#in'+no).hide();
-			i=0;
-		}
-	});
-	
-	
-	
-	// 댓글 댓글 올리기 
-	$('.rrBtn').click(function(){
-		let data_no=$(this).attr("data-no");
-		let pno=$('#rr_insert_pno'+data_no).val();
-		let bno=$('#rr_insert_bno'+data_no).val();
-		let page=$('#rr_insert_page'+data_no).val();
-		let msg=$('#rr_insert_msg'+data_no).val();
-		if(msg.trim()=="") {
-			$('#rr_insert_msg'+data_no).focus();
-			return;
-		}
-		$.ajax({
-			type:'post',
-			url:'reply_to_reply_insert.do',
-			data:{"pno":pno,"bno":bno,"page":page,"msg":msg},
-			success:function(result) {
-				$('#reply_data').html(result);
-			}
-		})
-	})
-
-	
-})
 // 댓글 추가
 function reply(){
 	let bno=$('#insert_bno').val();
@@ -87,7 +26,7 @@ function reply(){
 		}
 	})
 };
-// 삭제하기
+// 삭제
 function deleteRe(re){
 	let no=$(re).attr("data-no");
 	let bno=$(re).attr("data-bno");
@@ -106,16 +45,20 @@ function updateRe(re){
 	let data_no=$(re).attr("data-no");
 	let bno=$(re).attr("data-bno");
 	let msg=$('#re-'+data_no).text();
-	console.log(data_no,msg)
 	$('#re-'+data_no).html(
 		"<textarea id='edit_re"+data_no+"'>"+msg+"</textarea>"	
 	);
 	$('#modify'+data_no).html(
-			"<a onclick='updateReOk(this);' class='btn-reply text-uppercase' data-no="+data_no+" data-bno="+bno+">update</a> "
-			+"<a onclick='' class='btn-reply text-uppercase' data-no="+data_no+" data-bno="+bno+">cancle</a> "
+			"<a href='javascript:;' onclick='updateReOk(this);' class='btn-reply text-uppercase' data-no='"+data_no+"' data-bno='"+bno+"'>update</a> "
+			+"<a href='javascript:;' onclick='back(this);' class='btn-reply text-uppercase' data-bno='"+bno+"'>cancle</a> "
 	);
-	/* if(msg.trim()=="") {
-		$('#update_msg'+data_no).focus();
+};
+function updateReOk(re){
+	let no=$(re).attr("data-no");
+	let bno=$(re).attr("data-bno");
+	let msg=$('#edit_re'+no).val();
+	if(msg.trim()=="") {
+		$('#edit_re'+no).focus();
 		return;
 	}
 	$.ajax({
@@ -125,7 +68,46 @@ function updateRe(re){
 		success:function(result) {
 			$('#reply_data').html(result);
 		}
-	}) */
+	})
+}
+//답댓
+function reReply(re){
+	$('.rere').show();
+	let root=$(re).attr("data-no");
+	let bno=$(re).attr("data-bno");
+	$('#reply'+root).html(
+			"<a href='javascript:;' onclick='back(this);' class='btn-reply text-uppercase' data-bno='"+bno+"'>cancle</a> "
+	);
+}
+function reReplyOk(re){
+	let bno=$('#rere_bno').val();
+	let root=$('#rere_no').val();
+	let msg=$('#remessage').val();
+	console.log(bno,root,msg)
+	if(msg.trim()=="") {
+		$('#remessage').focus();
+		return;
+	}
+	$.ajax({
+		type:'POST',
+		url:'reReplyinsert.do',
+		data:{"bno":bno,"msg":msg,"root":root},
+		success:function(result) {
+			$('#reply_data').html(result);
+		}
+	});
+}
+function back(re){
+	$('.rere').hide();
+	let bno=$(re).attr("data-bno");
+	$.ajax({
+		type:'GET',
+		url:'reply_list.do',
+		data:{"bno":bno},
+		success:function(result){
+			$('#reply_data').html(result);
+		}
+	});
 }
 </script>
 </head>
@@ -134,11 +116,7 @@ function updateRe(re){
 			<h4>${rList.size()} Comments</h4>
 			
 			<c:forEach var="rvo" items="${rList}">
-			<c:if test="${rvo.root>0}">
-            <c:set var="rtype" value="left-padding"/>
-           </c:if>
-           
-			<div class="comment-list ${rtype}">
+			<div class="comment-list">
 				<div class="single-comment justify-content-between d-flex">
 					<div class="user justify-content-between d-flex">
 						<div class="thumb">
@@ -155,62 +133,63 @@ function updateRe(re){
 					<c:choose>
 					<c:when test="${sessionScope.id eq rvo.id}">
 						<div id="modify${rvo.no}">
-							<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}">modify</a>
+							<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">modify</a>
 							<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">delete</a>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="reply-btn">
-							<a href="#" class="btn-reply text-uppercase">reply</a>
+						<div class="reply-btn" id="reply${rvo.no}">
+							<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">reply</a>
 						</div>
 					</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
+			
+			<c:forEach var="avo" items="${aList}">
+			<c:if test="${rvo.no==avo.root}">
+			<div class="comment-list left-padding">
+				<div class="single-comment justify-content-between d-flex">
+					<div class="user justify-content-between d-flex">
+						<div class="thumb">
+							<img src="img/blog/c1.jpg" alt="">
+						</div>
+						<div class="desc" id="replydetail">
+							<h5>
+								<a href="#">${avo.id}</a>
+							</h5>
+							<p class="date">${avo.redate} </p>
+							<p class="comment" id="re-${avo.no}">${avo.msg}</p>
+						</div>
+					</div>
+					<c:choose>
+					<c:when test="${sessionScope.id eq avo.id}">
+						<div id="modify${avo.no}">
+							<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">modify</a>
+							<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">delete</a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="reply-btn" id="reply${avo.no}">
+							<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">reply</a>
+						</div>
+					</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+			</c:if>
 			</c:forEach>
 			
-			<div class="comment-list left-padding">
-					<div class="single-comment justify-content-between d-flex">
-							<div class="user justify-content-between d-flex">
-									<div class="thumb">
-											<img src="img/blog/c2.jpg" alt="">
-									</div>
-									<div class="desc">
-											<h5>
-													<a href="#">Elsie Cunningham</a>
-											</h5>
-											<p class="date">December 4, 2017 at 3:12 pm </p>
-											<p class="comment">
-													Never say goodbye till the end comes!
-											</p>
-									</div>
-							</div>
-							<div class="reply-btn">
-									<a href="#" class="btn-reply text-uppercase">reply</a>
-							</div>
-					</div>
-			</div>
-			<div class="comment-list">
-					<div class="single-comment justify-content-between d-flex">
-							<div class="user justify-content-between d-flex">
-									<div class="thumb">
-											<img src="img/blog/c4.jpg" alt="">
-									</div>
-									<div class="desc">
-											<h5>
-													<a href="#">Maria Luna</a>
-											</h5>
-											<p class="date">December 4, 2017 at 3:12 pm </p>
-											<p class="comment">
-													Never say goodbye till the end comes!
-											</p>
-									</div>
-							</div>
-							<div class="reply-btn">
-									<a href="#" class="btn-reply text-uppercase">reply</a>
-							</div>
-					</div>
-			</div>
+			<form class="rere" style="display:none">
+				<div class="form-group">
+					 <input type="hidden" name=rbno value="${no}" id="rere_bno">
+					 <input type="hidden" name=rno value="${rvo.no}" id="rere_no">
+					<textarea class="form-control mb-10" rows="5" name="message" id="remessage" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Reply'"
+								required=""></textarea>
+				</div>
+				<a href="javascript:reReplyOk()" class="button button-postComment button--active" id="reBtn">Post Reply</a>
+			</form>
+			</c:forEach>
 	</div>
 	<div class="comment-form">
 			<h4>Leave a Reply</h4>
