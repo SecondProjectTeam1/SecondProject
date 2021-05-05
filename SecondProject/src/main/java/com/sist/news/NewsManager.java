@@ -19,6 +19,7 @@ public class NewsManager {
 		   Unmarshaller un=jb.createUnmarshaller();
 		   Rss rss=(Rss)un.unmarshal(url);
 		   list=rss.getChannel().getItem();
+		   System.out.println(list.size());
 	   }catch(Exception ex){}
 	   return list;
    }
