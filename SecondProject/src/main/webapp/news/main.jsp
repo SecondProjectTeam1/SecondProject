@@ -184,7 +184,7 @@ $(function(){
 				                      </a>
 				                  </li>
 				                  <li>
-				                      <a href="#"><fmt:formatDate value="${vo.pubDate}" pattern="yyyy-MM-dd"/>
+				                      <a href="#">${vo.pubDate}
 				                          <i class="lnr lnr-calendar-full"></i>
 				                      </a>
 				                  </li>

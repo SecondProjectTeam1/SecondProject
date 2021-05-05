@@ -25,31 +25,10 @@ public class ReplyDAO extends SqlSessionDaoSupport{
 	public void replyUpdate(ReplyVO vo) {
 		getSqlSession().update("replyUpdate",vo);
 	}
-   
-    @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
-    public void replyToReplyInsert(int root,ReplyVO vo) {
-	   	 ReplyVO pvo=getSqlSession().selectOne("replyParentInfoData",root);
-	   	 // parent => group_id , group_step , group_tab
-	   	 getSqlSession().update("replyGroupStepIncrement",pvo);
-	   	 vo.setGroup_id(pvo.getGroup_id());
-	   	 vo.setGroup_step(pvo.getGroup_step()+1);
-	   	 vo.setGroup_tab(pvo.getGroup_tab()+1);
-	   	 vo.setRoot(root);
-	   	 getSqlSession().insert("replyToReplyInsert",vo);
-	   	 // depthÏ¶ùÍ?
-	   	 getSqlSession().update("replyDepthIncrement",root);
-    }
-    
+
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
     public void replyDelete(int no) {
-    	ReplyVO vo=getSqlSession().selectOne("replyInfoData", no);
-    	if(vo.getDepth()==0) {
-    		getSqlSession().delete("replyDelete",no);
-    	}
-    	else {
-    		getSqlSession().update("replyMsgUpdate",no);
-    	}
-    	getSqlSession().update("depthDecrement",vo.getRoot());
+    	getSqlSession().delete("replyDelete",no);
     }
 }
 

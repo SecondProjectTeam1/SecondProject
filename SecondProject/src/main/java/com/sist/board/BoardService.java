@@ -68,15 +68,11 @@ public class BoardService {
    public List<ReplyVO> replyListData(int bno) {
 	   return rDao.replyListData(bno);
    }
-   
    public void replyInsert(ReplyVO vo) {
 	   rDao.replyInsert(vo);
    }
    public void replyUpdate(ReplyVO vo)  {
 	   rDao.replyUpdate(vo);
-   }
-   public void replyToReplyInsert(int root,ReplyVO vo) {
-	   rDao.replyToReplyInsert(root, vo);
    }
    public void replyDelete(int no) {
 	   rDao.replyDelete(no);
