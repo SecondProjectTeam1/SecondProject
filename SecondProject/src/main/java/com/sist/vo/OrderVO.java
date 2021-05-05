@@ -5,7 +5,7 @@ package com.sist.vo;
 	ID                    VARCHAR2(20)   
 	DOMBOOKNO             NUMBER         
 	FORBOOKNO             NUMBER         
-	USEDBOOKNO            NUMBER         
+	USEDBOOKNO            NUMBER          
 	CLASSNO               NUMBER         
 	TITLE                 VARCHAR2(100)  
 	QTY                   NUMBER         
