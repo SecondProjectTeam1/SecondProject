@@ -49,11 +49,21 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	
 	public int idCheck(String id)
 	{
-		int idCount=0;
-		idCount=getSqlSession().selectOne("memberIdCount",id);
+		
+		int idCount=getSqlSession().selectOne("memberIdCount",id);
 		
 		
 		return idCount;
+	}
+	
+	public List<ZipcodeVO> signUpAddress(String dong)
+	{
+		return getSqlSession().selectList("signUpAddress",dong);
+	}
+	
+	public void memberJoin(MemberVO vo)
+	{
+		getSqlSession().insert("insertMember",vo);
 	}
 		
 }

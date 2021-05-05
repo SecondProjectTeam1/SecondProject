@@ -77,18 +77,16 @@ public class BooksController {
       return "main/main";
    }
    
-   @PostMapping("junggo/junggo_find.do")
-   public String junggo_find(Model model, String page, String findTitle, String userFind)
+   @RequestMapping("junggo/junggo_find.do")
+   public String junggo_find(Model model, String userFind)
    {
-	   Map map=new HashMap();
-	   map.put("findTitle", findTitle);
-	   map.put("userFing", userFind);
-	   List<BooksVO> fList=dao.booksFindListData(map);
-	   int fCount=dao.booksFindDataCount(map);
+	  
+	   List<BooksVO> fList=dao.booksFindListData(userFind);
+	   
+	  
+	   System.out.println(userFind);
 	   
 	   model.addAttribute("fList", fList);
-	   model.addAttribute("fCount", fCount);
-	   model.addAttribute("main_jsp", "../junggo/junggo_find.jsp");
-	   return "main/main";
+	   return "junggo/junggo_find";
    }
 }

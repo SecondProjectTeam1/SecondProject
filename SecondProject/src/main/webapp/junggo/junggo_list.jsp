@@ -18,10 +18,26 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function(){
+ $(function(){
 	$('#keyword').keyup(function(){
-		let k=$(this).val();
 		$('#bookList > div').hide();
+	})
+	$('#findBtn').click(function(){
+		let userFind=$('#keyword').val();
+		if(userFind.trim()=="")
+		{
+			$('#keyword').focus();
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'junggo_find.do',
+			data:{"userFind":userFind},
+			success:function(result)
+			{
+				$('#findList').html(result);
+			}
+		})
 	})
 });
 </script> 
@@ -111,31 +127,28 @@ $(function(){
           </div>
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
-          <!-- Start Filter Bar -->
-          <form method="post" action="junggo_find.do">
-         	<input type=hidden name=page value="${curpage }">
+           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
-            <div class="sorting">
-               <select name="findTitle">
+            <!-- <div class="sorting">
+              <select name="findTitle" id="findTitle">
                 <option value="T">책 제목</option>
                 <option value="A">저자</option>
                 <option value="TA">책 제목+저자</option>
-              </select>   
-            </div>
+              </select> 
+            </div>  -->    
             <div>
               <div class="input-group filter-bar-search">
                 <input type="text" placeholder="Search" id="keyword">
                 <div class="input-group-append">
-                  <button type="button"><i class="ti-search"></i></button>
+                  <button type="button" id="findBtn"><i class="ti-search"></i></button>
                 </div>
               </div>
             </div>
           </div>
-          </form>
           <!-- End Filter Bar -->
           
           
-          <!-- Start Best Seller -->
+         <!-- Start Best Seller -->
            <section class="lattest-product-area pb-40 category-list" id="bookList">
             <div class="row">
             <c:forEach var="vo" items="${list }">
@@ -163,9 +176,14 @@ $(function(){
               </div>
               </c:forEach>
             </div>
+            <div class="row" id="findList">
+            
+            </div>
           </section> 
           <!-- End Best Seller -->
           
+           
+        
           
           
         </div>

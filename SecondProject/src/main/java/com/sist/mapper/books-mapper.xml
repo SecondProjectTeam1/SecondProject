@@ -47,7 +47,7 @@ SELECT no, cno, title, poster, price FROM BOOK
 WHERE title LIKE '%'||#{title}||'%'
 </select>
 <!-- 검색 결과 리스트 -->
-<sql id="dsql">
+<!-- <sql id="dsql">
 <trim prefix="(" suffix=")" prefixOverrides="OR">
  <foreach collection="FuArr" item="findTitle">
  <trim prefix="OR">
@@ -67,12 +67,16 @@ WHERE title LIKE '%'||#{title}||'%'
 SELECT * FROM book_s
 WHERE 
 <include refid="dsql"/>
+</select> -->
+<select id="booksFindListData" resultType="BooksVO" parameterType="String">
+SELECT * FROM book_s
+WHERE title LIKE '%'||#{userFind}||'%'
 </select>
 <!-- 검색결과 갯수 -->
-<select id="booksFindDataCount" resultType="int" parameterType="hashmap">
+<!-- <select id="booksFindDataCount" resultType="int" parameterType="hashmap">
 SELECT COUNT(*)
 FROM book_s
 WHERE 
 <include refid="dsql"/>
-</select>
+</select> -->
 </mapper>
