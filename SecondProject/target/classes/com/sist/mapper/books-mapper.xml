@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 
+ NO         NOT NULL NUMBER         
+CNO                 NUMBER         
+CATEGORY            VARCHAR2(200)  
+TITLE               VARCHAR2(400)  
+SUBTITLE            VARCHAR2(400)  
+POSTER              VARCHAR2(1000) 
+AUTHOR              VARCHAR2(400)  
+PUDATE              VARCHAR2(200)  
+PUBLISHER           VARCHAR2(200)  
+PRICE               VARCHAR2(200)  
+SALE_PRICE          VARCHAR2(200)  
+STOCK               VARCHAR2(100)  
+  -->
+<mapper namespace="com.sist.mapper.books-mapper">
+<!-- 카테고리별 리스트 -->
+<select id="booksListData" resultType="BooksVO" parameterType="hashmap">
+SELECT no, cno, category, title, subtitle, poster, author, pudate, publisher, price, sale_price, stock, num
+FROM (SELECT no, cno, category, title, subtitle, poster, author, pudate, publisher, price, sale_price, stock, rownum as num
+FROM (SELECT no, cno, category, title, subtitle, poster, author, pudate, publisher, price, sale_price, stock
+FROM book_s WHERE cno=#{cno} ORDER BY no ASC))
+WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="booksTotalPage" resultType="int" parameterType="int">
+SELECT CEIL(COUNT(*)/9.0) FROM book_s
+WHERE cno=#{cno}
+</select>
+<select id="booksCategory" resultType="BooksCategoryVO">
+select table1.cno, table1.category, table2.count
+from (select distinct cno as cno, category from book_s order by cno asc) table1
+join (select count(category) as count, category from book_s group by category) table2
+on table1.category=table2.category
+order by table1.cno asc
+</select>
+<!-- 디테일 리스트 -->
+<select id="booksDetailData" resultType="BooksVO" parameterType="int">
+SELECT * FROM book_s
+WHERE no=#{no}
+</select>
+<!-- 관련 새책 리스트 -->
+<select id="findNewBookList" resultType="BookVO" parameterType="String">
+SELECT no, cno, title, poster, price FROM BOOK
+WHERE title LIKE '%'||#{title}||'%'
+</select>
+<!-- 검색 결과 리스트 -->
+<!-- <sql id="dsql">
+<trim prefix="(" suffix=")" prefixOverrides="OR">
+ <foreach collection="FuArr" item="findTitle">
+ <trim prefix="OR">
+  <choose>
+ 	<when test="findTitle=='T'.toString()">
+ 	 title LIKE '%'||#{userFind}||'%'	
+ 	</when>
+ 	<when test="findTitle=='A'.toString()">
+ 	 author LIKE '%'||#{userFind}||'%'	
+ 	</when>
+  </choose>
+ </trim>
+ </foreach>
+</trim>
+</sql>
+<select id="booksFindListData" resultType="BooksVO" parameterType="hashmap">
+SELECT * FROM book_s
+WHERE 
+<include refid="dsql"/>
+</select> -->
+<select id="booksFindListData" resultType="BooksVO" parameterType="String">
+SELECT * FROM book_s
+WHERE title LIKE '%'||#{userFind}||'%'
+</select>
+<!-- 검색결과 갯수 -->
+<!-- <select id="booksFindDataCount" resultType="int" parameterType="hashmap">
+SELECT COUNT(*)
+FROM book_s
+WHERE 
+<include refid="dsql"/>
+</select> -->
+</mapper>

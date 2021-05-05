@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.sist.mapper.cart-mapper">
+ 	<!-- =====================장바구니 담기===================== -->
+ 	<insert id="productsInCart">
+ 		<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
+	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
+	    </selectKey>
+ 		INSERT INTO cart (cartno, id, dombookno, forbookno, usedbookno, classno, qty, price, title, poster) VALUES (
+		#{cartno},
+		#{id},
+		#{dombookno},
+		#{forbookno},
+		#{usedbookno},
+		#{classno},
+		#{qty},
+		#{price},
+		#{title},
+		#{poster}
+ 	</insert>
+ 	
+ 	<!-- =====================기존 확인===================== -->
+ 	<!-- 국내책 -->
+ 	<select id="dBeforeInCart" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM cart
+ 		WHERE id=#{id}
+ 		AND dombookno=#{dombookno}
+ 	</select>
+ 	<!-- 동일한 상품 존재하면 수량 수정 -->
+ 	<update id="updateCartD">
+ 		UPDATE cart
+ 		SET qty = qty + #{qty}
+ 		WEHRE id=#{id}
+ 		AND dombookno = #{dombookno}
+ 	</update>
+ 	
+ 	<!-- 해외책 -->
+ 	<select id="fBeforeInCart" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM cart
+ 		WHERE id=#{id}
+ 		AND forbookno=#{forbookno}
+ 	</select>
+ 	
+ 	<!-- 동일한 상품 존재하면 수정 -->
+ 	<update id="updateCartF">
+ 		UPDATE cart
+ 		SET qty = qty + #{qty}
+ 		WEHRE id=#{id}
+ 		AND forbookno = #{forbookno}
+ 	</update>
+ 	
+ 	<!-- 클래스 -->
+ 	<select id="cBeforeInCart" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM cart
+ 		WHERE id=#{id}
+ 		AND classno=#{classno}
+ 	</select>
+ 	
+ 	<!-- 동일한 상품 존재하면 수정 -->
+ 	<update id="updateCartC">
+ 		UPDATE cart
+ 		SET qty = qty + #{qty}
+ 		WEHRE id=#{id}
+ 		AND classno = #{classno}
+ 	</update>
+ 	
+ 	<!-- 중고책 -->
+ 	<select id="uBeforeInCart" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM cart
+ 		WHERE id=#{id}
+ 		AND usedbookno=#{usedbookno}
+ 	</select>
+ 	<!-- 동일한 상품 존재하면 수정 -->
+ 	<update id="updateCartU">
+ 		UPDATE cart
+ 		SET qty = qty + #{qty}
+ 		WEHRE id=#{id}
+ 		AND usedbookno = #{usedbookno}
+ 	</update>
+ 	
+ 	<!-- =====================목록===================== -->
+ 	<select id="CartList" resultType="CartVO" parameterType="hashmap">
+ 		SELECT
+	 		c.cartno,
+	 		c.id,
+	 		d.no,
+	 		f.no,
+	 		u.no,
+	 		v.no,
+	 		c.qty,
+	 		c.price,
+	 		c.title,
+	 		c.poster,
+ 		FROM
+ 			cart c, book d, book_f f, book_s u, video v, member m
+ 		WHERE d.no = c.dombookno
+ 			OR f.no = c.forbookno
+ 			OR u.no = c.usedbookno
+ 			OR v.no = c.classno
+ 			AND m.id=c.id
+ 			AND c.id=#{id}
+ 		ORDER BY
+ 			c.cartno
+ 	</select>
+ 	
+ 	
+ 	<!-- =====================수정(장바구니 화면에서 상품수량 변경)===================== -->
+ 	<update id="dModifyCart">
+ 		UPDATE cart
+ 		SET qty=#{qty}
+ 		WHERE id=#{id}
+ 		AND dombookno=#{dombookno}
+ 	</update>
+ 	
+ 	<update id="fModifyCart">
+ 		UPDATE cart
+ 		SET qty=#{qty}
+ 		WHERE id=#{id}
+ 		AND forbookno=#{forbookno}
+ 	</update>
+ 	
+ 	<update id="uModifyCart">
+ 		UPDATE cart
+ 		SET qty=#{qty}
+ 		WHERE id=#{id}
+ 		AND usedbookno=#{usedbookno}
+ 	</update>
+ 	
+ 	<update id="cModifyCart">
+ 		UPDATE cart
+ 		SET qty=#{qty}
+ 		WHERE id=#{id}
+ 		AND classno=#{classno}
+ 	</update>
+ 	
+ 	<!-- =====================삭제===================== -->
+ 	<delete id="DeleteCart">
+ 		DELETE FROM cart
+ 		WHERE cartno=#{cartno}
+ 	</delete>
+ 	
+ 	
+ </mapper>
