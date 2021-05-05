@@ -14,13 +14,25 @@ WHERE vno=#{vno}
 ORDER BY no DESC
 </select>
 <insert id="videoReviewInsert" parameterType="VideoReviewVO">
-INSERT INTO video_review(no, vno, name, msg, star)
+INSERT INTO video_review(no, vno, id, name, msg, star)
 VALUES(
 	(SELECT MAX(no)+1 as no FROM video_review),
 	#{vno},
+	#{id},
 	#{name},
 	#{msg},
 	#{star}
 )
 </insert>
+<!-- 댓글 수정 -->
+<update id="videoReviewUpdate" parameterType="VideoReviewVO">
+UPDATE video_review SET
+msg=#{msg}
+WHERE no=#{no}
+</update>
+<!-- 댓글 삭제 -->
+<delete id="videoReviewDelete" parameterType="int">
+DELETE FROM video_review
+WHERE no=#{no}
+</delete>
 </mapper>

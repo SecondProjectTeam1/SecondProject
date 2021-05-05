@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="../css/comment_style.css">
 <style type="text/css">
 .main_img{
 	width:450px;
@@ -15,13 +18,58 @@
 	width:20px;
 	height:20px;
 }
+.fa {
+	color:orange;
+}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+let u=0;
+let i=0;
 $(function(){
-	var userScore=$('#makeStar');
-	userScore.change(function(){
-		var userScoreNum=$(this).val();
+$('.dBtn').click(function(){
+		let no=$(this).attr("data-no");
+		let vno=$(this).attr("data-vno");
+		$.ajax({
+			type:'get',
+			url:'video_review_delete.do',
+			data:{"no":no,"vno":vno},
+			success:function(result)
+			{
+				location.href="../video/video_detail.do?no="+vno;
+			}
+		})
 	})
+$('.uBtn').click(function(){
+	let no=$(this).attr("data-no");
+	if(u==0)
+	{
+		$('#m'+no).show();
+		$(this).text("취소");
+		u=1;
+	}
+	else
+	{
+		$('#m'+no).hide();
+		$(this).text("수정");
+		u=0;
+	}
+})
+$('.update').click(function(){
+	let data_no=$(this).attr("data-no");
+	let no=$('#update_no'+data_no).val();
+	let vno=$('#update_vno'+data_no).val();
+	let msg=$('#update_msg'+data_no).val();
+	$.ajax({
+		type:'post',
+		url:'video_review_update.do',
+		data:{"no":no, "vno":vno, "msg":msg},
+		success:function(result)
+		{
+			location.href="../video/video_detail.do?no="+vno;
+		}
+	})
+})
 	
 })
 </script>
@@ -185,22 +233,80 @@ $(function(){
 								</div>
 							</div>
 							<div class="review_list">
-								<c:forEach var="rvo" items="${list }">
+							<c:forEach var="rvo" items="${list }">
+							<div class="comment-wrap">
+						<div class="photo">
+						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
+						</div>
+						<div class="comment-block">
+						<p class="comment-text">${rvo.msg }</p>
+						<div class="bottom-comment">
+								 별점: <c:forEach var="i" begin="1" end="${rvo.star }">
+											<i class="fa fa-star"></i>
+											</c:forEach>
+											<br><br>
+								<div class="comment-date">id:&nbsp;${rvo.id }</div>			
+								<br><br><div class="comment-date">${rvo.dbday }</div>			
+								<c:if test="${sessionScope.id==rvo.id }">
+								<ul class="comment-actions">
+										<li class="complain uBtn" data-no="${rvo.no }" data-vno="${rvo.vno }">수정</li>
+										<li class="reply dBtn" data-no="${rvo.no }" data-vno="${rvo.vno }">삭제</li>
+									</ul>
+								</c:if>
+								</div>
+								<br>
+								<br>
+								<%-- 수정 데이터 --%>
+								<div class="comment-wrap" style="display:none" id="m${rvo.no }">
+							<div class="comment-block">
+								<input type=hidden name=no value="${rvo.no }" id="update_no${rvo.no }">
+								<input type=hidden name=vno value="${rvo.vno }" id="update_vno${rvo.vno }">
+								<textarea name="msg" cols="30" rows="3" placeholder="${rvo.msg }" id="update_msg${rvo.no }"></textarea>
+							<ul class="comment-actions">
+								<li class="reply update"  data-no="${rvo.no }">수정하기</li>
+								</ul>
+							</div>
+						</div>
+							</div>
+						</div>
+						</c:forEach>
+							
+								<%-- <c:forEach var="rvo" items="${list }">
 								<div class="review_item">
 									<div class="media">
 										<div class="d-flex">
 											<img src="img/product/review-1.png" alt="">
 										</div>
 										<div class="media-body">
-											<h4>${rvo.name }</h4>
-											<c:forEach var="i" begin="1" end="${rvo.star }">
+										<table class="table">
+										 <tr>
+										  <td colspan="3"><h6>${rvo.name } &nbsp; id:${rvo.id } </h6></td>
+										  <td>
+										  <c:if test="${sessionScope.id==rvo.id }">
+										  <button style="float:left" class="btn btn-sm uBtn"> 수정 </button>&nbsp;&nbsp; <button style="float:left" class="btn btn-sm dBtn"> 삭제 </button>
+										  </c:if>
+										  </td>
+										 </tr>
+										 <tr>
+										  <td>
+										  별점:
+										  <c:forEach var="i" begin="1" end="${rvo.star }">
 											<i class="fa fa-star"></i>
 											</c:forEach>
+										  </td>
+										 </tr>
+										 <tr>
+										 <td>
+										 <p>${rvo.msg }</p>
+										 </td>
+										 </tr>
+										</table>
+											
 										</div>
 									</div>
-									<p>${rvo.msg }</p>
+									
 								</div>
-								</c:forEach>
+								</c:forEach> --%>
 							
 							</div>
 						</div>
@@ -226,9 +332,9 @@ $(function(){
 								</ul>
 								<p>Outstanding</p>
                 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <textarea class="form-control different-control w-100" name="msg" id="textarea" cols="30" rows="5" placeholder="Enter Message"></textarea>
                   </div>
@@ -270,83 +376,53 @@ $(function(){
  		  </div>
         </div>
 
-        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+     <%--    <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
           <div class="single-search-product-wrapper">
+          
+          
+          <c:forEach var="svo" items="${sList }">         
             <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
+              <a href="video_detail.do?no=${svo.no }"><img src="${svo.poster }" alt=""></a>
               <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
+                  <a href="video_detail.do?no=${svo.no }" class="title">${svo.title }</a>
+                  <div class="price">${svo.price }</div>
               </div>
             </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
+            </c:forEach>
+ 		  </div>
         </div>
 
         <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
           <div class="single-search-product-wrapper">
+          
+          
+          <c:forEach var="svo" items="${sList }">         
             <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
+              <a href="video_detail.do?no=${svo.no }"><img src="${svo.poster }" alt=""></a>
               <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
+                  <a href="video_detail.do?no=${svo.no }" class="title">${svo.title }</a>
+                  <div class="price">${svo.price }</div>
               </div>
             </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
+            </c:forEach>
+ 		  </div>
         </div>
 
         <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
           <div class="single-search-product-wrapper">
+          
+          
+          <c:forEach var="svo" items="${sList }">         
             <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+              <a href="video_detail.do?no=${svo.no }"><img src="${svo.poster }" alt=""></a>
               <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
+                  <a href="video_detail.do?no=${svo.no }" class="title">${svo.title }</a>
+                  <div class="price">${svo.price }</div>
               </div>
             </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </c:forEach>
+ 		  </div>
+        </div> --%>
       </div>
 		</div>
 	</section>

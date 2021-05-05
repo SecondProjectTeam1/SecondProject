@@ -1,11 +1,15 @@
 package com.sist.web;
+import java.net.Inet4Address;
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.*;
@@ -77,16 +81,41 @@ public class VideoController {
 	}
 	
 	@PostMapping("video/review_insert_ok.do")
-	public String video_review_insert(String no, String name, String msg, String star, Model model, RedirectAttributes ra)
+	public String video_review_insert(String no, String msg, String star, Model model, RedirectAttributes ra, HttpSession session)
 	{
 		VideoReviewVO vo=new VideoReviewVO();
+		String name=(String)session.getAttribute("name");
+		String id=(String)session.getAttribute("id");
+		
 		vo.setVno(Integer.parseInt(no));
+		vo.setId(id);
 		vo.setMsg(msg);
 		vo.setName(name);
 		vo.setStar(Integer.parseInt(star));
 		
 		service.videoReviewInsert(vo);
 		ra.addAttribute("no", Integer.parseInt(no));
+		return "redirect:video_detail.do";
+	}
+	@GetMapping("video/video_review_delete.do")
+	public String video_review_delete(String no, String vno, Model model, RedirectAttributes ra, HttpSession session)
+	{
+		int rno=Integer.parseInt(no);
+		service.videoReviewDelete(rno);
+		
+		ra.addAttribute("no", Integer.parseInt(vno));
+		return "redirect:video_detail.do";
+	}
+	@RequestMapping("video/video_review_update.do")
+	public String video_review_update(String no, String vno, String msg, Model model, RedirectAttributes ra, HttpSession session)
+	{
+		int rno=Integer.parseInt(no);
+		VideoReviewVO vo=new VideoReviewVO();
+		vo.setNo(rno);
+		vo.setMsg(msg);
+		service.videoReviewUpdate(vo);
+		
+		ra.addAttribute("no", Integer.parseInt(vno));
 		return "redirect:video_detail.do";
 	}
 }

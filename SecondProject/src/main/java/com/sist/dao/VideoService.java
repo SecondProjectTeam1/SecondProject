@@ -51,5 +51,13 @@ public class VideoService {
 	{
 		rDao.videoReviewInsert(vo);
 	}
+	public void videoReviewUpdate(VideoReviewVO vo)
+	{
+		rDao.videoReviewUpdate(vo);
+	}
+	public void videoReviewDelete(int no)
+	{
+		rDao.videoReviewDelete(no);
+	}
 	
 }

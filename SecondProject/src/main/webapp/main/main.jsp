@@ -39,13 +39,12 @@
               <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Shop</a>
+                  aria-expanded="false">개발자를 위한 도서 & 강의</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="category.html">국내도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="single-product.html">해외도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../junggo/junggo_list.do">중고도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../video/video_list.do">강의</a></li>
                 </ul>
 							</li>
               <li class="nav-item submenu dropdown">

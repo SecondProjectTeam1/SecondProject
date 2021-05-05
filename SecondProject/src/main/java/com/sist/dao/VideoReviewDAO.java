@@ -47,6 +47,27 @@ public class VideoReviewDAO extends SqlSessionDaoSupport {
 	{
 		getSqlSession().selectOne("videoReviewInsert", vo);
 	}
+	/*
+	 * 	<update id="videoReviewUpdate" parameterType="VideoReviewVO">
+		UPDATE video_review SET
+		msg=#{msg}
+		WHERE no=#{no}
+		</update>
+		<!-- 댓글 삭제 -->
+		<delete id="videoReviewDelete" parameterType="int">
+		DELETE FROM video_review
+		WHERE no=#{no}
+		</delete>
+	 * 
+	 */
+	public void videoReviewUpdate(VideoReviewVO vo)
+	{
+		getSqlSession().selectOne("videoReviewUpdate",vo);
+	}
+	public void videoReviewDelete(int no)
+	{
+		getSqlSession().selectOne("videoReviewDelete", no);
+	}
 }
 
 
