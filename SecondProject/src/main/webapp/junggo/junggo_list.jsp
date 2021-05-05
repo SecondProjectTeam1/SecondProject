@@ -24,6 +24,8 @@
 	})
 	$('#findBtn').click(function(){
 		let userFind=$('#keyword').val();
+		let cno=$('#cno').val();
+		let page=$('#page').val();
 		if(userFind.trim()=="")
 		{
 			$('#keyword').focus();
@@ -32,7 +34,7 @@
 		$.ajax({
 			type:'post',
 			url:'junggo_find.do',
-			data:{"userFind":userFind},
+			data:{"userFind":userFind, "cno":cno, "page":page},
 			success:function(result)
 			{
 				$('#findList').html(result);
@@ -139,6 +141,8 @@
             <div>
               <div class="input-group filter-bar-search">
                 <input type="text" placeholder="Search" id="keyword">
+                <input type="hidden" id="page" value="${curpage }">
+                <input type="hidden" id="cno" value="${curcno}">
                 <div class="input-group-append">
                   <button type="button" id="findBtn"><i class="ti-search"></i></button>
                 </div>

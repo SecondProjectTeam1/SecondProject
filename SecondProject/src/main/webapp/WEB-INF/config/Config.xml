@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BooksVO" alias="BooksVO"/>
 		<typeAlias type="com.sist.vo.BooksCategoryVO" alias="BooksCategoryVO"/>
 		<typeAlias type="com.sist.vo.VideoReviewVO" alias="VideoReviewVO"/>
+		<typeAlias type="com.sist.vo.BooksReviewVO" alias="BooksReviewVO"/>
 		<typeAlias type="com.sist.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.board.ReplyVO" alias="ReplyVO"/>
 	</typeAliases>
@@ -19,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/books-mapper.xml"/>
 		<mapper resource="com/sist/mapper/video-mapper.xml"/>
 		<mapper resource="com/sist/mapper/video-review-mapper.xml"/>
+		<mapper resource="com/sist/mapper/books-review-mapper.xml"/>
 		<mapper resource="com/sist/mapper/member-mapper.xml"/>
 		<mapper resource="com/sist/board/board-mapper.xml"/>
 		<mapper resource="com/sist/board/reply-mapper.xml"/>

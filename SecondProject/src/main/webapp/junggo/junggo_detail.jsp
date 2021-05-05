@@ -1,20 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/comment_style.css">
 <style type="text/css">
 .main_img{
 	width:450px;
 	height:450px;
 }
-#price{
-	text-decoration : line-through;
-	color:gray;
+.icon{
+	width:20px;
+	height:20px;
+}
+.fa {
+	color:orange;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let u=0;
+let i=0;
+$(function(){
+$('.dBtn').click(function(){
+		let no=$(this).attr("data-no");
+		let vno=$(this).attr("data-vno");
+		$.ajax({
+			type:'get',
+			url:'junggo_review_delete.do',
+			data:{"no":no,"vno":vno},
+			success:function(result)
+			{
+				location.href="../junggo/junggo_detail.do?no="+vno;
+			}
+		})
+	})
+$('.uBtn').click(function(){
+	let no=$(this).attr("data-no");
+	if(u==0)
+	{
+		$('#m'+no).show();
+		$(this).text("취소");
+		u=1;
+	}
+	else
+	{
+		$('#m'+no).hide();
+		$(this).text("수정");
+		u=0;
+	}
+})
+$('.update').click(function(){
+	let data_no=$(this).attr("data-no");
+	let no=$('#update_no'+data_no).val();
+	let vno=$('#update_vno'+data_no).val();
+	let msg=$('#update_msg'+data_no).val();
+	$.ajax({
+		type:'post',
+		url:'junggo_review_update.do',
+		data:{"no":no, "vno":vno, "msg":msg},
+		success:function(result)
+		{
+			location.href="../junggo/junggo_detail.do?no="+vno;
+		}
+	})
+})
+	
+})
+</script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
@@ -51,17 +107,6 @@
 					<img src="${vo.poster}" class="main_img">
 				</div>
 				</div>
-				
-				<!-- 
-						<div class="col-lg-6">
-					<div class="owl-carousel owl-theme s_Product_carousel">
-						<div class="single-prd-item">
-							<img src="${vo.poster}">
-						</div>
-					</div>
-				</div>
-				 -->
-				
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3>${vo.title} </h3>
@@ -159,116 +204,112 @@
 				</div>
 				
 				
-				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+			<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="row total_rate">
 								<div class="col-6">
 									<div class="box_total">
 										<h5>Overall</h5>
-										<h4>4.0</h4>
-										<h6>(03 Reviews)</h6>
+										<h4>${avg }</h4>
+										<h6>${revCount } reviews</h6>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="rating_list">
-										<h3>Based on 3 Reviews</h3>
+										<h3>Based on ${revCount } Reviews</h3>
 										<ul class="list">
-											<li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">1 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
+										<c:forEach var="j" begin="1" end="5">
+											<li><a href="#">${j} Star 
+											<c:if test="${j==1 }">
+											<i class="fa fa-star"></i>
+											</c:if>
+											<c:if test="${j==2 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i>
+											</c:if>
+											<c:if test="${j==3 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											</c:if>
+											<c:if test="${j==4 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											</c:if>
+											<c:if test="${j==5 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											</c:if>
+											 01</a></li>
+										</c:forEach>
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="review_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-1.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
+							<c:forEach var="rvo" items="${list }">
+							<div class="comment-wrap">
+						<div class="photo">
+						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
+						</div>
+						<div class="comment-block">
+						<p class="comment-text">${rvo.msg }</p>
+						<div class="bottom-comment">
+								 별점: <c:forEach var="i" begin="1" end="${rvo.star }">
 											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
+											</c:forEach>
+											<br><br>
+								<div class="comment-date">id:&nbsp;${rvo.id }</div>			
+								<br><br><div class="comment-date">${rvo.dbday }</div>			
+								<c:if test="${sessionScope.id==rvo.id }">
+								<ul class="comment-actions">
+										<li class="complain uBtn" data-no="${rvo.no }" data-vno="${rvo.vno }">수정</li>
+										<li class="reply dBtn" data-no="${rvo.no }" data-vno="${rvo.vno }">삭제</li>
+									</ul>
+								</c:if>
 								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-2.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-3.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
+								<br>
+								<br>
+								<%-- 수정 데이터 --%>
+								<div class="comment-wrap" style="display:none" id="m${rvo.no }">
+							<div class="comment-block">
+								<input type=hidden name=no value="${rvo.no }" id="update_no${rvo.no }">
+								<input type=hidden name=vno value="${rvo.vno }" id="update_vno${rvo.vno }">
+								<textarea name="msg" cols="30" rows="3" placeholder="${rvo.msg }" id="update_msg${rvo.no }"></textarea>
+							<ul class="comment-actions">
+								<li class="reply update"  data-no="${rvo.no }">수정하기</li>
+								</ul>
+							</div>
+						</div>
+							</div>
+						</div>
+						</c:forEach>
+							
+							
+							
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>Add a Review</h4>
 								<p>Your Rating:</p>
-								<ul class="list">
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
+								<form method="post" action="review_insert_ok.do" class="form-contact form-review mt-3">
+								<input type="hidden" name="no" value="${no}">
+								<select name="star" id="makeStar">
+								 <option>1</option>
+								 <option>2</option>
+								 <option>3</option>
+								 <option>4</option>
+								 <option>5</option>
+								</select>
+								<ul class="list rating" id="rateStar">
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
 								</ul>
 								<p>Outstanding</p>
-                <form action="#/" class="form-contact form-review mt-3">
+                
+                 
                   <div class="form-group">
-                    <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" name="email" type="email" placeholder="Enter email address" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" name="subject" type="text" placeholder="Enter Subject">
-                  </div>
-                  <div class="form-group">
-                    <textarea class="form-control different-control w-100" name="textarea" id="textarea" cols="30" rows="5" placeholder="Enter Message"></textarea>
+                    <textarea class="form-control different-control w-100" name="msg" id="textarea" cols="30" rows="5" placeholder="Enter Message"></textarea>
                   </div>
                   <div class="form-group text-center text-md-right mt-3">
                     <button type="submit" class="button button--active button-review">Submit Now</button>
@@ -278,11 +319,8 @@
 						</div>
 					</div>
 				</div>
-				
-				
-				
+				</div>
 			</div>
-		</div>
 	</section>
 	<!--================End Product Description Area =================-->
 
