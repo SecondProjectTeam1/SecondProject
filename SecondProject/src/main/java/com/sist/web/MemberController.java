@@ -65,25 +65,25 @@ public class MemberController {
 		
 		mDao.memberJoin(vo);
 		
-		return "redirect:login.do";
+		return "redirect:main.do";
 	}
-	@PostMapping("member/idcheck.do")
-	public String id_check(String id, Model model)
-	{
-		int idCount=mDao.idCheck(id);
-		model.addAttribute("idCount",idCount);
-		return "/member/idcheck";
-	}
+//	@GetMapping("member/idcheck2.do")
+//	public String id_check(String id, Model model)
+//	{
+//		int idCount=mDao.idCheck(id);
+//		model.addAttribute("idCount",idCount);
+//		return "/member/idcheck";
+//	}
 	
-	@GetMapping("member/post_result.do")
-	public String post_result(Model model)
-	{
-		String dong="";
-		List<ZipcodeVO> list=mDao.signUpAddress(dong);
-		
-		model.addAttribute("list",list);
-		model.addAttribute("main_jsp","../member/postfind.jsp");
-		return "main/main";
-				
-	}
+//	@GetMapping("member/post_result.do")
+//	public String post_result(Model model)
+//	{
+//		String dong="";
+//		List<ZipcodeVO> list=mDao.signUpAddress(dong);
+//		
+//		model.addAttribute("list",list);
+//		model.addAttribute("main_jsp","../member/postfind.jsp");
+//		return "main/main";
+//				
+//	}
 }

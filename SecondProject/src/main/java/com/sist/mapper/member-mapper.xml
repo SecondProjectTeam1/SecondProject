@@ -49,7 +49,7 @@
 		
 	 -->
 	<select id="signUpAddress" resultType="com.sist.vo.ZipcodeVO" parameterType="string">
-		SELECT zipcode,sido,gugun,dong,NVL(bunji,' ') 
+		SELECT zipcode,sido,gugun,dong,NVL(bunji,' ') as bunji
 		FROM zipcode 
 		WHERE dong LIKE '%'||#{dong}||'%'
 	</select>
