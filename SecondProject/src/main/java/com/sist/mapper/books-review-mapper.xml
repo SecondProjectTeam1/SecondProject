@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.books-review-mapper">
+<select id="junggoReviewListData" resultType="com.sist.vo.BooksReviewVO" parameterType="int">
+SELECT no, id, name, msg, star, vno, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') as dbday FROM junggo_review 
+WHERE vno=#{vno}
+ORDER BY no DESC
+</select>
+<insert id="junggoReviewInsert" parameterType="com.sist.vo.BooksReviewVO">
+INSERT INTO junggo_review(no, vno, id, name, msg, star)
+VALUES(
+	(SELECT MAX(no)+1 as no FROM junggo_review),
+	#{vno},
+	#{id},
+	#{name},
+	#{msg},
+	#{star}
+)
+</insert>
+<!-- 댓글 수정 -->
+<update id="junggoReviewUpdate" parameterType="com.sist.vo.BooksReviewVO">
+UPDATE junggo_review SET
+msg=#{msg}
+WHERE no=#{no}
+</update>
+<!-- 댓글 삭제 -->
+<delete id="junggoReviewDelete" parameterType="int">
+DELETE FROM junggo_review
+WHERE no=#{no}
+</delete>
+<!-- 평균 별점 -->
+<select id="booksStarAvgData" parameterType="int" resultType="double">
+select NVL(round(avg(star), 1), 0.0) as avg
+from junggo_review
+where vno=#{vno}
+</select>
+<!-- 리뷰 갯수 -->
+<select id="booksRevCountData" resultType="int" parameterType="int">
+SELECT NVL(COUNT(*),0) as revCount FROM junggo_review
+WHERE vno=#{vno}
+</select>
+</mapper>
