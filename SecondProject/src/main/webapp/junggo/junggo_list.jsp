@@ -24,8 +24,7 @@
 	})
 	$('#findBtn').click(function(){
 		let userFind=$('#keyword').val();
-		let cno=$('#cno').val();
-		let page=$('#page').val();
+		let findTitle=$('#findTitle').val();
 		if(userFind.trim()=="")
 		{
 			$('#keyword').focus();
@@ -34,10 +33,34 @@
 		$.ajax({
 			type:'post',
 			url:'junggo_find.do',
-			data:{"userFind":userFind, "cno":cno, "page":page},
+			data:{"userFind":userFind, "findTitle":findTitle},
 			success:function(result)
 			{
-				$('#findList').html(result);
+				let json=JSON.parse(result);
+				let jsonData='';
+				for(let i=0; i<json.length; i++)
+				{
+					jsonData+='<div class="col-md-6 col-lg-4">'
+		                +'<div class="card text-center card-product">' 
+	                  +'<div class="card-product__img">'
+	                   +'<img class="card-img" src="'+json[i].poster+'">'
+	                    +'<ul class="card-product__imgOverlay">'
+	                      +'<li><button><i class="ti-search"></i></button></li>'
+	                      +'<li><button><i class="ti-shopping-cart"></i></button></li>'
+	                      +'<li><button><i class="ti-heart"></i></button></li>'
+	                    +'</ul>'
+	                  +'</div>'
+	                 
+	                  +'<div class="card-body">'
+	                    +'<p>'+json[i].category+'</p>'
+	                    +'<h4 class="card-product__title">'+json[i].title+'</h4>'
+	                    +'<p id="price">'+json[i].price+'</p>'
+	                    +'<p class="card-product__price">'+json[i].sale_price+'</p>'
+	                  +'</div>'
+	                +'</div>'
+	              +'</div>'
+				}
+				$('#findList').html(jsonData);
 			}
 		})
 	})
@@ -131,16 +154,16 @@
         <div class="col-xl-9 col-lg-8 col-md-7">
            <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
-            <!-- <div class="sorting">
-              <select name="findTitle" id="findTitle">
+           <div class="sorting">
+              <select id="findTitle" class="input-sm">
                 <option value="T">책 제목</option>
                 <option value="A">저자</option>
                 <option value="TA">책 제목+저자</option>
               </select> 
-            </div>  -->    
+            </div>
             <div>
               <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Search" id="keyword">
+                <input type="text" placeholder="Search" id="keyword" autocomplete=off>
                 <input type="hidden" id="page" value="${curpage }">
                 <input type="hidden" id="cno" value="${curcno}">
                 <div class="input-group-append">
@@ -153,8 +176,8 @@
           
           
          <!-- Start Best Seller -->
-           <section class="lattest-product-area pb-40 category-list" id="bookList">
-            <div class="row">
+           <section class="lattest-product-area pb-40 category-list">
+            <div class="row" id="bookList">
             <c:forEach var="vo" items="${list }">
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
@@ -179,8 +202,11 @@
                 </div>
               </div>
               </c:forEach>
+              <h6>검색결과</h6>
             </div>
+            
             <div class="row" id="findList">
+            
             
             </div>
           </section> 

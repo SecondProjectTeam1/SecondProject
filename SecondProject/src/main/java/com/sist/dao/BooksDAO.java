@@ -61,9 +61,9 @@ public class BooksDAO extends SqlSessionDaoSupport{
 		</select>
 	 * 
 	 */
-	public List<BooksVO> booksFindListData(String userFind)
+	public List<BooksVO> booksFindData(Map map)
 	{
-		return getSqlSession().selectList("booksFindListData", userFind);
+		return getSqlSession().selectList("booksFindData", map);
 	}
 	/*public int booksFindDataCount(Map map)
 	{

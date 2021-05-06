@@ -132,17 +132,5 @@ public class BooksController {
 	}
    
    
-   @RequestMapping("junggo/junggo_find.do")
-   public String junggo_find(Model model, String userFind, String page, String cno)
-   {
-	  
-	   List<BooksVO> fList=dao.booksFindListData(userFind);
-	   System.out.println(cno);
-	   System.out.println(page);
-	   System.out.println(userFind);
-	   
-	   model.addAttribute("fList", fList);
-	   model.addAttribute("main_jsp", "../junggo/junggo_find.jsp");
-	   return "main/main";
-   }
+   
 }
