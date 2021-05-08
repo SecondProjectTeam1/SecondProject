@@ -53,6 +53,32 @@
 		FROM zipcode 
 		WHERE dong LIKE '%'||#{dong}||'%'
 	</select>
+	
+	<select id="memberFindData" resultType="com.sist.vo.MemberVO" parameterType="hashmap">
+		SELECT id,name,sex,email,addr1,addr2,tel 
+		FROM member 
+		WHERE 
+		<trim prefix="(" suffix=")" prefixOverrides="OR">
+			<foreach collection="memberArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='id'.toString()">
+							id LIKE '%'||#{keyword}||'%' 
+						</when>
+						<when test="type=='name'.toString()">
+							name LIKE '%'||#{keyword}||'%' 
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</select>
+	
+	<delete id="memberDelete" parameterType="string">
+		DELETE FROM member 
+		WHERE id=#{id}
+	</delete>
+	
 </mapper>
 
 

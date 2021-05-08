@@ -65,5 +65,15 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().insert("insertMember",vo);
 	}
+	
+	public List<MemberVO> memberSearch(Map map)
+	{
+		return getSqlSession().selectList("memberFindData",map);
+	}
+	
+	public void memberDelete(String id)
+	{
+		getSqlSession().delete("memberDelete",id);
+	}
 		
 }

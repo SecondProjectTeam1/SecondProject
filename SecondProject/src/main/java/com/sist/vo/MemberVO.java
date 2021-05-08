@@ -1,10 +1,34 @@
 package com.sist.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class MemberVO {
 
-	private String id,pwd,name,sex,birthday,email,post,addr1,addr2,tel,content,admin;
-
+	//private String id,pwd,name,sex,birthday,email,post,addr1,addr2,tel,content,admin;
+	@NotBlank
+	private String id;
+	@NotBlank
+	private String pwd;
+	@NotBlank
+	private String name;
+	@NotBlank
+	private String sex;
+	@NotBlank
+	private String birthday;
+	@Email
+	private String email;
+	@NotBlank
+	private String post;
+	private String addr1;
+	private String addr2;
+	@NotBlank
+	private String tel;
+	@NotBlank
+	private String content;
+	private String admin;
 	public String getId() {
+		
 		return id;
 	}
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="index.html"><img src="../img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="../main/main.do"><img src="../img/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
@@ -36,7 +37,7 @@
           </button>
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item active"><a class="nav-link" href="../main/main.do">Home</a></li>
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">개발자를 위한 도서 & 강의</a>
@@ -66,12 +67,19 @@
               </li>
               <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
             </ul>
-
-            <ul class="nav-shop">
-              <li class="nav-item"><button><i class="ti-search"></i></button></li>
-              <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button> </li>
-              <li class="nav-item"><a class="button button-header" href="#">Buy Now</a></li>
-            </ul>
+				
+			<c:if test="${sessionScope.id == null }">
+				<a href="../main/login.do"><h6>로그인</h6></a>&nbsp;|&nbsp;
+				<a href="../member/join.do"><h6>회원가입</h6></a>
+			</c:if>
+			<c:if test="${sessionScope.id != null }">
+				<a href=""><h6>마이페이지 임시</h6></a>&nbsp;|&nbsp;
+				<a href="../member/logout.do"><h6>로그아웃</h6></a>
+			</c:if>
+			<c:if test="${sessionScope.id == 'admin' }">
+				<a href=""><h6>관리자페이지</h6></a>
+			</c:if>
+            
           </div>
         </div>
       </nav>
