@@ -69,6 +69,9 @@ public class BooksDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("booksFindDataCount", map);
 	}*/
-	
+	public BookVO findNewBookList(String title)
+	{
+		return getSqlSession().selectOne("findNewBookList",title);
+	}
 	
 }

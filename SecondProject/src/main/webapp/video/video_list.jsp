@@ -138,7 +138,7 @@ $(function(){
                 <div class="card text-center card-product">
                
                   <div class="card-product__img">
-                   <a href="video_detail.do?no=${vo.no}">
+                   <a href="video_detail.do?no=${vo.no}&cno=${curcno}&page=${curpage}">
                    <input type=hidden name=page value="${curpage }">
                     <img class="card-img" src="${vo.poster }" alt="">
                     </a> 

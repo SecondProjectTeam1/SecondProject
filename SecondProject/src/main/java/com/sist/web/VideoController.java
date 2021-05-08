@@ -63,7 +63,7 @@ public class VideoController {
 	}
 	
 	@GetMapping("video/video_detail.do")
-	public String video_detail(String no, Model model)
+	public String video_detail(String no, Model model, String page, String cno)
 	{
 		
 		int vno=Integer.parseInt(no);
@@ -75,6 +75,8 @@ public class VideoController {
 		Double avg=service.starAvgData(vno);
 		int revCount=service.revCountData(vno);
 		
+		model.addAttribute("page", page);
+		model.addAttribute("cno", cno);
 		model.addAttribute("revCount", revCount);
 		model.addAttribute("avg", avg);
 		model.addAttribute("sList", sList);

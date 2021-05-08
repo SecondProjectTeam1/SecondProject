@@ -30,4 +30,6 @@ public class BookDAO extends SqlSessionDaoSupport{
 	public int bookTotalPage(int cno) {
 		return getSqlSession().selectOne("bookTotalPage", cno);
 	}
+	
+	
 }

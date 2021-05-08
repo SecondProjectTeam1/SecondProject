@@ -72,12 +72,14 @@ public class BooksController {
    }
    
    @GetMapping("junggo/junggo_detail.do")
-   public String junggo_detail(String no, Model model)
+   public String junggo_detail(String no, Model model, String page, String cno)
    {
       int bno=Integer.parseInt(no);
       BooksVO vo=dao.booksDetailData(bno);
       
+      
       List<BooksReviewVO> list=rDao.junggoReviewListData(bno);
+      BookVO nvo=dao.findNewBookList(vo.getTitle());
       
       Double avg=rDao.booksStarAvgData(bno);
       int revCount=rDao.booksRevCountData(bno);
@@ -90,12 +92,15 @@ public class BooksController {
     	  }catch(Exception ex){ex.printStackTrace();}
       }
       
+      model.addAttribute("nvo", nvo);
+      model.addAttribute("page", page);
+      model.addAttribute("cno", cno);
       model.addAttribute("revCount", revCount);
       model.addAttribute("avg", avg);
       model.addAttribute("list", list);
       model.addAttribute("vo", vo);
       model.addAttribute("no", bno);
-      
+      model.addAttribute("sList", sList);
       model.addAttribute("main_jsp", "../junggo/junggo_detail.jsp");
       return "main/main";
    }

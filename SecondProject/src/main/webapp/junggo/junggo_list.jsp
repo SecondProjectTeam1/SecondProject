@@ -190,7 +190,7 @@
                 <div class="card text-center card-product">
                
                   <div class="card-product__img">
-                   <a href="junggo_detail.do?no=${vo.no}">
+                   <a href="junggo_detail.do?no=${vo.no}&cno=${curcno }&page=${curpage}">
                     <img class="card-img" src="${vo.poster }" alt="">
                     </a> 
                     <ul class="card-product__imgOverlay">

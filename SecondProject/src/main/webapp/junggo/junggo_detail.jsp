@@ -195,7 +195,7 @@ $('.update').click(function(){
 									</td>
 								</tr>
 								<tr>
-                 		<td colspan="3" class="text-right"><a href="javascript:history.back();">목록</a>
+                 		<td colspan="3" class="text-right"><a href="junggo_list.do?cno=${cno }&page=${page}">목록</a>
                  			</td>
                 			</tr>
 							</tbody>
@@ -351,107 +351,23 @@ $('.update').click(function(){
 			<div class="row mt-30">
         <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
           <div class="single-search-product-wrapper">
+          
+          	
             <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+              <a href="#"><img src="${nvo.poster }" alt=""></a>
               <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
+                  <a href="#" class="title">${nvo.title }</a>
+                  <div class="price">${nvo.price }</div>
               </div>
             </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
+          
+            
+            
+            
           </div>
         </div>
 
-        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-          <div class="single-search-product-wrapper">
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
-              <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-          <div class="single-search-product-wrapper">
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
-              <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-          <div class="single-search-product-wrapper">
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
-              <div class="desc">
-                  <a href="#" class="title">Gray Coffee Cup</a>
-                  <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-            <div class="single-search-product d-flex">
-              <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
-              <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
 		</div>
 	</section>

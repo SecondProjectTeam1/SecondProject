@@ -184,7 +184,7 @@ $('.update').click(function(){
                  </td>
                 </tr>
                 <tr>
-                 <td colspan="3" class="text-right"><a href="javascript:history.back();">목록</a>
+                 <td colspan="3" class="text-right"><a href="video_list.do?cno=${cno }&page=${page}">목록</a>
                  </td>
                 </tr>
                </table>
