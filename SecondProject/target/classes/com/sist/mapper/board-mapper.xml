@@ -35,7 +35,8 @@
       #{content},
       #{id},
       SYSDATE,
-      0
+      0,
+      1
     )
 </insert>
   <!-- 상세보기 -->
@@ -153,7 +154,7 @@
    DELETE FROM board WHERE no=#{no}
   </delete>
   <delete id="boardReplyDelete" parameterType="int">
-    DELETE FROM spring_reply
+    DELETE FROM board_reply
     WHERE bno=#{bno}
   </delete>
 </mapper>

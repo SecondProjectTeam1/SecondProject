@@ -87,35 +87,27 @@ public class BoardController {
    }
    
    @GetMapping("board/update.do")
-   public String board_update(int no,int page,Model model) {
+   public String board_update(int no,Model model) {
 	   BoardVO vo=service.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
-	   model.addAttribute("page", page);
-	   return "board/update";
+	   return "board/boardupdate";
    }
    @PostMapping("board/update_ok.do")
-   public String board_update_ok(BoardVO vo,int page,Model model) {
-	   service.boardUpdate(vo);
+   public String board_update_ok(BoardVO vo,RedirectAttributes ra,Model model) {
+//	   service.boardUpdate(vo);
 	   
-	   model.addAttribute("no", vo.getNo());
-	   model.addAttribute("page", page);
-	   return "board/update_ok";
+	   ra.addAttribute("no", vo.getNo());
+	   return "redirect:detail.do";
+	   
    }
    
    @GetMapping("board/delete.do")
-   public String board_delete(int no,int page,Model model) {
+   public String board_delete(int no,Model model) {
+	   service.boardDelete(no);
 	   model.addAttribute("no", no);
-	   model.addAttribute("page", page);
-	   return "board/delete";
+	   return "redirect:board.do";
    }
    
-   @PostMapping("board/delete_ok.do")
-   public String board_delete_ok(int no,int page,Model model) {
-	   service.boardDelete(no);
-	   
-	   model.addAttribute("page", page); // list.jsp => no(X) , page(O)
-	   return "board/delete_ok";
-   }
    
    @PostMapping("board/reply_insert.do")
    public String board_reply_insert(int bno,String msg,RedirectAttributes ra,HttpSession session) {

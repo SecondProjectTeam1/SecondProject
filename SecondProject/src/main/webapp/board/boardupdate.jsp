@@ -18,24 +18,37 @@
   <link rel="stylesheet" href="../vendors/owl-carousel/owl.carousel.min.css">
   <link rel="stylesheet" href="../css/style.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-		type:'GET',
-		url:'reply_list.do',
-		data:{"bno":<c:out value="${vo.no}"/>},
-		success:function(result){
-			$('#reply_data').html(result);
-		}
-	});
-});
-function deletepost(){
-	 if (!confirm("게시글을 삭제하시겠습니까?")) {
-            alert("취소(아니오)를 누르셨습니다.");
-        } else {
-        	location.href="delete.do?no="+<c:out value="${vo.no}"/>;
-        }
+function submit(){
+	let id = $('#id').val();
+	let title = $('#title').val();
+	let content = $('#content').val();
+	console.log(id,title,content)
+	if(title.trim()=="") {
+		$('#title').focus();
+		return;
+	};
+	if(content.trim()=="") {
+		$('#content').focus();
+		return;
+	};
+	var form = document.frm;
+    form.submit();
 };
+
+function setThumbnail(event) {
+	for (var image of event.target.files) {
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		console.log(image);
+		reader.readAsDataURL(image); 
+	} 
+}
 </script>
 </head>  
 <body>
@@ -46,11 +59,11 @@ function deletepost(){
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>Board Details</h1>
+					<h1>Upload Post</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Board Details</li>
+              <li class="breadcrumb-item active" aria-current="page">upload your post</li>
             </ol>
           </nav>
 				</div>
@@ -66,74 +79,27 @@ function deletepost(){
 			<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
+				<form action="update_ok.do" name=frm method="post">
 					<div class="single-post row">
 					<div class="col-lg-12">
-							<div class="feature-img">
-									<img class="img-fluid" src="../img/free.png" alt="FREE BOARD" style="width:700px;height:300px;">
-							</div>
-					</div>
-					<div class="col-lg-3  col-md-3">
-							<div class="blog_info text-right">
-								<div class="post_tag">
-                                      POST NO. &nbsp;&nbsp;<a class="active" href="#">${vo.no}</a>
+					<input type="file" id="image" name="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
+					<div id="image_container"></div>
 
-                                  </div>
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          <a href="#">${vo.id}
-                                              <i class="lnr lnr-user"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">${vo.hit} Views
-                                              <i class="lnr lnr-eye"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">${vo.replyCount} Comments
-                                              <i class="lnr lnr-bubble"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-									<ul class="social-links">
-										<li>
-											<a href="#">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-twitter"></i>																				
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-github"></i>																				
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-behance"></i>																				
-											</a>
-										</li>
-									</ul>
-							</div>
 					</div>
-					<div class="col-lg-9 col-md-9 blog_details">
-						<h2>${vo.title }</h2>
-						<p class="excert">${vo.content}</p>
+					
+					<div class="col-lg-12 col-md-9 blog_details">
+						
+						<input type="hidden" name=id value="${sessionScope.id}">
+							<div class="form-group">
+								<input type="text" class="form-control" value="${vo.title}" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
+							</div>
+						<div class="form-group">
+							<textarea class="form-control mb-10" rows="20" name="content" id='content' placeholder="Insert Content" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Content'"
+										required="">${vo.content}</textarea>
+						</div>
+						
 					</div>
 					<div class="col-lg-12">
-						<div class="quotes">
-								MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money
-								on boot camp when you can get the MCSE study materials yourself at a fraction of the camp
-								price. However, who has the willpower to actually sit through a self-imposed MCSE training.
-						</div>
 						<div class="row">
 								<div class="col-6">
 									<img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
@@ -151,37 +117,25 @@ function deletepost(){
 						</div>
 					</div>
 			</div>
-			<div id="reply_data">
-			<!--  reply -->
-			</div>
 			<div class="navigation-area">
 					<div class="row">
 							<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 								
 							</div>
-							
 							<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<c:if test="${sessionScope.id eq vo.id }">
 								<div class="detials">
-									<a href="update.do?no=${vo.no}" class="button button-postComment button--active">MODIFY</a>
+									<a href="javascript:submit();" class="button button-postComment button--active" id="reBtn">MODIFY</a>
 								</div>
 								<div class="detail">
 								&nbsp;&nbsp;&nbsp;
 								</div>
 								<div class="detials">
-									<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
-								</div>
-								<div class="detail">
-								&nbsp;&nbsp;&nbsp;
-								</div>
-								</c:if>
-								<div class="detials">
-									<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">LIST</a>
+									<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">CANCLE</a>
 								</div>
 							</div>
 					</div>
 			</div>
-		
+			</form>
 	</div>
 	<div class="col-lg-4">
 			<div class="blog_right_sidebar">
@@ -222,10 +176,12 @@ function deletepost(){
                          <div class="br"></div>
                      </aside>
                      <aside class="single-sidebar-widget newsletter_widget">
-                         <h4 class="widget_title">Upload Post</h4>
-                         <p>
-                             upload your own post
-                         </p>
+                         <a href="insert.do" style="display:block;">
+                          <h4 class="widget_title">Upload Post</h4>
+                          <p>
+                              upload your own post
+                          </p>
+                          </a>
                      </aside>
                      <aside class="single_sidebar_widget author_widget">
                          <img class="author_img rounded-circle" src="img/blog/author.png" alt="">

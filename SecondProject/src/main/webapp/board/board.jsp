@@ -133,7 +133,7 @@
                           </div>
                           <div class="col-md-9">
                               <div class="blog_post">
-                                  <img src="../img/blog/main-blog/m-blog-1.jpg" alt="">
+                                  <img src="../img/free.png" alt="" style="width:500px;height:227px;">
                                   <div class="blog_details">
                                       <a href="../board/detail.do?no=${vo.no}">
                                           <h2>${vo.title}</h2>
