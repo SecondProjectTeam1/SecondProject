@@ -81,6 +81,14 @@ public class BooksController {
       
       Double avg=rDao.booksStarAvgData(bno);
       int revCount=rDao.booksRevCountData(bno);
+      List<BooksReviewVO> sList=rDao.eachStarCount(bno);
+      for(BooksReviewVO svo:sList)
+      {
+    	  try
+    	  {
+    		  
+    	  }catch(Exception ex){ex.printStackTrace();}
+      }
       
       model.addAttribute("revCount", revCount);
       model.addAttribute("avg", avg);

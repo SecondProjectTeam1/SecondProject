@@ -39,4 +39,11 @@ where vno=#{vno}
 SELECT NVL(COUNT(*),0) as revCount FROM junggo_review
 WHERE vno=#{vno}
 </select>
+<!-- 별 갯수 -->
+<select id="eachStarCount" resultType="BooksVO" parameterType="int">
+SELECT COUNT(star) as starCount, star 
+FROM junggo_review
+WHERE vno=#{vno} 
+GROUP BY star
+</select>
 </mapper>

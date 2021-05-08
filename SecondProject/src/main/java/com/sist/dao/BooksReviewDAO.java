@@ -63,5 +63,9 @@ public class BooksReviewDAO extends SqlSessionDaoSupport {
 	{
 		return getSqlSession().selectOne("booksRevCountData", vno);
 	}
+	public List<BooksReviewVO> eachStarCount(int vno)
+	{
+		return getSqlSession().selectList("eachStarCount", vno);
+	}
 }
 

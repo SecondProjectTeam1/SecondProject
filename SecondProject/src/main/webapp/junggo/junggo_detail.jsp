@@ -219,7 +219,7 @@ $('.update').click(function(){
 									<div class="rating_list">
 										<h3>Based on ${revCount } Reviews</h3>
 										<ul class="list">
-										<c:forEach var="j" begin="1" end="5">
+										 <c:forEach var="j" begin="1" end="5">
 											<li><a href="#">${j} Star 
 											<c:if test="${j==1 }">
 											<i class="fa fa-star"></i>
@@ -238,6 +238,23 @@ $('.update').click(function(){
 											</c:if>
 											 01</a></li>
 										</c:forEach>
+										<%-- <c:forEach var="svo" items="${sList }">
+										<c:if test="${svo.star==1 }">
+										<i class="fa fa-star"></i> ${svo.starCount }
+										</c:if>
+										<c:if test="${svo.star==2 }">
+										<i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
+										</c:if>
+										<c:if test="${svo.star==3 }">
+										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
+										</c:if>
+										<c:if test="${svo.star==4 }">
+										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
+										</c:if>
+										<c:if test="${svo.star==5 }">
+										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
+										</c:if>
+										</c:forEach> --%>
 										</ul>
 									</div>
 								</div>

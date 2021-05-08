@@ -21,8 +21,11 @@
  $(function(){
 	$('#keyword').keyup(function(){
 		$('#bookList > div').hide();
+		$('.pagination > li').hide();
+		
 	})
 	$('#findBtn').click(function(){
+		$('#sresult').show();
 		let userFind=$('#keyword').val();
 		let findTitle=$('#findTitle').val();
 		if(userFind.trim()=="")
@@ -43,7 +46,9 @@
 					jsonData+='<div class="col-md-6 col-lg-4">'
 		                +'<div class="card text-center card-product">' 
 	                  +'<div class="card-product__img">'
+	                  +'<a href="../junggo/junggo_detail.do?no='+json[i].no+'">'
 	                   +'<img class="card-img" src="'+json[i].poster+'">'
+	                   +'</a>'
 	                    +'<ul class="card-product__imgOverlay">'
 	                      +'<li><button><i class="ti-search"></i></button></li>'
 	                      +'<li><button><i class="ti-shopping-cart"></i></button></li>'
@@ -107,7 +112,9 @@
               </li>
             </ul>
           </div>
-          <div class="sidebar-filter">
+          
+          
+          <!-- <div class="sidebar-filter">
             <div class="top-filter-head">Product Filters</div>
             <div class="common-filter">
               <div class="head">Brands</div>
@@ -149,7 +156,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div -->
+          
+          
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
            <!-- Start Filter Bar -->
@@ -202,7 +211,7 @@
                 </div>
               </div>
               </c:forEach>
-              <h6>검색결과</h6>
+              <h6 class="card-body" id="sresult" style="display:none">검색결과</h6>
             </div>
             
             <div class="row" id="findList">
