@@ -49,7 +49,7 @@
                 <img class="card-img rounded-0" src="../img/blog/cat-post/cat-post-3.jpg" alt="post">
                 <div class="categories_details">
                     <div class="categories_text">
-                        <a href="single-blog.html">
+                        <a href="../board/board.do?type=f">
                             <h5>FREE BOARD</h5>
                         </a>
                         <div class="border_line"></div>
@@ -63,7 +63,7 @@
             <img class="card-img rounded-0" src="../img/blog/cat-post/cat-post-2.jpg" alt="post">
             <div class="categories_details">
               <div class="categories_text">
-                <a href="single-blog.html">
+                <a href="../board/board.do?type=q">
                     <h5>Q&A BOARD</h5>
                 </a>
                 <div class="border_line"></div>
@@ -159,12 +159,12 @@
 					         </c:if>
 					         <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 					           <c:if test="${i==curpage}">
-					            <c:set var="type" value="active"/>
+					            <c:set var="ptype" value="active"/>
 					           </c:if>
 					           <c:if test="${i!=curpage}">
-					            <c:set var="type" value=""/>
+					            <c:set var="ptype" value=""/>
 					           </c:if>
-					           <li class="page-item ${type}">
+					           <li class="page-item ${ptype}">
 					              <a href="../board/board.do?type=${type}&page=${i}" class="page-link">${i}</a>
 					          </li>
 					         </c:forEach>
@@ -220,10 +220,12 @@
                           <div class="br"></div>
                       </aside>
                       <aside class="single-sidebar-widget newsletter_widget">
+                      	<a href="insert.do" style="display:block;">
                           <h4 class="widget_title">Upload Post</h4>
                           <p>
                               upload your own post
                           </p>
+                          </a>
                       </aside>
                       <aside class="single_sidebar_widget author_widget">
                           <img class="author_img rounded-circle" src="img/blog/author.png" alt="">

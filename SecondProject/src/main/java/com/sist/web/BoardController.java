@@ -57,21 +57,17 @@ public class BoardController {
    }
    @GetMapping("board/insert.do")
    public String board_insert() {
-	   return "board/insert";
+	   return "board/boardinsert";
    }
    @PostMapping("board/insert_ok.do")
    public String board_insert_ok(BoardVO vo) {
 	   service.boardInsert(vo);
-	   return "redirect:list.do";
+	   return "redirect:board.do";
    }
    @GetMapping("board/detail.do")
    public String board_detail(int no,HttpSession session,Model model) {
 	   BoardVO vo=service.boardDetailData(no);
-//	   String id = (String)session.getAttribute("id");
-//	   List<ReplyVO> rList=service.replyListData(no);
 	   model.addAttribute("vo", vo);
-//	   model.addAttribute("id", id);
-//	   model.addAttribute("rList", rList);
 	   return "board/boarddetail";
    }
    @PostMapping("board/find.do")
