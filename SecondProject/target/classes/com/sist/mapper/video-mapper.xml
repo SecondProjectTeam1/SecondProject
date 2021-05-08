@@ -31,4 +31,46 @@ WHERE rownum <![CDATA[
 <=3
 ]]>
 </select>
+<!-- 검색리스트 -->
+<select id="videoFindData" resultType="com.sist.vo.VideoVO" parameterType="hashmap">
+SELECT no, poster, title, teacher, price
+FROM video WHERE 
+<trim prefix="(" suffix=")" prefixOverrides="OR">
+<foreach collection="FuArr" item="findTitle">
+<trim prefix="OR">
+<choose>
+<when test="findTitle=='T'.toString()">
+title LIKE '%'||#{userFind}||'%'
+</when> 
+<when test="findTitle='A'.toString()">
+teacher LIKE '%'||#{userFind}||'%'
+</when>
+</choose>
+</trim>
+</foreach>
+</trim>
+</select>
+<!-- find Totalpage -->
+<!-- <select id="videoFindTotalPage" resultType="int" parameterType="hashmap">
+SELECT CEIL(COUNT(*)/9.0) FROM 
+(SELECT no, poster, title, teacher, price, num 
+FROM (SELECT no, poster, title, teacher, price, rownum as num 
+FROM (SELECT no, poster, title, teacher, price
+FROM video WHERE
+<trim prefix="(" suffix=")" prefixOverrides="OR">
+<foreach collection="FuArr" item="findTitle">
+<trim prefix="OR">
+<choose>
+<when test="findTitle=='T'.toString()">
+title LIKE '%'||#{userFind}||'%'
+</when> 
+<when test="findTitle='A'.toString()">
+teacher LIKE '%'||#{userFind}||'%'
+</when>
+</choose>
+</trim>
+</foreach>
+</trim>
+)))
+</select> -->
 </mapper>

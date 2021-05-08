@@ -46,6 +46,7 @@ WHERE no=#{no}
 SELECT no, cno, title, poster, price FROM BOOK
 WHERE title LIKE '%'||#{title}||'%'
 </select>
+<!-- 검색리스트 -->
 <select id="booksFindData" resultType="BooksVO" parameterType="hashmap">
 SELECT no, title, author, poster, category, price, sale_price 
 FROM book_s

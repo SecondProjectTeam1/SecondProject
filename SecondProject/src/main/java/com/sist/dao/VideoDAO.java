@@ -71,6 +71,14 @@ public class VideoDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectList("videoSameCategoryData", category);
 	}
+	public List<VideoVO> videoFindData(Map map)
+	{
+		return getSqlSession().selectList("videoFindData", map);
+	}
+	public int videoFindTotalPage(Map map)
+	{
+		return getSqlSession().selectOne("videoFindTotalPage", map);
+	}
 }
 
 

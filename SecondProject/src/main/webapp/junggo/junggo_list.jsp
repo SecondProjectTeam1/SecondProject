@@ -173,8 +173,6 @@
             <div>
               <div class="input-group filter-bar-search">
                 <input type="text" placeholder="Search" id="keyword" autocomplete=off>
-                <input type="hidden" id="page" value="${curpage }">
-                <input type="hidden" id="cno" value="${curcno}">
                 <div class="input-group-append">
                   <button type="button" id="findBtn"><i class="ti-search"></i></button>
                 </div>

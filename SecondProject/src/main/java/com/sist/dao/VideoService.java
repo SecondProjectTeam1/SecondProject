@@ -40,6 +40,14 @@ public class VideoService {
 	{
 		return vDao.videoSameCategoryData(category);
 	}
+	public List<VideoVO> videoFindData(Map map)
+	{
+		return vDao.videoFindData(map);
+	}
+	public int videoFindTotalPage(Map map)
+	{
+		return vDao.videoFindTotalPage(map);
+	}
 	
 	
 	// 댓글관련
