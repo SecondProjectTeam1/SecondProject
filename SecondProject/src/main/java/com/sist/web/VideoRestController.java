@@ -19,7 +19,7 @@ public class VideoRestController {
 	private VideoService service;
 	
 	@PostMapping("video/video_find.do")
-	public String junggo_find(VideoFindVO vo)
+	public String video_find(VideoFindVO vo)
 	{
 		Map map=new HashMap();
 		map.put("userFind", vo.getUserFind());

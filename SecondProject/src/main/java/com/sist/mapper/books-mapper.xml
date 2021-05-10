@@ -56,10 +56,10 @@ WHERE
 <trim prefix="OR">
 <choose>
  <when test="findTitle=='T'.toString()">
- title LIKE '%'||#{keyword}||'%'
+ title LIKE '%'||#{userFind}||'%'
  </when>
   <when test="findTitle=='A'.toString()">
- author LIKE '%'||#{keyword}||'%'
+ author LIKE '%'||#{userFind}||'%'
  </when>
 </choose>
 </trim>
