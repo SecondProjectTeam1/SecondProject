@@ -131,17 +131,26 @@ function back(re){
 						</div>
 					</div>
 					<c:choose>
-					<c:when test="${sessionScope.id eq rvo.id}">
-						<div id="modify${rvo.no}">
-							<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">modify</a>
-							<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">delete</a>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="reply-btn" id="reply${rvo.no}">
-							<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">reply</a>
-						</div>
-					</c:otherwise>
+						<c:when test="${sessionScope.admin eq 'y'}">
+							<div>
+								<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">delete</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${sessionScope.id eq rvo.id}">
+									<div id="modify${rvo.no}">
+										<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">modify</a>
+										<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">delete</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="reply-btn" id="reply${rvo.no}">
+										<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">reply</a>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
@@ -163,16 +172,25 @@ function back(re){
 						</div>
 					</div>
 					<c:choose>
-					<c:when test="${sessionScope.id eq avo.id}">
-						<div id="modify${avo.no}">
-							<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">modify</a>
-							<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">delete</a>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="reply-btn" id="reply${avo.no}">
-							<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">reply</a>
-						</div>
+						<c:when test="${sessionScope.admin eq 'y'}">
+							<div>
+								<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">delete</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+							<c:when test="${sessionScope.id eq avo.id}">
+								<div id="modify${avo.no}">
+									<a href="javascript:;" onclick="updateRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">modify</a>
+									<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">delete</a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="reply-btn" id="reply${avo.no}">
+									<a href="javascript:;" onclick="reReply(this);" class="btn-reply text-uppercase" data-no="${avo.no}" data-bno="${no}">reply</a>
+								</div>
+							</c:otherwise>
+							</c:choose>
 					</c:otherwise>
 					</c:choose>
 				</div>
