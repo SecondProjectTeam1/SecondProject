@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.*;
 import com.sist.vo.BoardVO;
-import com.sist.vo.FindVO;
+import com.sist.vo.BoardFindVO;
 import com.sist.vo.ReplyVO;
 
 import java.util.*;
@@ -22,23 +22,25 @@ public class BoardController {
    
    @GetMapping("board/board.do")
    public String board_list(String page,String type,Model model) {
-	   if(type==null) type="all";
+	   if(type==null) type="f";
 	   if(page==null) page="1";
 	   int curpage=Integer.parseInt(page);
 	   Map map=new HashMap();
-	   int rowSize=10;
+	   int rowSize=6;
 	   int start=(rowSize*curpage)-(rowSize-1);
 	   int end=rowSize*curpage;
 	   map.put("start", start);
 	   map.put("end", end);
-	   List<BoardVO> list=service.boardListData(map);
-	   if(type.equals("f")){
-		   list=service.boardFreeListData(map);
-	   }else if(type.equals("q")){
-		   list=service.boardQAListData(map);
-	   }
+	   map.put("type",type);
 	   
-	   int totalPage=service.boardTotalPage();
+	   List<BoardVO> list=service.boardListData(map);
+//	   if(type.equals("f")){
+//		   list=service.boardFreeListData(map);
+//	   }else if(type.equals("q")){
+//		   list=service.boardQAListData(map);
+//	   }
+	   
+	   int totalPage=service.boardTotalPage(map);
 	   
 	   final int BLOCK = 5;
 	   int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -65,26 +67,14 @@ public class BoardController {
 	   return "redirect:board.do";
    }
    @GetMapping("board/detail.do")
-   public String board_detail(int no,HttpSession session,Model model) {
+   public String board_detail(int no,String type,HttpSession session,Model model) {
 	   BoardVO vo=service.boardDetailData(no);
+	   
+	   model.addAttribute("type", type);
 	   model.addAttribute("vo", vo);
 	   return "board/boarddetail";
    }
-   @PostMapping("board/find.do")
-   public String board_find(String fs,String ss,Model model) {
-	   FindVO vo=new FindVO();
-	   vo.setFs(fs);
-	   vo.setSs(ss);
-	   Map map=new HashMap();
-	   map.put("fs",fs);
-	   map.put("ss", ss);
-	   map.put("fsArr", vo.getFsArr());
-	   List<BoardVO> list=service.boardFindData(map);
-	   int count=service.boardFindDataCount(map);
-	   model.addAttribute("list", list);
-	   model.addAttribute("count", count);
-	   return "board/find";
-   }
+   
    
    @GetMapping("board/update.do")
    public String board_update(int no,Model model) {
@@ -94,11 +84,9 @@ public class BoardController {
    }
    @PostMapping("board/update_ok.do")
    public String board_update_ok(BoardVO vo,RedirectAttributes ra,Model model) {
-//	   service.boardUpdate(vo);
-	   
+	   service.boardUpdate(vo);
 	   ra.addAttribute("no", vo.getNo());
 	   return "redirect:detail.do";
-	   
    }
    
    @GetMapping("board/delete.do")
@@ -107,7 +95,6 @@ public class BoardController {
 	   model.addAttribute("no", no);
 	   return "redirect:board.do";
    }
-   
    
    @PostMapping("board/reply_insert.do")
    public String board_reply_insert(int bno,String msg,RedirectAttributes ra,HttpSession session) {
@@ -124,7 +111,6 @@ public class BoardController {
    
    @PostMapping("board/reply_update.do")
    public String board_reply_update(int no,int bno,String msg,RedirectAttributes ra) {
-	   // ?ˆ˜? • => DAO
 	   ReplyVO vo=new ReplyVO();
 	   vo.setNo(no);
 	   vo.setMsg(msg);
@@ -162,8 +148,6 @@ public class BoardController {
 	   model.addAttribute("no", bno);
 	   return "board/boardreply";
    }
-   
-  
 }
 
 

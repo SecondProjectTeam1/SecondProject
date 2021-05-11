@@ -46,8 +46,8 @@ public class BoardService {
    public List<BoardVO> boardQAListData(Map map) {
 	   return bDao.boardQAListData(map);
    }
-   public int boardTotalPage() {
-	   return bDao.boardTotalPage();
+   public int boardTotalPage(Map map) {
+	   return bDao.boardTotalPage(map);
    }
    public void boardInsert(BoardVO vo) {
 	   bDao.boardInsert(vo);

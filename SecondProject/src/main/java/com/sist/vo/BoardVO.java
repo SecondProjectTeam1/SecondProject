@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BoardVO {
 	private int no,hit,replyCount;
-    private String id,title,content,dbday;
+    private String id,title,content,poster;
     private Date regdate;
 	public int getNo() {
 		return no;
@@ -42,11 +42,11 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getDbday() {
-		return dbday;
+	public String getPoster() {
+		return poster;
 	}
-	public void setDbday(String dbday) {
-		this.dbday = dbday;
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
 	public Date getRegdate() {
 		return regdate;

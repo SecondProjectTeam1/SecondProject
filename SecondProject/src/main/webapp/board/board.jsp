@@ -133,13 +133,27 @@
                           </div>
                           <div class="col-md-9">
                               <div class="blog_post">
-                                  <img src="../img/free.png" alt="" style="width:500px;height:227px;">
+                              <c:choose>
+						         <c:when test = "${vo.poster eq null}">
+								         <c:choose>
+								         <c:when test = "${type=='q'}">
+								            <img src="../img/qa.png" alt="" style="width:500px;height:227px;">
+								         </c:when>
+								         <c:otherwise>
+								         	<img src="../img/free.png" alt="" style="width:500px;height:227px;">
+								         </c:otherwise>
+								      	</c:choose>
+						         </c:when>
+						         <c:otherwise>
+						            <img src="${vo.poster}" alt="" style="width:500px;height:227px;">
+						         </c:otherwise>
+						      </c:choose>
                                   <div class="blog_details">
-                                      <a href="../board/detail.do?no=${vo.no}">
+                                      <a href="../board/detail.do?type=${type}&no=${vo.no}">
                                           <h2>${vo.title}</h2>
                                       </a>
                                       <p>${vo.content}</p>
-                                      <a class="button button-blog" href="../board/detail.do?no=${vo.no}">View More</a>
+                                      <a class="button button-blog" href="../board/detail.do?type=${type}&no=${vo.no}">View More</a>
                                   </div>
                               </div>
                           </div>

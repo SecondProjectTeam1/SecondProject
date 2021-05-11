@@ -36,14 +36,74 @@ function submit(){
 	var form = document.frm;
     form.submit();
 };
+// 사진 업로드
+function uploadImageByImgur(file, callback) {
+	form = new FormData();
+	form.append('image', file);
+	$.ajax({
+			xhr : function() {
+				var xhr = new window.XMLHttpRequest();
+				xhr.upload.addEventListener("progress", function(evt) {
+					if (evt.lengthComputable) {
+						console.log("업로드진행률:"+ parseInt((evt.loaded / evt.total * 100),10) + "%");
+					}
+				}, false);
+				return xhr;
+			},
+			url : 'https://api.imgur.com/3/image',             
+			headers : {
+				Authorization : 'Client-ID 8d95801a0ad3ea9'
+			},
+			type : 'POST',
+			data : form,
+			cache : false,
+			contentType : false,
+			processData : false
+	}).always(callback);
+}
+$(document).ready(function() {
+	$("input[name=img]").change(function() {
+		var file = this.files[0];
+		uploadImageByImgur(file, function(result) {
+			console.log(result);
+			console.log('업로드결과:' + result.status);
+			if (result.status != 200) {
+				result = $.parseJSON(result.responseText);
+			}
+			if (result.data.error) {
+				console.log('지원하지않는 파일형식..');
+			} else {
+				console.log('업로드된 파일경로:' + result.data.link);
+				// $('#preview').attr('src',result.data.link)
+				$('input[name="poster"]').val(result.data.link);
+			}
+		});
+	});
+});
 
+$(document).ready(function(){
+	  var fileTarget = $('.filebox .upload-hidden');
+	    fileTarget.on('change', function(){
+	        if(window.FileReader){
+	            var filename = $(this)[0].files[0].name;
+	        } else {
+	            var filename = $(this).val().split('/').pop().split('\\').pop();
+	        }
+	        $(this).siblings('.upload-name').val(filename);
+	    });
+});
 function setThumbnail(event) {
 	for (var image of event.target.files) {
 		var reader = new FileReader();
 		reader.onload = function(event) {
+			var container = document.querySelector("div#image_container");
+			while(container.hasChildNodes()){
+				container.removeChild(container.firstChild);
+			}
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
-			document.querySelector("div#image_container").appendChild(img);
+			img.style.width = '100%';
+			container.appendChild(img);
 		};
 		console.log(image);
 		reader.readAsDataURL(image); 
@@ -63,7 +123,7 @@ function setThumbnail(event) {
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">upload your post</li>
+              <li class="breadcrumb-item active" aria-current="page">Upload Post</li>
             </ol>
           </nav>
 				</div>
@@ -71,7 +131,6 @@ function setThumbnail(event) {
     </div>
 	</section>
 	<!-- ================ end banner area ================= -->
-
 
 
   <!--================Blog Area =================-->
@@ -82,22 +141,28 @@ function setThumbnail(event) {
 				<form action="update_ok.do" name=frm method="post">
 					<div class="single-post row">
 					<div class="col-lg-12">
-					<input type="file" id="image" name="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
-					<div id="image_container"></div>
-
-					</div>
-					
-					<div class="col-lg-12 col-md-9 blog_details">
-						
-						<input type="hidden" name=id value="${sessionScope.id}">
-							<div class="form-group">
-								<input type="text" class="form-control" value="${vo.title}" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
+						<span>THUMBNAIL</span>
+						<div>
+							<input name="img" type="file" id="img" onchange="setThumbnail(event);"/><br>
+							<div id="image_container">
+							<img src="${vo.poster}" style="width:100%">
 							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12 col-md-9 blog_details">
+						<input type="hidden" name=id value="${sessionScope.id}">
+						<input type="hidden" name="poster" value="">
+						<input type="hidden" name="no" value="${vo.no}">
 						<div class="form-group">
+						<span>TITLE</span>
+							<input type="text" class="form-control" value="${vo.title}" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
+						</div>
+						<div class="form-group">
+						<span>CONTENT</span>
 							<textarea class="form-control mb-10" rows="20" name="content" id='content' placeholder="Insert Content" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Content'"
 										required="">${vo.content}</textarea>
 						</div>
-						
 					</div>
 					<div class="col-lg-12">
 						<div class="row">
@@ -118,24 +183,24 @@ function setThumbnail(event) {
 					</div>
 			</div>
 			<div class="navigation-area">
-					<div class="row">
-							<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<div class="detials">
-									<a href="javascript:submit();" class="button button-postComment button--active" id="reBtn">MODIFY</a>
-								</div>
-								<div class="detail">
-								&nbsp;&nbsp;&nbsp;
-								</div>
-								<div class="detials">
-									<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">CANCLE</a>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+						
 					</div>
+					<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+						<div class="detials">
+							<a href="javascript:submit();" class="button button-postComment button--active" id="reBtn">MODIFY</a>
+						</div>
+						<div class="detail">
+						&nbsp;&nbsp;&nbsp;
+						</div>
+						<div class="detials">
+							<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">CANCLE</a>
+						</div>
+					</div>
+				</div>
 			</div>
-			</form>
+		</form>
 	</div>
 	<div class="col-lg-4">
 			<div class="blog_right_sidebar">

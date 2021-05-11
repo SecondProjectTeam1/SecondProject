@@ -36,7 +36,7 @@ function submit(){
 	var form = document.frm;
     form.submit();
 };
-// 사진 업로드
+//사진 업로드
 function uploadImageByImgur(file, callback) {
 	form = new FormData();
 	form.append('image', file);
@@ -74,7 +74,6 @@ $(document).ready(function() {
 				console.log('지원하지않는 파일형식..');
 			} else {
 				console.log('업로드된 파일경로:' + result.data.link);
-				// $('#preview').attr('src',result.data.link)
 				$('input[name="poster"]').val(result.data.link);
 			}
 		});
@@ -123,7 +122,7 @@ function setThumbnail(event) {
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Upload Post</li>
+              <li class="breadcrumb-item active" aria-current="page">upload your post</li>
             </ol>
           </nav>
 				</div>
@@ -133,33 +132,38 @@ function setThumbnail(event) {
 	<!-- ================ end banner area ================= -->
 
 
+
   <!--================Blog Area =================-->
 	<section class="blog_area single-post-area py-80px section-margin--small">
 			<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
-				<form action="insert_ok.do" name=frm method="post">
+				<form action="update_ok.do" name=frm method="post">
 					<div class="single-post row">
 					<div class="col-lg-12">
-						<span>THUMBNAIL</span>
-						<div>
-							<input name="img" type="file" id="img" onchange="setThumbnail(event);"/><br>
-							<div id="image_container"></div>
+					<span>THUMBNAIL</span>
+					<div>
+						<input name="poster" type="file" id="img" onchange="setThumbnail(event);"/><br>
+						<div id="image_container">
+							<img src="${vo.poster}" style="width:100%">
 						</div>
 					</div>
-
+					</div>
+					</div>
+					
 					<div class="col-lg-12 col-md-9 blog_details">
+						
 						<input type="hidden" name=id value="${sessionScope.id}">
-						<input type="hidden" name="poster" value="">
 							<div class="form-group">
 							<span>TITLE</span>
-								<input type="text" class="form-control" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
+								<input type="text" class="form-control" value="${vo.title}" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
 							</div>
 						<div class="form-group">
-							<span>CONTENT</span>
+						<span>CONTENT</span>
 							<textarea class="form-control mb-10" rows="20" name="content" id='content' placeholder="Insert Content" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Content'"
-										required=""></textarea>
+										required="">${vo.content}</textarea>
 						</div>
+						
 					</div>
 					<div class="col-lg-12">
 						<div class="row">
@@ -181,22 +185,23 @@ function setThumbnail(event) {
 			</div>
 			<div class="navigation-area">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-					</div>
-					<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-						<div class="detials">
-							<a href="javascript:submit();" class="button button-postComment button--active" id="reBtn">POST</a>
+						<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+							
 						</div>
-						<div class="detail">
-						&nbsp;&nbsp;&nbsp;
+						<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+							<div class="detials">
+								<a href="javascript:submit();" class="button button-postComment button--active" id="reBtn">MODIFY</a>
+							</div>
+							<div class="detail">
+							&nbsp;&nbsp;&nbsp;
+							</div>
+							<div class="detials">
+								<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">CANCLE</a>
+							</div>
 						</div>
-						<div class="detials">
-							<a href="board.do" class="button button-postComment button--active" id="reBtn">CANCLE</a>
-						</div>
-					</div>
 				</div>
 			</div>
-		</form>
+			</form>
 	</div>
 	<div class="col-lg-4">
 			<div class="blog_right_sidebar">

@@ -20,6 +20,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
+	console.log(window.history)
+
 	$.ajax({
 		type:'GET',
 		url:'reply_list.do',
@@ -69,10 +71,24 @@ function deletepost(){
 					<div class="single-post row">
 					<div class="col-lg-12">
 							<div class="feature-img">
-									<img class="img-fluid" src="../img/free.png" alt="FREE BOARD" style="width:700px;height:300px;">
+							<c:choose>
+					         <c:when test = "${vo.poster eq null}">
+							         <c:choose>
+							         <c:when test = "${type eq f}">
+							            <img class="img-fluid" src="../img/free.png" alt="FREE BOARD" style="width:700px;height:300px;">
+							         </c:when>
+							         <c:otherwise>
+							            <img class="img-fluid" src="../img/qa.png" alt="FREE BOARD" style="width:700px;height:300px;">
+							         </c:otherwise>
+							      	</c:choose>
+					         </c:when>
+					         <c:otherwise>
+					            <img class="img-fluid" src="${vo.poster}" alt="POST IMAGE" style="width:700px;height:300px;">
+					         </c:otherwise>
+					      </c:choose>
 							</div>
 					</div>
-					<div class="col-lg-3  col-md-3">
+					<div class="col-lg-3 col-md-3">
 							<div class="blog_info text-right">
 								<div class="post_tag">
                                       POST NO. &nbsp;&nbsp;<a class="active" href="#">${vo.no}</a>
@@ -129,11 +145,6 @@ function deletepost(){
 						<p class="excert">${vo.content}</p>
 					</div>
 					<div class="col-lg-12">
-						<div class="quotes">
-								MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money
-								on boot camp when you can get the MCSE study materials yourself at a fraction of the camp
-								price. However, who has the willpower to actually sit through a self-imposed MCSE training.
-						</div>
 						<div class="row">
 								<div class="col-6">
 									<img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
@@ -155,31 +166,31 @@ function deletepost(){
 			<!--  reply -->
 			</div>
 			<div class="navigation-area">
-					<div class="row">
-							<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								
-							</div>
-							
-							<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<c:if test="${sessionScope.id eq vo.id }">
-								<div class="detials">
-									<a href="update.do?no=${vo.no}" class="button button-postComment button--active">MODIFY</a>
-								</div>
-								<div class="detail">
-								&nbsp;&nbsp;&nbsp;
-								</div>
-								<div class="detials">
-									<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
-								</div>
-								<div class="detail">
-								&nbsp;&nbsp;&nbsp;
-								</div>
-								</c:if>
-								<div class="detials">
-									<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">LIST</a>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+						
 					</div>
+					
+					<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+						<c:if test="${sessionScope.id eq vo.id }">
+						<div class="detials">
+							<a href="update.do?no=${vo.no}" class="button button-postComment button--active">MODIFY</a>
+						</div>
+						<div class="detail">
+						&nbsp;&nbsp;&nbsp;
+						</div>
+						<div class="detials">
+							<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
+						</div>
+						<div class="detail">
+						&nbsp;&nbsp;&nbsp;
+						</div>
+						</c:if>
+						<div class="detials">
+							<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">LIST</a>
+						</div>
+					</div>
+			  </div>
 			</div>
 		
 	</div>
@@ -222,10 +233,12 @@ function deletepost(){
                          <div class="br"></div>
                      </aside>
                      <aside class="single-sidebar-widget newsletter_widget">
-                         <h4 class="widget_title">Upload Post</h4>
-                         <p>
-                             upload your own post
-                         </p>
+                         <a href="insert.do" style="display:block;">
+                          <h4 class="widget_title">Upload Post</h4>
+                          <p>
+                              upload your own post
+                          </p>
+                          </a>
                      </aside>
                      <aside class="single_sidebar_widget author_widget">
                          <img class="author_img rounded-circle" src="img/blog/author.png" alt="">

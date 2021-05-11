@@ -26,8 +26,8 @@ public class BoardDAO extends SqlSessionDaoSupport{
      public List<BoardVO> boardQAListData(Map map) {
     	 return getSqlSession().selectList("boardQAListData", map);
      }
-     public int boardTotalPage() {
-    	 return getSqlSession().selectOne("boardTotalPage");
+     public int boardTotalPage(Map map) {
+    	 return getSqlSession().selectOne("boardTotalPage",map);
      }
      public void boardInsert(BoardVO vo) {
     	 getSqlSession().insert("boardInsert", vo);
