@@ -73,6 +73,12 @@
 				<a href="../member/join.do"><h6>회원가입</h6></a>
 			</c:if>
 			<c:if test="${sessionScope.id != null }">
+				<h6>${sessionScope.id }로 로그인됨</h6>
+				${sessionScope.name }
+				${sessionScope.admin }
+				${sessionScope.address }
+				${sessionScope.tel }
+				${sessionScope.email }
 				<a href=""><h6>마이페이지 임시</h6></a>&nbsp;|&nbsp;
 				<a href="../member/logout.do"><h6>로그아웃</h6></a>
 			</c:if>

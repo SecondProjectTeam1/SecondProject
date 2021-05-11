@@ -27,6 +27,15 @@ public class MemberVO {
 	@NotBlank
 	private String content;
 	private String admin;
+	private String msg;
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 	public String getId() {
 		
 		return id;

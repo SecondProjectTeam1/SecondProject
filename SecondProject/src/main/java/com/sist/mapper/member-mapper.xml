@@ -21,7 +21,7 @@
 	ADMIN             CHAR(1)   
 	 -->
 	<select id="memberGetPassword" resultType="com.sist.vo.MemberVO" parameterType="string">
-		SELECT pwd,name FROM member 
+		SELECT pwd,name,admin,addr1,NVL(addr2,' ') as addr2,tel,email FROM member 
 		WHERE id=#{id}
 	</select>
 	<insert id="insertMember" parameterType="com.sist.vo.MemberVO">

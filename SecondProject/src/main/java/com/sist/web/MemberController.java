@@ -2,6 +2,8 @@ package com.sist.web;
 
 import java.util.List;
 import java.util.*;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -32,7 +34,7 @@ public class MemberController {
 		return "main/main";
 	}
 	
-	@PostMapping("main/login_ok.do")
+	/*@PostMapping("main/login_ok.do")
 	public String member_login_ok(String id, String pwd, HttpSession session, Model model)
 	{
 		String result=mDao.isLogin(id, pwd);
@@ -45,6 +47,30 @@ public class MemberController {
 		}
 		model.addAttribute("main_jsp","../main/login_ok.jsp");
 		model.addAttribute("result", result);
+		return "redirect:main.do";
+	}*/
+	
+	@PostMapping("main/login_ok.do")
+	public String member_login_ok(String id, String pwd, HttpSession session, Model model)
+	{
+		MemberVO vo = mDao.isLogin(id, pwd);
+		
+		if(vo.getMsg().equals("OK"))
+		{
+			session.setAttribute("id", id);
+			session.setAttribute("name", vo.getName());
+			session.setAttribute("admin", vo.getAdmin());
+			session.setAttribute("address", vo.getAddr1()+" "+vo.getAddr2());
+			session.setAttribute("tel", vo.getTel());
+			session.setAttribute("email", vo.getEmail());
+			
+			Cookie loginCookie=new Cookie("cookieId_"+id, id);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60 * 60);
+			
+			
+		}
+		model.addAttribute("vo",vo);
 		return "redirect:main.do";
 	}
 	
@@ -121,5 +147,7 @@ public class MemberController {
 		mDao.memberDelete(id);
 		return "redirect: ../member/admin.do";
 	}
+	
+	
 	
 }

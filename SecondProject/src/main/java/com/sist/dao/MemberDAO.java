@@ -19,9 +19,10 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 
-	public String isLogin(String id, String pwd)
+	/*public String isLogin(String id, String pwd)
 	{
 		String result="";
+		MemberVO vo = new MemberVO();
 		int count=getSqlSession().selectOne("memberIdCount",id);
 		if(count==0)
 		{
@@ -29,10 +30,9 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		}
 		else
 		{
-			MemberVO vo=getSqlSession().selectOne("memberGetPassword", id);
+			vo=getSqlSession().selectOne("memberGetPassword", id);
 			String dbPwd=vo.getPwd();
 			String name=vo.getName();
-			
 			
 			
 			if(dbPwd.equals(pwd))
@@ -45,6 +45,33 @@ public class MemberDAO extends SqlSessionDaoSupport{
 			}
 		}
 		return result;
+	}*/
+	
+	public MemberVO isLogin(String id, String pwd)
+	{
+		
+		MemberVO vo = new MemberVO();
+		int count=getSqlSession().selectOne("memberIdCount",id);
+		if(count==0)
+		{
+			vo.setMsg("NOID");
+		}
+		else
+		{
+			vo=getSqlSession().selectOne("memberGetPassword", id);
+			String dbPwd=vo.getPwd();
+			//String name=vo.getName();
+			
+			if(dbPwd.equals(pwd))
+			{
+				vo.setMsg("OK");
+			}
+			else
+			{
+				vo.setMsg("NOPWD");
+			}
+		}
+		return vo;
 	}
 	
 	public int idCheck(String id)
