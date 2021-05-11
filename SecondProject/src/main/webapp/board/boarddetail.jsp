@@ -172,20 +172,30 @@ function deletepost(){
 					</div>
 					
 					<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-						<c:if test="${sessionScope.id eq vo.id }">
-						<div class="detials">
-							<a href="update.do?no=${vo.no}" class="button button-postComment button--active">MODIFY</a>
-						</div>
-						<div class="detail">
-						&nbsp;&nbsp;&nbsp;
-						</div>
-						<div class="detials">
-							<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
-						</div>
-						<div class="detail">
-						&nbsp;&nbsp;&nbsp;
-						</div>
-						</c:if>
+						<c:choose>
+					        <c:when test="${sessionScope.admin eq 'y'}">
+					         <div class="detials">
+								<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
+							</div>
+							<div class="detail">&nbsp;&nbsp;&nbsp;</div>
+					        </c:when>
+					        <c:otherwise>
+					            <c:choose>
+						         <c:when test="${sessionScope.id eq vo.id }">
+						           <div class="detials">
+										<a href="update.do?no=${vo.no}" class="button button-postComment button--active">MODIFY</a>
+									</div>
+									<div class="detail">&nbsp;&nbsp;&nbsp;</div>
+									<div class="detials">
+										<a href="javascript:deletepost();" class="button button-postComment button--active">DELETE</a>
+									</div>
+									<div class="detail">&nbsp;&nbsp;&nbsp;</div>
+						         </c:when>
+						         <c:otherwise>
+						         </c:otherwise>
+						      	</c:choose>
+					         </c:otherwise>
+					      </c:choose>
 						<div class="detials">
 							<a href="#" onclick="history.back();" class="button button-postComment button--active" id="reBtn">LIST</a>
 						</div>
