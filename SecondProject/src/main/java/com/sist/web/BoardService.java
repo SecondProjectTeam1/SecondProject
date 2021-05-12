@@ -40,6 +40,9 @@ public class BoardService {
    public List<BoardVO> boardListData(Map map) {
 	   return bDao.boardListData(map);
    }
+   public int boardReplyCount(int bno) {
+	   return bDao.boardReplyCount(bno);
+   }
    public List<BoardVO> boardTopListData(int isFree) {
 	   return bDao.boardTopListData(isFree);
    }

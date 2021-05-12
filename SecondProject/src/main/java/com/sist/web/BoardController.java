@@ -34,6 +34,9 @@ public class BoardController {
 	   map.put("type",type);
 	   
 	   List<BoardVO> list=service.boardListData(map);
+	   for(BoardVO vo:list){
+		   vo.setReplyCount(service.boardReplyCount(vo.getNo()));
+	   }
 	   int totalPage=service.boardTotalPage(map);
 	   final int BLOCK = 5;
 	   int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -80,7 +83,7 @@ public class BoardController {
    @GetMapping("board/detail.do")
    public String board_detail(int no,String type,HttpSession session,Model model) {
 	   BoardVO vo=service.boardDetailData(no);
-	   
+	   vo.setReplyCount(service.boardReplyCount(vo.getNo()));
 	   model.addAttribute("type", type);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("main_jsp", "../board/boarddetail.jsp");

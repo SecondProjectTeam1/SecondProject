@@ -22,6 +22,9 @@
    SELECT * FROM (SELECT no,title,id,content,regdate,hit,poster FROM board 
    WHERE isFree=#{isFree} ORDER BY hit DESC) WHERE <![CDATA[ rownum < 4 ]]> 
 </select>
+<select id="boardReplyCount" resultType="int" parameterType="int">
+   SELECT COUNT(*) FROM board_reply WHERE bno=#{bno} 
+</select>
 <select id="boardTotalPage" resultType="int" parameterType="hashmap">
    SELECT CEIL(COUNT(*)/10.0) FROM board <include refid="boardType"/>
 </select>
