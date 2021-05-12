@@ -48,7 +48,8 @@ public class BoardController {
 	   model.addAttribute("list", list);
 	   model.addAttribute("type", type);
 	   
-	   return "board/board";
+	   model.addAttribute("main_jsp", "../board/board.jsp");
+		return "main/main";
    }
    @GetMapping("board/rightNav.do")
    public String board_nav(String type,Model model) {
@@ -67,11 +68,13 @@ public class BoardController {
    public String board_insert(String type,Model model) {
 	   if(type==null) type="f";
 	   model.addAttribute("type", type);
-	   return "board/boardinsert";
+	   model.addAttribute("main_jsp", "../board/boardinsert.jsp");
+	   return "main/main";
    }
    @PostMapping("board/insert_ok.do")
    public String board_insert_ok(BoardVO vo) {
 	   service.boardInsert(vo);
+	   
 	   return "redirect:board.do";
    }
    @GetMapping("board/detail.do")
@@ -80,14 +83,16 @@ public class BoardController {
 	   
 	   model.addAttribute("type", type);
 	   model.addAttribute("vo", vo);
-	   return "board/boarddetail";
+	   model.addAttribute("main_jsp", "../board/boarddetail.jsp");
+	   return "main/main";
    }
    
    @GetMapping("board/update.do")
    public String board_update(int no,Model model) {
 	   BoardVO vo=service.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
-	   return "board/boardupdate";
+	   model.addAttribute("main_jsp", "../board/boardupdate.jsp");
+	   return "main/main";
    }
    @PostMapping("board/update_ok.do")
    public String board_update_ok(BoardVO vo,RedirectAttributes ra,Model model) {

@@ -33,7 +33,6 @@ $(function(){
 </script>
 </head>  
 <body>
-<%@include file ="../board/header.jsp" %>
 
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="blog">
@@ -129,7 +128,6 @@ $(function(){
 </section>
 	<!--================Blog Area =================-->
   
-<%@include file ="../board/footer.jsp" %>
 <script src="insert.js"></script>
 </body>
 </html>
