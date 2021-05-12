@@ -5,21 +5,40 @@
  
  <mapper namespace="com.sist.mapper.cart-mapper">
  	<!-- =====================장바구니 담기===================== -->
- 	<insert id="productsInCart">
+ 	<insert id="productsInCart" parameterType="CartVO">
+ 	<!-- 
+ 		CARTNO      NOT NULL NUMBER        
+		ID                   VARCHAR2(20)  
+		DOMBOOKNO            NUMBER        
+		FORBOOKNO            NUMBER        
+		USEDBOOKNO           NUMBER        
+		VIDEONO              NUMBER        
+		QTY                  NUMBER        
+		REGDATE              DATE          
+		TOTAL_PRICE          NUMBER        
+		ADDRESS     NOT NULL VARCHAR2(700) 
+		TEL         NOT NULL VARCHAR2(20)  
+		EMAIL       NOT NULL VARCHAR2(100) 
+		STATE                VARCHAR2(1)   
+ 	 -->
  		<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
 	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
 	    </selectKey>
- 		INSERT INTO cart (cartno, id, dombookno, forbookno, usedbookno, classno, qty, price, title, poster) VALUES (
+ 		INSERT INTO cart VALUES (
 		#{cartno},
 		#{id},
-		#{dombookno},
-		#{forbookno},
-		#{usedbookno},
-		#{classno},
+		#{dombookno, jdbcType=INTEGER},
+		#{forbookno, jdbcType=INTEGER},
+		#{usedbookno, jdbcType=INTEGER},
+		#{videono, jdbcType=INTEGER},
 		#{qty},
-		#{price},
-		#{title},
-		#{poster}
+		SYSDATE,
+		#{total_price},
+		#{address},
+		#{tel},
+		#{email},
+		'n'
+		)
  	</insert>
  	
  	<!-- =====================기존 확인===================== -->
@@ -55,19 +74,19 @@
  	</update>
  	
  	<!-- 클래스 -->
- 	<select id="cBeforeInCart" resultType="int">
+ 	<select id="vBeforeInCart" resultType="int">
  		SELECT COUNT(*)
  		FROM cart
  		WHERE id=#{id}
- 		AND classno=#{classno}
+ 		AND videono=#{videono}
  	</select>
  	
  	<!-- 동일한 상품 존재하면 수정 -->
- 	<update id="updateCartC">
+ 	<update id="updateCartV">
  		UPDATE cart
  		SET qty = qty + #{qty}
  		WEHRE id=#{id}
- 		AND classno = #{classno}
+ 		AND videono = #{videono}
  	</update>
  	
  	<!-- 중고책 -->
@@ -85,30 +104,106 @@
  		AND usedbookno = #{usedbookno}
  	</update>
  	
+ 	
+ 	<resultMap type="CartVO" id="CartMap">
+ 		<result property="cartno" column="cartno"/>
+ 		<result property="id" column="id"/>
+ 		<result property="qty" column="qty"/>
+ 		<result property="regdate" column="regdate"/>
+ 		<result property="address" column="address"/>
+ 		<result property="tel" column="tel"/>
+ 		<result property="email" column="email"/>
+ 		<result property="state" column="state"/>
+ 		<result property="total_price" column="total_price"/>
+ 	</resultMap>
+ 	
  	<!-- =====================목록===================== -->
- 	<select id="CartList" resultType="CartVO" parameterType="hashmap">
+ 	<select id="dCartList" resultMap="CartMap" parameterType="string">
  		SELECT
 	 		c.cartno,
+	 		d.poster,d.title,d.price,
 	 		c.id,
-	 		d.no,
-	 		f.no,
-	 		u.no,
-	 		v.no,
 	 		c.qty,
-	 		c.price,
-	 		c.title,
-	 		c.poster,
+	 		c.address,
+	 		c.tel,
+			c.email,
+			c.state,
+			c.regdate,
+			c.total_price
  		FROM
- 			cart c, book d, book_f f, book_s u, video v, member m
+ 			cart c, book d, member m
  		WHERE d.no = c.dombookno
- 			OR f.no = c.forbookno
- 			OR u.no = c.usedbookno
- 			OR v.no = c.classno
  			AND m.id=c.id
  			AND c.id=#{id}
  		ORDER BY
  			c.cartno
  	</select>
+ 	
+ 	<select id="fCartList" resultMap="CartMap" parameterType="string">
+ 		SELECT
+	 		c.cartno,
+	 		f.poster,f.title,f.price,
+	 		c.id,
+	 		c.qty,
+	 		c.address,
+	 		c.tel,
+			c.email,
+			c.state,
+			c.regdate,
+			c.total_price
+ 		FROM
+ 			cart c, book_f f, member m
+ 		WHERE f.no = c.forbookno
+ 			AND m.id=c.id
+ 			AND c.id=#{id}
+ 		ORDER BY
+ 			c.cartno
+ 	</select>
+ 	
+ 	
+ 	<select id="uCartList" resultMap="CartMap" parameterType="string">
+ 		SELECT
+	 		c.cartno,
+	 		u.poster,u.title,u.price,
+	 		c.id,
+	 		c.qty,
+	 		c.address,
+	 		c.tel,
+			c.email,
+			c.state,
+			c.regdate,
+			c.total_price
+ 		FROM
+ 			cart c, book_s u
+ 		WHERE u.no = c.usedbookno
+ 			AND c.id=#{id}
+ 		ORDER BY
+ 			c.cartno
+ 	</select>
+ 	
+ 	<select id="vCartList" resultMap="CartMap" parameterType="string">
+ 		SELECT
+	 		c.cartno,
+	 		v.poster,v.title,v.price,
+	 		c.id,
+	 		c.qty,
+	 		c.address,
+	 		c.tel,
+			c.email,
+			c.state,
+			c.regdate,
+			c.total_price
+ 		FROM
+ 			cart c, video v, member m
+ 		WHERE v.no = c.videono
+ 			AND m.id=c.id
+ 			AND c.id=#{id}
+ 		ORDER BY
+ 			c.cartno
+ 	</select>
+ 	
+ 	
+ 	
  	
  	
  	<!-- =====================수정(장바구니 화면에서 상품수량 변경)===================== -->
@@ -133,7 +228,7 @@
  		AND usedbookno=#{usedbookno}
  	</update>
  	
- 	<update id="cModifyCart">
+ 	<update id="vModifyCart">
  		UPDATE cart
  		SET qty=#{qty}
  		WHERE id=#{id}

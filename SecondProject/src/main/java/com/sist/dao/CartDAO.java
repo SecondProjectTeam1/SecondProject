@@ -1,4 +1,5 @@
 package com.sist.dao;
+
 import java.util.*;
 
 import javax.annotation.Resource;
@@ -49,38 +50,53 @@ public class CartDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("uBeforeInCart", map);
 	}
 	
-	public int cBeforeInCart(int classno, String id)
+	public int vBeforeInCart(int videono, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("classno", classno);
+		map.put("videono", videono);
 		map.put("id", id);
-		return getSqlSession().selectOne("cBeforeInCart", map);
+		return getSqlSession().selectOne("vBeforeInCart", map);
 	}
 	
 	
 	// 수량 변경
 	public void updateCartD(CartVO vo)
 	{
-		getSqlSession().update("dsumCart",vo);
+		getSqlSession().update("updateCartD",vo);
 	}
 	public void updateCartF(CartVO vo)
 	{
-		getSqlSession().update("fsumCart",vo);
+		getSqlSession().update("updateCartF",vo);
 	}
 	public void updateCartU(CartVO vo)
 	{
-		getSqlSession().update("usumCart",vo);
+		getSqlSession().update("updateCartU",vo);
 	}
-	public void updateCartC(CartVO vo)
+	public void updateCartV(CartVO vo)
 	{
-		getSqlSession().update("vsumCart",vo);
+		getSqlSession().update("updateCartV",vo);
 	}
 	
 	
 	// 카트리스트
-	public List<CartVO> CartList(String id)
+	public List<CartVO> dCartList(String id)
 	{
-		return getSqlSession().selectList("CartList",id);
+		return getSqlSession().selectList("dCartList",id);
+	}
+	
+	public List<CartVO> uCartList(String id)
+	{
+		return getSqlSession().selectList("uCartList",id);
+	}
+	
+	public List<CartVO> fCartList(String id)
+	{
+		return getSqlSession().selectList("fCartList",id);
+	}
+	
+	public List<CartVO> vCartList(String id)
+	{
+		return getSqlSession().selectList("vCartList",id);
 	}
 	
 	

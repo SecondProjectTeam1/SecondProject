@@ -80,6 +80,7 @@
 				${sessionScope.tel }
 				${sessionScope.email }
 				<a href=""><h6>마이페이지 임시</h6></a>&nbsp;|&nbsp;
+				<a href="../cart/list.do"><h6>장바구니</h6></a>&nbsp;|&nbsp;
 				<a href="../member/logout.do"><h6>로그아웃</h6></a>
 			</c:if>
 			<c:if test="${sessionScope.id == 'admin' }">
