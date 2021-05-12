@@ -70,6 +70,18 @@ function updateReOk(re){
 		}
 	})
 }
+function adminDelete(re){
+	let no=$(re).attr("data-no");
+	let bno=$(re).attr("data-bno");
+	$.ajax({
+		type:'post',
+		url:'reply_update.do',
+		data:{"no":no,"bno":bno,"msg":"adminDel"},
+		success:function(result) {
+			$('#reply_data').html(result);
+		}
+	})
+}
 //답댓
 function reReply(re){
 	$('.rere').show();
@@ -116,16 +128,22 @@ function back(re){
 			<h4>${rList.size()} Comments</h4>
 			
 			<c:forEach var="rvo" items="${rList}">
+			<c:choose>
+				<c:when test="${rvo.msg eq 'adminDel'}">
+					<div class="single-comment justify-content-between d-flex">
+					<div class="user justify-content-between d-flex">
+					<p class="comment">관리자가 삭제한 댓글입니다.</p>
+					<div style="height:60px"></div>
+					</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+			
 			<div class="comment-list">
 				<div class="single-comment justify-content-between d-flex">
 					<div class="user justify-content-between d-flex">
-						<div class="thumb">
-							<img src="img/blog/c1.jpg" alt="">
-						</div>
 						<div class="desc" id="replydetail">
-							<h5>
-								<a href="#">${rvo.id}</a>
-							</h5>
+							<h5><a href="#">${rvo.id}</a></h5>
 							<p class="date">${rvo.redate} </p>
 							<p class="comment" id="re-${rvo.no}">${rvo.msg}</p>
 						</div>
@@ -133,7 +151,8 @@ function back(re){
 					<c:choose>
 						<c:when test="${sessionScope.admin eq 'y'}">
 							<div>
-								<a href="javascript:;" onclick="deleteRe(this);" class="btn-reply text-uppercase" data-no="${rvo.no}" data-bno="${no}">delete</a>
+								<a href="javascript:;" onclick="adminDelete(this);" class="btn-reply text-uppercase"
+									 data-no="${rvo.no}" data-bno="${no}">delete</a>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -207,6 +226,8 @@ function back(re){
 				</div>
 				<a href="javascript:reReplyOk()" class="button button-postComment button--active" id="reBtn">Post Reply</a>
 			</form>
+			</c:otherwise>
+			</c:choose>
 			</c:forEach>
 	</div>
 	<div class="comment-form">
