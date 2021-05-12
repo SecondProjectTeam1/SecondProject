@@ -135,7 +135,28 @@ $(function(){
      <div class="br"></div>
  </aside>
 
-<%@include file ="../news/newsSearch.jsp" %>
+<aside class="single-sidebar-widget newsletter_widget">
+   <a href="../news/main.do" style="display:block;">
+   <h4 class="widget_title">News</h4>
+    <p>
+        Here, check out the latest news.
+    </p>
+    </a>
+    <div class="form-group d-flex flex-row">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="newsSearch" placeholder="Enter email address" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'Enter word'">
+        </div>
+        <a href="#" class="bbtns" id="newsSearchBtn">Search</a>
+    </div>
+    <p class="text-bottom">You can Search for your interest.</p>
+    <div class="br"></div>
+</aside>
 
  <aside class="single-sidebar-widget tag_cloud_widget">
      <h4 class="widget_title">Tag Clouds</h4>

@@ -148,7 +148,7 @@ $(function(){
                 <img class="card-img rounded-0" src="../img/blog/cat-post/cat-post-1.jpg" alt="post">
                 <div class="categories_details">
                     <div class="categories_text">
-                        <a href="single-blog.html">
+                        <a href="main.do?fd=food">
                             <h5>Food</h5>
                         </a>
                         <div class="border_line"></div>
@@ -252,9 +252,10 @@ $(function(){
               
               <div class="col-lg-4">
                   <div class="blog_right_sidebar">
+                  <%@include file ="../news/newsSearch.jsp" %>
                       <aside class="single_sidebar_widget search_widget">
                           <div class="input-group">
-                              <input type="text" class="form-control" id="searchword" placeholder="Search Posts">
+                              <input type="text" class="form-control" id="searchword" placeholder="Search by Keyword">
                               <span class="input-group-btn">
                                   <button class="btn btn-default" type="button" id="searchBtn">
                                       <i class="lnr lnr-magnifier"></i>
@@ -264,6 +265,40 @@ $(function(){
                           <!-- /input-group -->
                           <div class="br"></div>
                       </aside>
+                      <aside class="single_sidebar_widget post_category_widget">
+					     <h4 class="widget_title">Post Catgories</h4>
+					     <ul class="list cat-list">
+					         <li>
+					             <a href="main.do?fd=IT" class="d-flex justify-content-between">
+					                 <p>IT</p>
+					                 <p>12</p>
+					             </a>
+					         </li>
+					         <li>
+					             <a href="main.do?fd=sport" class="d-flex justify-content-between">
+					                 <p>SPORT</p>
+					                 <p>12</p>
+					             </a>
+					         </li>
+					         <li>
+					             <a href="main.do?fd=food" class="d-flex justify-content-between">
+					                 <p>FOOD</p>
+					                 <p>12</p>
+					             </a>
+					         </li>
+					     </ul>
+					     <div class="br"></div>
+					 </aside>
+					<aside class="single-sidebar-widget newsletter_widget">
+					   <a href="../board/board.do" style="display:block;">
+					   <h4 class="widget_title">Board</h4>
+					    <p>
+					        Here, ask anything you want!
+					    </p>
+					    </a>
+					    <div class="br"></div>
+					</aside>
+					
                       <aside class="single_sidebar_widget author_widget">
                           <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
                           <h4>Charlie Barber</h4>
@@ -289,100 +324,25 @@ $(function(){
                           <div class="br"></div>
                       </aside>
                       <aside class="single_sidebar_widget popular_post_widget">
-                          <h3 class="widget_title">Popular Posts</h3>
+                          <h3 class="widget_title">Newest News</h3>
+                          
+                          <c:forEach var="i" begin="0" end="2">
+                          
                           <div class="media post_item">
                               <img src="img/blog/popular-post/post1.jpg" alt="post">
                               <div class="media-body">
                                   <a href="single-blog.html">
-                                      <h3>Space The Final Frontier</h3>
+                                      <h3>${list[i].title}</h3>
                                   </a>
-                                  <p>02 Hours ago</p>
+                                  <p>${list[i].pubDate}</p>
                               </div>
                           </div>
-                          <div class="media post_item">
-                              <img src="img/blog/popular-post/post2.jpg" alt="post">
-                              <div class="media-body">
-                                  <a href="single-blog.html">
-                                      <h3>The Amazing Hubble</h3>
-                                  </a>
-                                  <p>02 Hours ago</p>
-                              </div>
-                          </div>
-                          <div class="media post_item">
-                              <img src="img/blog/popular-post/post3.jpg" alt="post">
-                              <div class="media-body">
-                                  <a href="single-blog.html">
-                                      <h3>Astronomy Or Astrology</h3>
-                                  </a>
-                                  <p>03 Hours ago</p>
-                              </div>
-                          </div>
-                          <div class="media post_item">
-                              <img src="img/blog/popular-post/post4.jpg" alt="post">
-                              <div class="media-body">
-                                  <a href="single-blog.html">
-                                      <h3>Asteroids telescope</h3>
-                                  </a>
-                                  <p>01 Hours ago</p>
-                              </div>
-                          </div>
+                          
+                          </c:forEach>
+
                           <div class="br"></div>
                       </aside>
-                      <aside class="single_sidebar_widget ads_widget">
-                          <a href="#">
-                              <img class="img-fluid" src="img/blog/add.jpg" alt="">
-                          </a>
-                          <div class="br"></div>
-                      </aside>
-                      <aside class="single_sidebar_widget post_category_widget">
-                          <h4 class="widget_title">Post Catgories</h4>
-                          <ul class="list cat-list">
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Technology</p>
-                                      <p>37</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Lifestyle</p>
-                                      <p>24</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Fashion</p>
-                                      <p>59</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Art</p>
-                                      <p>29</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Food</p>
-                                      <p>15</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Architecture</p>
-                                      <p>09</p>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="d-flex justify-content-between">
-                                      <p>Adventure</p>
-                                      <p>44</p>
-                                  </a>
-                              </li>
-                          </ul>
-                          <div class="br"></div>
-                      </aside>
-                      <%@include file ="../news/newsSearch.jsp" %>
+                     
                       <aside class="single-sidebar-widget tag_cloud_widget">
                           <h4 class="widget_title">Tag Clouds</h4>
                           <ul class="list">

@@ -55,17 +55,18 @@
                   <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                   <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                 </ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Pages</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+				<li class="nav-item submenu dropdown">
+                <a href="../board/board.do" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">게시판</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../board/board.do">자유게시판</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../board/board.do?type=q">문의게시판</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../news/main.do">뉴스</a></li>
                 </ul>
               </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              
             </ul>
 				
 			<c:if test="${sessionScope.id == null }">
