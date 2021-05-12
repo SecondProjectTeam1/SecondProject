@@ -6,6 +6,9 @@
    <!-- partial:index.partial.html -->
 <div style="height: 80px"></div>
 <div class="book-store">
+<div class="section-intro pb-60px text-center">
+          <h2><span class="section-intro__style">Best Sellers</span></h2>
+        </div>
  <div class="book-slide">
   <div class="book js-flickity" data-flickity-options='{ "wrapAround": true }'>
   
