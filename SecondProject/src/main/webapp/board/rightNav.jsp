@@ -55,12 +55,23 @@ $(function(){
      <div class="br"></div>
  </aside>
  <aside class="single-sidebar-widget newsletter_widget">
- 	<a href="insert.do" style="display:block;">
-     <h4 class="widget_title">Upload Post</h4>
-     <p>
-         upload your own post
-     </p>
-     </a>
+ 	<c:choose>
+       <c:when test = "${sessionScope.id eq null}">
+         <h4 class="widget_title">Upload Post</h4>
+	     <p>
+	         LogIn to upload your own post
+	     </p>
+       </c:when>
+       <c:otherwise>
+         <a href="insert.do" style="display:block;">
+	     <h4 class="widget_title">Upload Post</h4>
+	     <p>
+	         upload your own post
+	     </p>
+	     </a>
+       </c:otherwise>
+    </c:choose>
+ 	
  </aside>
  <aside class="single_sidebar_widget author_widget">
      <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
