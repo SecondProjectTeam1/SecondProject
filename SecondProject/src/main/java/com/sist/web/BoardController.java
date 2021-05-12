@@ -34,14 +34,7 @@ public class BoardController {
 	   map.put("type",type);
 	   
 	   List<BoardVO> list=service.boardListData(map);
-//	   if(type.equals("f")){
-//		   list=service.boardFreeListData(map);
-//	   }else if(type.equals("q")){
-//		   list=service.boardQAListData(map);
-//	   }
-	   
 	   int totalPage=service.boardTotalPage(map);
-	   
 	   final int BLOCK = 5;
 	   int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 	   int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
@@ -57,8 +50,23 @@ public class BoardController {
 	   
 	   return "board/board";
    }
+   @GetMapping("board/rightNav.do")
+   public String board_nav(String type,Model model) {
+	   if(type==null) type="f";
+	   // top viewed post
+	   int isFree=0;
+	   if(type.equals("f")) isFree=1;
+	   List<BoardVO> list=service.boardTopListData(isFree);
+	   
+	   model.addAttribute("type", type);
+	   model.addAttribute("list", list);
+	   return "board/rightNav";
+   }
+   
    @GetMapping("board/insert.do")
-   public String board_insert() {
+   public String board_insert(String type,Model model) {
+	   if(type==null) type="f";
+	   model.addAttribute("type", type);
 	   return "board/boardinsert";
    }
    @PostMapping("board/insert_ok.do")
@@ -74,7 +82,6 @@ public class BoardController {
 	   model.addAttribute("vo", vo);
 	   return "board/boarddetail";
    }
-   
    
    @GetMapping("board/update.do")
    public String board_update(int no,Model model) {

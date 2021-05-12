@@ -20,11 +20,8 @@ public class BoardDAO extends SqlSessionDaoSupport{
      public List<BoardVO> boardListData(Map map) {
     	 return getSqlSession().selectList("boardListData", map);
      }
-     public List<BoardVO> boardFreeListData(Map map) {
-    	 return getSqlSession().selectList("boardFreeListData", map);
-     }
-     public List<BoardVO> boardQAListData(Map map) {
-    	 return getSqlSession().selectList("boardQAListData", map);
+     public List<BoardVO> boardTopListData(int isFree) {
+    	 return getSqlSession().selectList("boardTopListData", isFree);
      }
      public int boardTotalPage(Map map) {
     	 return getSqlSession().selectOne("boardTotalPage",map);

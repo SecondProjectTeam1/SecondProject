@@ -40,11 +40,8 @@ public class BoardService {
    public List<BoardVO> boardListData(Map map) {
 	   return bDao.boardListData(map);
    }
-   public List<BoardVO> boardFreeListData(Map map) {
-	   return bDao.boardFreeListData(map);
-   }
-   public List<BoardVO> boardQAListData(Map map) {
-	   return bDao.boardQAListData(map);
+   public List<BoardVO> boardTopListData(int isFree) {
+	   return bDao.boardTopListData(isFree);
    }
    public int boardTotalPage(Map map) {
 	   return bDao.boardTotalPage(map);

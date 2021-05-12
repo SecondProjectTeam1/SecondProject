@@ -18,6 +18,10 @@
    FROM board <include refid="boardType"/>))
    WHERE num BETWEEN #{start} AND #{end}
 </select>
+<select id="boardTopListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT * FROM (SELECT no,title,id,content,regdate,hit,poster FROM board 
+   WHERE isFree=#{isFree} ORDER BY hit DESC) WHERE <![CDATA[ rownum < 4 ]]> 
+</select>
 <select id="boardTotalPage" resultType="int" parameterType="hashmap">
    SELECT CEIL(COUNT(*)/10.0) FROM board <include refid="boardType"/>
 </select>
@@ -41,7 +45,7 @@
    UPDATE board SET hit=hit+1 WHERE no=#{no}
   </update>
   <select id="boardDetailData" resultType="BoardVO" parameterType="int">
-   SELECT no,title,content,id,regdate,hit,poster FROM board WHERE no=#{no}
+   SELECT no,title,content,id,regdate,hit,poster,isFree FROM board WHERE no=#{no}
   </select>
   <!-- 찾기 -->
   <sql id="dsql">

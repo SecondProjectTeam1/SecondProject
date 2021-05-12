@@ -3,7 +3,7 @@ package com.sist.vo;
 import java.util.Date;
 
 public class BoardVO {
-	private int no,hit,replyCount;
+	private int no,hit,replyCount,isFree;
     private String id,title,content,poster;
     private Date regdate;
 	public int getNo() {
@@ -53,6 +53,12 @@ public class BoardVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public int getIsFree() {
+		return isFree;
+	}
+	public void setIsFree(int isFree) {
+		this.isFree = isFree;
 	}
     
 }
