@@ -3,26 +3,22 @@ package com.sist.vo;
 /*
  *  CARTNO      NOT NULL NUMBER        
 	ID                   VARCHAR2(20)  
-	DOMBOOKNO            NUMBER        
-	FORBOOKNO            NUMBER        
-	USEDBOOKNO           NUMBER        
-	VIDEONO              NUMBER        
+	TYPE                 NUMBER        
+	PRODUCTNO            NUMBER        
 	QTY                  NUMBER        
 	REGDATE              DATE          
 	TOTAL_PRICE          NUMBER        
 	ADDRESS     NOT NULL VARCHAR2(700) 
 	TEL         NOT NULL VARCHAR2(20)  
 	EMAIL       NOT NULL VARCHAR2(100) 
-	STATE                VARCHAR2(1)     
+	STATE                VARCHAR2(1)    
  */
 import java.util.*;
 public class CartVO {
 	private int cartno;
 	private String id;
-	private int dombookno;
-	private int forbookno;
-	private int usedbookno;
-	private int videono;
+	private int type;
+	private int productno;
 	private int qty;
 	private Date regdate;
 	private String address;
@@ -33,29 +29,19 @@ public class CartVO {
 	
 	private int price;
 	
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
 	// 임시 변수
 	private BookVO dvo=new BookVO();
 	private BookfVO fvo=new BookfVO();
 	private BooksVO uvo=new BooksVO();
 	private VideoVO cvo=new VideoVO();
 	
-	public int getVideono() {
-		return videono;
+	
+	
+	public int getProductno() {
+		return productno;
 	}
-	public void setVideono(int videono) {
-		this.videono = videono;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setProductno(int productno) {
+		this.productno = productno;
 	}
 	public int getCartno() {
 		return cartno;
@@ -69,26 +55,13 @@ public class CartVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getDombookno() {
-		return dombookno;
-	}
-	public void setDombookno(int dombookno) {
-		this.dombookno = dombookno;
-	}
-	public int getForbookno() {
-		return forbookno;
-	}
-	public void setForbookno(int forbookno) {
-		this.forbookno = forbookno;
-	}
-	public int getUsedbookno() {
-		return usedbookno;
-	}
-	public void setUsedbookno(int usedbookno) {
-		this.usedbookno = usedbookno;
-	}
 	
-	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public int getQty() {
 		return qty;
 	}
@@ -100,6 +73,12 @@ public class CartVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getTel() {
 		return tel;
@@ -125,6 +104,12 @@ public class CartVO {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public BookVO getDvo() {
 		return dvo;
 	}
@@ -148,9 +133,6 @@ public class CartVO {
 	}
 	public void setCvo(VideoVO cvo) {
 		this.cvo = cvo;
-	} 
-	
-	
-
+	}
 	
 }
