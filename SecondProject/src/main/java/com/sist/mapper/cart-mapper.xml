@@ -5,21 +5,19 @@
  
  <mapper namespace="com.sist.mapper.cart-mapper">
  	<!-- =====================장바구니 담기===================== -->
- 	<insert id="productsInCart" parameterType="CartVO">
+ 	<insert id="dInCart" parameterType="CartVO">
  	<!-- 
  		CARTNO      NOT NULL NUMBER        
 		ID                   VARCHAR2(20)  
-		DOMBOOKNO            NUMBER        
-		FORBOOKNO            NUMBER        
-		USEDBOOKNO           NUMBER        
-		VIDEONO              NUMBER        
+		TYPE                 NUMBER        
+		PRODUCTNO            NUMBER        
 		QTY                  NUMBER        
 		REGDATE              DATE          
 		TOTAL_PRICE          NUMBER        
 		ADDRESS     NOT NULL VARCHAR2(700) 
 		TEL         NOT NULL VARCHAR2(20)  
 		EMAIL       NOT NULL VARCHAR2(100) 
-		STATE                VARCHAR2(1)   
+		STATE                VARCHAR2(1)     
  	 -->
  		<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
 	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
@@ -27,10 +25,8 @@
  		INSERT INTO cart VALUES (
 		#{cartno},
 		#{id},
-		#{dombookno, jdbcType=INTEGER},
-		#{forbookno, jdbcType=INTEGER},
-		#{usedbookno, jdbcType=INTEGER},
-		#{videono, jdbcType=INTEGER},
+		'1',
+		#{productno},
 		#{qty},
 		SYSDATE,
 		#{total_price},
@@ -41,20 +37,76 @@
 		)
  	</insert>
  	
+ 	<insert id="fInCart" parameterType="CartVO">
+ 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
+	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
+	</selectKey>
+ 		INSERT INTO cart VALUES (
+		#{cartno},
+		#{id},
+		'2',
+		#{productno},
+		#{qty},
+		SYSDATE,
+		#{total_price},
+		#{address},
+		#{tel},
+		#{email},
+		'n'
+		)
+ 	</insert>
+ 	
+ 	<insert id="uInCart" parameterType="CartVO">
+ 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
+	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
+	</selectKey>
+ 		INSERT INTO cart VALUES (
+		#{cartno},
+		#{id},
+		'3',
+		#{productno},
+		#{qty},
+		SYSDATE,
+		#{total_price},
+		#{address},
+		#{tel},
+		#{email},
+		'n'
+		)
+ 	</insert>
+ 	
+ 	<insert id="vInCart" parameterType="CartVO">
+ 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
+	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
+	</selectKey>
+ 		INSERT INTO cart VALUES (
+		#{cartno},
+		#{id},
+		'4',
+		#{productno},
+		#{qty},
+		SYSDATE,
+		#{total_price},
+		#{address},
+		#{tel},
+		#{email},
+		'n'
+		)
+ 	</insert>
  	<!-- =====================기존 확인===================== -->
  	<!-- 국내책 -->
  	<select id="dBeforeInCart" resultType="int">
  		SELECT COUNT(*)
  		FROM cart
  		WHERE id=#{id}
- 		AND dombookno=#{dombookno}
+ 		AND type='1'
  	</select>
  	<!-- 동일한 상품 존재하면 수량 수정 -->
  	<update id="updateCartD">
  		UPDATE cart
  		SET qty = qty + #{qty}
- 		WEHRE id=#{id}
- 		AND dombookno = #{dombookno}
+ 		WHERE id=#{id}
+ 		AND type='1'
  	</update>
  	
  	<!-- 해외책 -->
@@ -62,15 +114,15 @@
  		SELECT COUNT(*)
  		FROM cart
  		WHERE id=#{id}
- 		AND forbookno=#{forbookno}
+ 		AND type='2'
  	</select>
  	
  	<!-- 동일한 상품 존재하면 수정 -->
  	<update id="updateCartF">
  		UPDATE cart
  		SET qty = qty + #{qty}
- 		WEHRE id=#{id}
- 		AND forbookno = #{forbookno}
+ 		WHERE id=#{id}
+ 		AND type='2'
  	</update>
  	
  	<!-- 클래스 -->
@@ -78,15 +130,15 @@
  		SELECT COUNT(*)
  		FROM cart
  		WHERE id=#{id}
- 		AND videono=#{videono}
+ 		AND type='4'
  	</select>
  	
  	<!-- 동일한 상품 존재하면 수정 -->
  	<update id="updateCartV">
  		UPDATE cart
  		SET qty = qty + #{qty}
- 		WEHRE id=#{id}
- 		AND videono = #{videono}
+ 		WHERE id=#{id}
+ 		AND type='4'
  	</update>
  	
  	<!-- 중고책 -->
@@ -94,20 +146,34 @@
  		SELECT COUNT(*)
  		FROM cart
  		WHERE id=#{id}
- 		AND usedbookno=#{usedbookno}
+ 		AND type='3'
  	</select>
  	<!-- 동일한 상품 존재하면 수정 -->
  	<update id="updateCartU">
  		UPDATE cart
  		SET qty = qty + #{qty}
- 		WEHRE id=#{id}
- 		AND usedbookno = #{usedbookno}
+ 		WHERE id=#{id}
+ 		AND type='3'
  	</update>
  	
- 	
+ 	<!-- 
+ 	CARTNO      NOT NULL NUMBER        
+	ID                   VARCHAR2(20)  
+	TYPE                 NUMBER        
+	PRODUCTNO            NUMBER        
+	QTY                  NUMBER        
+	REGDATE              DATE          
+	TOTAL_PRICE          NUMBER        
+	ADDRESS     NOT NULL VARCHAR2(700) 
+	TEL         NOT NULL VARCHAR2(20)  
+	EMAIL       NOT NULL VARCHAR2(100) 
+	STATE                VARCHAR2(1)    
+ 	 -->
  	<resultMap type="CartVO" id="CartMap">
  		<result property="cartno" column="cartno"/>
  		<result property="id" column="id"/>
+ 		<result property="type" column="type"/>
+ 		<result property="productno" column="productno"/>
  		<result property="qty" column="qty"/>
  		<result property="regdate" column="regdate"/>
  		<result property="address" column="address"/>
@@ -127,12 +193,11 @@
 	 		c.address,
 	 		c.tel,
 			c.email,
-			c.state,
 			c.regdate,
 			c.total_price
  		FROM
  			cart c, book d, member m
- 		WHERE d.no = c.dombookno
+ 		WHERE c.type='1'
  			AND m.id=c.id
  			AND c.id=#{id}
  		ORDER BY
@@ -148,12 +213,11 @@
 	 		c.address,
 	 		c.tel,
 			c.email,
-			c.state,
 			c.regdate,
 			c.total_price
  		FROM
  			cart c, book_f f, member m
- 		WHERE f.no = c.forbookno
+ 		WHERE c.type='2'
  			AND m.id=c.id
  			AND c.id=#{id}
  		ORDER BY
@@ -164,21 +228,20 @@
  	<select id="uCartList" resultMap="CartMap" parameterType="string">
  		SELECT
 	 		c.cartno,
-	 		u.poster,u.title,u.price,
+	 		u.poster, u.title, u.price,
 	 		c.id,
 	 		c.qty,
 	 		c.address,
 	 		c.tel,
 			c.email,
-			c.state,
 			c.regdate,
 			c.total_price
  		FROM
- 			cart c, book_s u
- 		WHERE u.no = c.usedbookno
+ 			cart c, book_s u, member m
+ 		WHERE c.type=3
+ 			AND c.productno=u.no
+ 			AND m.id=c.id
  			AND c.id=#{id}
- 		ORDER BY
- 			c.cartno
  	</select>
  	
  	<select id="vCartList" resultMap="CartMap" parameterType="string">
@@ -190,12 +253,11 @@
 	 		c.address,
 	 		c.tel,
 			c.email,
-			c.state,
 			c.regdate,
 			c.total_price
  		FROM
  			cart c, video v, member m
- 		WHERE v.no = c.videono
+ 		WHERE c.type='4'
  			AND m.id=c.id
  			AND c.id=#{id}
  		ORDER BY

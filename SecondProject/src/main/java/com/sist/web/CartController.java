@@ -48,15 +48,15 @@ public class CartController {
 		vo.setQty(su);
 		vo.setTotal_price(total);
 		vo.setPrice(Integer.parseInt(sp));
-		vo.setDombookno(no);
+		vo.setProductno(no);
 		
-		
+
 		// 기존에 담았는지 (국내도서)?
-		int dcount = cDao.dBeforeInCart(vo.getDombookno(), id);
+		int dcount = cDao.dBeforeInCart(vo.getType(), id);
 		if(dcount == 0)
 		{
 			// insert
-			cDao.productsInCart(vo);
+			cDao.dInCart(vo);
 		}
 		else
 		{
@@ -92,15 +92,15 @@ public class CartController {
 		vo.setQty(su);
 		vo.setTotal_price(total);
 		vo.setPrice(Integer.parseInt(sp));
-		vo.setForbookno(no);
+		vo.setProductno(no);
 		
 		
 		// 기존에 담았는지 (해외도서)?
-		int fcount = cDao.fBeforeInCart(vo.getForbookno(), id);
+		int fcount = cDao.fBeforeInCart(vo.getType(), id);
 		if(fcount == 0)
 		{
 			// insert
-			cDao.productsInCart(vo);
+			cDao.fInCart(vo);
 		}
 		else
 		{
@@ -127,6 +127,7 @@ public class CartController {
 		System.out.println("sp:"+sp);
 		
 		int total=Integer.parseInt(sp)*su;
+		System.out.println("total:"+total);
 		
 		CartVO vo=new CartVO();
 		vo.setId(id);
@@ -136,15 +137,15 @@ public class CartController {
 		vo.setQty(su);
 		vo.setTotal_price(total);
 		vo.setPrice(Integer.parseInt(sp));
-		vo.setUsedbookno(no);
+		vo.setProductno(no);
 		
 		
 		// 기존에 담았는지 (중고도서)?
-		int ucount = cDao.uBeforeInCart(vo.getUsedbookno(), id);
+		int ucount = cDao.uBeforeInCart(vo.getType(), id);
 		if(ucount == 0)
 		{
 			// insert
-			cDao.productsInCart(vo);
+			cDao.uInCart(vo);
 		}
 		else
 		{
@@ -152,7 +153,7 @@ public class CartController {
 			cDao.updateCartU(vo);
 		}
 		
-		return "redirect:cart/list.do";
+		return "redirect:../cart/list.do";
 	}
 	
 	@PostMapping("cart/vinput.do")
@@ -180,15 +181,15 @@ public class CartController {
 		vo.setQty(su);
 		vo.setTotal_price(total);
 		vo.setPrice(Integer.parseInt(sp));
-		vo.setVideono(no);
+		vo.setProductno(no);
 		
 		
 		// 기존에 담았는지(클래스)?
-		int vcount = cDao.vBeforeInCart(vo.getVideono(), id);
+		int vcount = cDao.vBeforeInCart(vo.getType(), id);
 		if(vcount == 0)
 		{
 			// insert
-			cDao.productsInCart(vo);
+			cDao.vInCart(vo);
 		}
 		else
 		{
@@ -246,6 +247,7 @@ public class CartController {
 	
 	
 	// 수정
+	/*
 	@RequestMapping("update.do")
 	public String update(@RequestParam int[] qty, @RequestParam int[] dombookno, @RequestParam int[] forbookno, @RequestParam int[] usedbookno, @RequestParam int[] videono, HttpSession session)
 	{
@@ -286,6 +288,7 @@ public class CartController {
 		}
 		return "redirect:cart/list.do";
 	}
+	*/
 }
 
 

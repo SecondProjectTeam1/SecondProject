@@ -19,41 +19,56 @@ public class CartDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	// 담기
-	public void productsInCart(CartVO vo)
+	public void dInCart(CartVO vo)
 	{
-		getSqlSession().insert("productsInCart", vo);
+		getSqlSession().insert("dInCart", vo);
+	}
+	
+	public void fInCart(CartVO vo)
+	{
+		getSqlSession().insert("fInCart", vo);
+	}
+	
+	public void uInCart(CartVO vo)
+	{
+		getSqlSession().insert("uInCart", vo);
+	}
+	
+	public void vInCart(CartVO vo)
+	{
+		getSqlSession().insert("vInCart", vo);
 	}
 	
 	
 	// 기존 확인
-	public int dBeforeInCart(int dombookno, String id)
+	public int dBeforeInCart(int type, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("dombookno", dombookno);
+		map.put("type", type);
 		map.put("id", id);
 		return getSqlSession().selectOne("dBeforeInCart", map);
 	}
 	
-	public int fBeforeInCart(int forbookno, String id)
+	public int fBeforeInCart(int type, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("forbookno", forbookno);
+		map.put("type", type);
 		map.put("id", id);
 		return getSqlSession().selectOne("fBeforeInCart", map);
 	}
 	
-	public int uBeforeInCart(int usedbookno, String id)
+	public int uBeforeInCart(int type, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("usedbookno", usedbookno);
+		map.put("type", type);
 		map.put("id", id);
 		return getSqlSession().selectOne("uBeforeInCart", map);
 	}
 	
-	public int vBeforeInCart(int videono, String id)
+	public int vBeforeInCart(int type, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("videono", videono);
+		map.put("type", type);
 		map.put("id", id);
 		return getSqlSession().selectOne("vBeforeInCart", map);
 	}
