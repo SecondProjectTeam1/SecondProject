@@ -10,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.BookVO;
+import com.sist.vo.BookfReplyVO;
 import com.sist.vo.BookfVO;
 
 @Repository
@@ -32,4 +33,25 @@ public class BookfDAO extends SqlSessionDaoSupport{
 	public int bookfTotalPage(int cno) {
 		return getSqlSession().selectOne("bookfTotalPage", cno);
 	}
+	
+	public BookfVO bookfDetailData(int fno) {
+		return getSqlSession().selectOne("bookfDetailData", fno);
+	}
+	
+	public List<BookfReplyVO> bookfReplyData(Map map) {
+		return getSqlSession().selectList("bookfReplyData", map);
+	}
+	
+	public int bookfReplyTotalPage(int no) {
+		return getSqlSession().selectOne("bookfReplyTotalPage", no);
+	}
+	
+	public List<BookfReplyVO> bookfReplyScoreData(int no) {
+		return getSqlSession().selectList("bookfReplyScoreData", no);
+	}
+	
+	public int bookfReplyAverageData(int no) {
+		return getSqlSession().selectOne("bookfReplyAverageData", no);
+	}
+
 }

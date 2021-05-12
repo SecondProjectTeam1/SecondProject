@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.sist.vo.BookReplyVO;
 import com.sist.vo.BookVO;
 
 @Repository
@@ -29,6 +30,26 @@ public class BookDAO extends SqlSessionDaoSupport{
 	
 	public int bookTotalPage(int cno) {
 		return getSqlSession().selectOne("bookTotalPage", cno);
+	}
+	
+	public BookVO bookDetailData(int fno) {
+		return getSqlSession().selectOne("bookDetailData", fno);
+	}
+	
+	public List<BookReplyVO> bookReplyData(Map map) {
+		return getSqlSession().selectList("bookReplyData", map);
+	}
+	
+	public int bookReplyTotalPage(int no) {
+		return getSqlSession().selectOne("bookReplyTotalPage", no);
+	}
+	
+	public List<BookReplyVO> bookReplyScoreData(int no) {
+		return getSqlSession().selectList("bookReplyScoreData", no);
+	}
+	
+	public int bookReplyAverageData(int no) {
+		return getSqlSession().selectOne("bookReplyAverageData", no);
 	}
 	
 	

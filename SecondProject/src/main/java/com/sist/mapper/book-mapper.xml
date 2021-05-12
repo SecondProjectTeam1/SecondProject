@@ -24,4 +24,36 @@
 	SELECT CEIL(count(*)/9.0) FROM book
 	WHERE cno = #{cno}
 	</select>
+	
+	<select id="bookDetailData" resultType="BookVO" parameterType="int">
+	SELECT no, cno, category, title, subtitle, poster, author, pudate, 
+	publisher, price, bookpage, book_info, content_list, stock 
+	FROM book
+	WHERE no = #{no}
+	</select>
+	
+	<select id="bookReplyData" resultType="BookReplyVO" parameterType="hashmap">
+	SELECT no, name, content, poster, score, num
+	FROM (SELECT no, name, content, poster, score, rownum as num
+	FROM (SELECT no, name, content, poster, score
+	FROM book_reply WHERE no=#{no} ORDER BY no ASC))
+	WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="bookReplyScoreData" resultType="BookReplyVO" parameterType="int">
+	SELECT count(score) as cs
+	FROM book_reply
+	WHERE no=#{no}
+	GROUP BY score
+	ORDER BY score DESC
+	</select>
+	
+	<select id="bookReplyTotalPage" resultType="int">
+	SELECT CEIL(count(*)/3.0) FROM book_reply
+	</select>
+	
+	<select id="bookReplyAverageData" resultType="int" parameterType="int">
+	SELECT AVG(score) FROM book_reply
+	WHERE no=#{no}
+	</select>
 </mapper>

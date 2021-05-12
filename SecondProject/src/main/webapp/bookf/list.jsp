@@ -144,7 +144,7 @@
                   </div>
                   <div class="card-body">
                     <p>${vo.category }</p>
-                    <h4 class="card-product__title"><a href="#">${vo.title }</a></h4>
+                    <h4 class="card-product__title"><a href="detail.do?no=${vo.no }">${vo.title }</a></h4>
                     <p class="card-product__price">${vo.price }</p>
                   </div>
                 </div>
@@ -160,6 +160,42 @@
   </section>
 	<!-- ================ category section end ================= -->		  
 
+<nav class="blog-pagination justify-content-center d-flex">
+			    
+                         <ul class="pagination">
+                           <c:if test="${startPage>1 }">
+                              <li class="page-item">
+                                  <a href="list.do?cno=${curcno}&page=${startPage-1}" class="page-link" aria-label="Previous"> 이전
+                                      <span aria-hidden="true">
+                                          <span class="lnr lnr-chevron-left"></span>
+                                      </span>
+                                  </a>
+                              </li>
+                             </c:if> 
+                              
+                            <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                             <c:if test="${curpage==i} ">
+                             	<c:set var="type" value="page-item active"/>
+                             </c:if>                            
+                               <c:if test="${curpage!=i} ">
+                               	<c:set var="type" value="page-item"/>
+                               </c:if>
+                             <li ${type }>
+                                  <a href="list.do?cno=${curcno}&page=${i}" class="page-link">${i }</a>
+                              </li>
+                            </c:forEach>
+                            
+                           <c:if test="${endPage<allPage}">
+                              <li class="page-item">
+                                  <a href="list.do?cno=${curcno}&page=${endPage+1}" class="page-link" aria-label="Next"> 다음
+                                      <span aria-hidden="true">
+                                          <span class="lnr lnr-chevron-right"></span>
+                                      </span>
+                                  </a>
+                              </li>
+                             </c:if> 
+                          </ul> 
+                    </nav> 
 	<!-- ================ top product area start ================= -->	
 	<section class="related-product-area">
 		<div class="container">

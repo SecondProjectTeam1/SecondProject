@@ -11,7 +11,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.sist.vo.BookVO" alias="BookVO"/>
+		<typeAlias type="com.sist.vo.BookReplyVO" alias="BookReplyVO"/>
 		<typeAlias type="com.sist.vo.BookfVO" alias="BookfVO"/>
+		<typeAlias type="com.sist.vo.BookfReplyVO" alias="BookfReplyVO"/>
 		<typeAlias type="com.sist.vo.BooksVO" alias="BooksVO"/>
 		<typeAlias type="com.sist.vo.BooksCategoryVO" alias="BooksCategoryVO"/>
 		<typeAlias type="com.sist.vo.VideoReviewVO" alias="VideoReviewVO"/>
@@ -19,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
 		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
+		<typeAlias type="com.sist.vo.OrderVO" alias="OrderVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
@@ -31,5 +34,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/board-mapper.xml"/>
 		<mapper resource="com/sist/mapper/reply-mapper.xml"/>
 		<mapper resource="com/sist/mapper/cart-mapper.xml"/>
+		<mapper resource="com/sist/mapper/order-mapper.xml"/>
 	</mappers>
 </configuration>
