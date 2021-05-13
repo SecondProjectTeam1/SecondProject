@@ -10,7 +10,8 @@
 <style type="text/css">
 .row_home{
   margin: 0px auto;
-  width:900px;
+  width:1200px;
+  height:600px;
 }
 </style>
 </head>
@@ -37,13 +38,6 @@
   <!--================Checkout Area =================-->
  <div style="height: 30px"></div>
   <div class="row row_home">
-   <table class="table">
-     <tr>
-       <td class="text-right">
-        <a href="../main/main.do" class="btn btn-sm btn-info">메인</a>
-       </td>
-     </tr>
-   </table>
    <table class="table">
      <tr class="danger">
       <th class="text-center">번호</th>
