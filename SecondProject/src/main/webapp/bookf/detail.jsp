@@ -59,6 +59,7 @@ function onestar(e) {
   <!--================Single Product Area =================-->
 	<div class="product_image_area">
 		<div class="container">
+		<form method="post" action="../cart/finput.do">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 					<img class="detail-img" src="${vo.poster }">
@@ -73,14 +74,29 @@ function onestar(e) {
 						</ul>
 						<p>${vo.title }</p>
 						<div class="product_count">
-              <label for="qty">Quantity:</label>
-              <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
-							<input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-               class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
-							<a class="button primary-btn" href="#">Add to Cart</a>               
+						
+						<tr>
+             			<td>
+             			<select name="su">
+				           <c:forEach var="i" begin="1" end="10">
+				            <option>${i }</option>
+				           </c:forEach>
+				          </select>
+             			</td>
+             			</tr>
+             			
+             			<tr>
+					       <td colspan="2" class="text-right">
+					          <input type=hidden name="no" value="${vo.no }">
+					          <input type=hidden name="price" value="${vo.price }">
+					        <c:if test="${sessionScope.id!=null }">
+					          <input type="submit" value="장바구니" class="btn btn-sm btn-danger">
+					        </c:if>
+					       </td>
+					     </tr>    
+							           
 						</div>
+
 						<div class="card_area d-flex align-items-center">
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
@@ -88,6 +104,7 @@ function onestar(e) {
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 	<!--================End Single Product Area =================-->

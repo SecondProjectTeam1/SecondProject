@@ -65,7 +65,7 @@
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="${d.dvo.poster}" alt="">
+                                          <img src="${d.dvo.poster}" style="width:165px; height:220px" alt="">
                                       </div>
                                       <div class="media-body">
                                           <p>${d.dvo.title}</p>
@@ -108,7 +108,7 @@
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="${f.fvo.poster}" alt="">
+                                          <img src="${f.fvo.poster}" style="width:165px; height:220px" alt="">
                                       </div>
                                       <div class="media-body">
                                           <p>${f.fvo.title}</p>
@@ -153,7 +153,7 @@
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="${u.uvo.poster}" alt="">
+                                          <img src="${u.uvo.poster}" style="width:165px; height:220px" alt="">
                                       </div>
                                       <div class="media-body">
                                           <p>${u.uvo.title}</p>
