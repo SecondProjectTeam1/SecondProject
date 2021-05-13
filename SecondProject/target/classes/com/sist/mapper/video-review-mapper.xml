@@ -46,4 +46,12 @@ where vno=#{vno}
 SELECT NVL(COUNT(*),0) as revCount FROM video_review
 WHERE vno=#{vno}
 </select>
+<!-- 별 갯수 세기 -->
+<select id="starCount" resultType="VideoStarVO" parameterType="int">
+SELECT COUNT(star) as starCount, star
+FROM video_review
+WHERE vno=#{vno}
+GROUP BY star
+ORDER BY star DESC
+</select>
 </mapper>

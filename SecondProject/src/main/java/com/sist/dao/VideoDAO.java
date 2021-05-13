@@ -73,30 +73,36 @@ public class VideoDAO extends SqlSessionDaoSupport{
 	}
 	public List<VideoVO> videoFindData(Map map)
 	{
-		return getSqlSession().selectList("videoFindData", map);
+		List<VideoVO> list=null;
+		try
+		{
+			list=getSqlSession().selectList("videoFindData",map);
+		}catch(Exception ex){ex.printStackTrace();}
+		return list;
 	}
 	public int videoFindTotalPage(Map map)
 	{
 		return getSqlSession().selectOne("videoFindTotalPage", map);
 	}
+	
 	// 찜목록
-	public List<VideoJjimVO> VideoJjimListData(String id)
-	{
-		return getSqlSession().selectList("VideoJjimListData", id);
-	}
-	// 찜개수
-	public int VideoJjimCount(String id)
-	{
-		return getSqlSession().selectOne("VideoJjimCount", id);
-	}
-	public void VideoJjimInsert(VideoJjimVO vo)
-	{
-		getSqlSession().selectOne("VideoJjimInsert",vo);
-	}
-	public int VideoJjimCheck(int cno)
-	{
-		return getSqlSession().selectOne("VideoJjimCheck", cno);
-	}
+		public List<VideoJjimVO> VideoJjimListData(String id)
+		{
+			return getSqlSession().selectList("VideoJjimListData", id);
+		}
+		// 찜개수
+		public int VideoJjimCount(String id)
+		{
+			return getSqlSession().selectOne("VideoJjimCount", id);
+		}
+		public void VideoJjimInsert(VideoJjimVO vo)
+		{
+			getSqlSession().selectOne("VideoJjimInsert",vo);
+		}
+		public int VideoJjimCheck(int cno)
+		{
+			return getSqlSession().selectOne("VideoJjimCheck", cno);
+		}
 }
 
 

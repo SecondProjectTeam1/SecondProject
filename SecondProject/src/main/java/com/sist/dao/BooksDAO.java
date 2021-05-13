@@ -52,7 +52,7 @@ public class BooksDAO extends SqlSessionDaoSupport{
 		WHERE 
 		<include refid="dsql"/>
 		</select>
-		<!-- 검색결과 갯수 -->
+		<!-- 寃��깋寃곌낵 媛��닔 -->
 		<select id="booksFindDataCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(*)
 		FROM book_s
@@ -61,34 +61,35 @@ public class BooksDAO extends SqlSessionDaoSupport{
 		</select>
 	 * 
 	 */
-	public List<BooksVO> booksFindData(Map map)
-	{
-		return getSqlSession().selectList("booksFindData", map);
-	}
-	/*public int booksFindDataCount(Map map)
-	{
-		return getSqlSession().selectOne("booksFindDataCount", map);
-	}*/
+	
 	public BookVO findNewBookList(String title)
 	{
 		return getSqlSession().selectOne("findNewBookList",title);
 	}
+	public List<BooksVO> booksFindData(Map map)
+	{
+		return getSqlSession().selectList("booksFindData", map);
+	}
+	public int booksFindTotalPage(Map map)
+	{
+		return getSqlSession().selectOne("booksFindTotalPage", map);
+	}
 	// 찜목록
-	public List<BooksJjimVO> BooksJjimListData(String id)
-	{
-		return getSqlSession().selectList("BooksJjimListData", id);
-	}
-	// 찜개수
-	public int BooksJjimCount(String id)
-	{
-		return getSqlSession().selectOne("BooksJjimCount", id);
-	}
-	public void BooksJjimInsert(BooksJjimVO vo)
-	{
-		getSqlSession().selectOne("BooksJjimInsert",vo);
-	}
-	public int BooksJjimCheck(int cno)
-	{
-		return getSqlSession().selectOne("BooksJjimCheck", cno);
-	}
+		public List<BooksJjimVO> BooksJjimListData(String id)
+		{
+			return getSqlSession().selectList("BooksJjimListData", id);
+		}
+		// 찜개수
+		public int BooksJjimCount(String id)
+		{
+			return getSqlSession().selectOne("BooksJjimCount", id);
+		}
+		public void BooksJjimInsert(BooksJjimVO vo)
+		{
+			getSqlSession().selectOne("BooksJjimInsert",vo);
+		}
+		public int BooksJjimCheck(int cno)
+		{
+			return getSqlSession().selectOne("BooksJjimCheck", cno);
+		}
 }

@@ -63,6 +63,17 @@ public class VideoReviewDAO extends SqlSessionDaoSupport {
 	{
 		return getSqlSession().selectOne("revCountData", vno);
 	}
+	public List<VideoStarVO> starCount(int vno)
+	{
+		List<VideoStarVO> list=new ArrayList<VideoStarVO>();
+		try
+		{
+			list=getSqlSession().selectList("starCount", vno);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }
 
 

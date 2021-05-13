@@ -24,10 +24,10 @@
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
-		 <img src="dev.jpg" id="dev">
+		 <img src="dev.png" id="dev">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1 style="color:white;">중고책 검색</h1>
+					<h1 style="color:white;">강의 검색</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -57,7 +57,7 @@
                   <ul>
                   <c:forEach var="cvo" items="${cList }">
                     <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">
-                    <a href="junggo_list.do?cno=${cvo.cno }&page=1"><span style="font-size:10px">${cvo.category }(${cvo.count })</span></a></label></li>
+                    <a href="video_list.do?cno=${cvo.cno }&page=1"><span style="font-size:10px">${cvo.category }(${cvo.count })</span></a></label></li>
                   </c:forEach>
                   </ul>
                 </form>
@@ -90,7 +90,7 @@
               <div class="col-md-6 col-lg-4" v-for="f in findList">
                 <div class="card text-center card-product"> 
                   <div class="card-product__img">
-                   <a :href="'../junggo/junggo_detail.do?no='+f.no">
+                   <a :href="'../video/video_detail.do?no='+f.no">
                     <img :src="f.poster" class="card-img" >
                     </a> 
                     <ul class="card-product__imgOverlay">
@@ -141,13 +141,13 @@
 		 }, 
 		 mounted:function(){
 			 let _this=this;
-			 this.junggoGetData();
-			 this.junggoTotalPage();
+			 this.videoGetData();
+			 this.videoTotalPage();
 		 },
 		 methods:{
-			 junggoGetData:function(){
+			videoGetData:function(){
 				let _this=this;
-				axios.get("http://localhost/main/junggo/junggo_find.do",{
+				axios.get("http://localhost/main/video/video_find.do",{
 					 params:{
 						 userFind:this.userFind,
 						 type:this.findTitle,
@@ -159,9 +159,9 @@
 				 })
 			},
 			
-			junggoTotalPage:function(){
+			videoTotalPage:function(){
 				let _this=this;
-				axios.get("http://localhost/main/junggo/junggo_find_total.do",{
+				axios.get("http://localhost/main/video/video_find_total.do",{
 					params:{
 						type:_this.findTitle,
 						userFind:_this.userFind
@@ -174,18 +174,18 @@
 			 sendData:function(){
 				 
 				 this.curpage=1;
-				 this.junggoGetData();
-				 this.junggoTotalPage();
+				 this.videoGetData();
+				 this.videoTotalPage();
 			 },
 		 
 			 showPrevPage(){
 			 		this.curpage=this.curpage>1?this.curpage-1:this.curpage;
-			 		this.junggoGetData();
+			 		this.videoGetData();
 			 	},
 			 	
 			 	showNextPage(){
 			 		this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
-			 		this.junggoGetData();
+			 		this.videoGetData();
 			 	}
 		 
 		 }

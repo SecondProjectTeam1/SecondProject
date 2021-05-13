@@ -75,19 +75,8 @@ public class VideoService {
 	{
 		return rDao.revCountData(vno);
 	}
-	
-	// 찜관련
-	
-	public int VideoJjimCount(String id)
+	public List<VideoStarVO> starCount(int vno)
 	{
-		return vDao.VideoJjimCount(id);
-	}
-	public void VideoJjimInsert(VideoJjimVO vo)
-	{
-		vDao.VideoJjimInsert(vo);
-	}
-	public int VideoJjimCheck(int cno)
-	{
-		return vDao.VideoJjimCheck(cno);
+		return rDao.starCount(vno);
 	}
 }

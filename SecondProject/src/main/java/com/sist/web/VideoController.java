@@ -63,7 +63,7 @@ public class VideoController {
 	}
 	
 	@GetMapping("video/video_detail.do")
-	public String video_detail(String no, Model model, String page, String cno,String id,HttpSession session)
+	public String video_detail(String no, Model model, String page, String cno)
 	{
 		
 		int vno=Integer.parseInt(no);
@@ -74,18 +74,14 @@ public class VideoController {
 		
 		Double avg=service.starAvgData(vno);
 		int revCount=service.revCountData(vno);
-		
-		id=(String)session.getAttribute("id");
-	    int count=service.VideoJjimCheck(Integer.parseInt(no));
-	      
-	    session.setAttribute("id", id);
-	    model.addAttribute("count", count);
+		List<VideoStarVO> tList=service.starCount(vno);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("cno", cno);
 		model.addAttribute("revCount", revCount);
 		model.addAttribute("avg", avg);
 		model.addAttribute("sList", sList);
+		model.addAttribute("tList", tList);
 		model.addAttribute("list", list);
 		model.addAttribute("vno", no);
 		model.addAttribute("vo", vo);
@@ -131,18 +127,14 @@ public class VideoController {
 		ra.addAttribute("no", Integer.parseInt(vno));
 		return "redirect:video_detail.do";
 	}
-	@PostMapping("video/jjim.do")
-	   public String video_jjim(String no,String cno,Model model,HttpSession session,RedirectAttributes ra)
-	   {
-		   VideoJjimVO vo=new VideoJjimVO();
-		   String id=(String)session.getAttribute("id");
-		   
-		   vo.setId(id);
-		   vo.setCno(Integer.parseInt(no));
-		   
-		   service.VideoJjimInsert(vo);
-		   ra.addAttribute("no", Integer.parseInt(no));
-		   
-		   return "redirect:video_detail.do";
-	   }
+	
+	@GetMapping("video/find.do")
+	public String find_show(Model model)
+	{
+		List<VideoCategoryVO> cList=service.videoCategoryData();
+		
+		model.addAttribute("cList", cList);
+		model.addAttribute("main_jsp", "../video/video_find.jsp");
+		return "main/main";
+	}
 }

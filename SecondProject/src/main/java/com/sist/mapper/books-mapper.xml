@@ -46,25 +46,33 @@ WHERE no=#{no}
 SELECT no, title, price, poster, rownum FROM BOOK
 WHERE title LIKE '%'||#{title}||'%' AND rownum=1
 </select>
-<!-- 검색리스트 -->
+<!-- 검색 리스트 -->
+<sql id="bookReview-where">
+<if test="type=='title'">
+WHERE title LIKE '%'||#{userFind}||'%'
+</if>
+<if test="type=='author'">
+WHERE author LIKE '%'||#{userFind}||'%'
+</if>
+</sql>
 <select id="booksFindData" resultType="BooksVO" parameterType="hashmap">
-SELECT no, title, author, poster, category, price, sale_price 
+SELECT no, poster, title, author, price, sale_price, num
+FROM (SELECT no, poster, title, author, price, sale_price, rownum as num
+FROM (SELECT no, poster, title, author, price, sale_price
 FROM book_s
-WHERE 
-<trim prefix="(" suffix=")" prefixOverrides="OR">
-<foreach collection="FuArr" item="findTitle">
-<trim prefix="OR">
-<choose>
- <when test="findTitle=='T'.toString()">
- title LIKE '%'||#{userFind}||'%'
- </when>
-  <when test="findTitle=='A'.toString()">
- author LIKE '%'||#{userFind}||'%'
- </when>
-</choose>
-</trim>
-</foreach>
-</trim>
+<include refid="bookReview-where"/>
+))
+WHERE num BETWEEN #{start} AND #{end}
+</select>
+<!-- find Totalpage -->
+<select id="booksFindTotalPage" resultType="int" parameterType="hashmap">
+SELECT CEIL(COUNT(*)/9.0) FROM 
+(SELECT no, poster, title, author, price, sale_price, num 
+FROM (SELECT no, poster, title, author, price, sale_price, rownum as num 
+FROM (SELECT no, poster, title, author, price, sale_price
+FROM book_s 
+<include refid="bookReview-where"/>
+)))
 </select>
 <!-- 찜목록 -->
 <select id="BooksJjimListData" resultType="com.sist.vo.BooksJjimVO" parameterType="string">

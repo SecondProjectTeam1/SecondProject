@@ -26,6 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BookfJjimVO" alias="BookfJjimVO"/>
 		<typeAlias type="com.sist.vo.BooksJjimVO" alias="BooksJjimVO"/>
 		<typeAlias type="com.sist.vo.VideoJjimVO" alias="VideoJjimVO"/>
+		<typeAlias type="com.sist.vo.VideoStarVO" alias="VideoStarVO"/>
+		<typeAlias type="com.sist.vo.BooksStarVO" alias="BooksStarVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>

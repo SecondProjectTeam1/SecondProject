@@ -32,47 +32,33 @@ WHERE rownum <![CDATA[
 ]]>
 </select>
 <!-- 검색리스트 -->
+<sql id="review-where">
+<if test="type=='title'">
+WHERE title LIKE '%'||#{userFind}||'%'
+</if>
+<if test="type=='teacher'">
+WHERE teacher LIKE '%'||#{userFind}||'%'
+</if>
+</sql>
 <select id="videoFindData" resultType="com.sist.vo.VideoVO" parameterType="hashmap">
-SELECT no, poster, title, teacher, price
-FROM video WHERE 
-<trim prefix="(" suffix=")" prefixOverrides="OR">
-<foreach collection="FuArr" item="findTitle">
-<trim prefix="OR">
-<choose>
-<when test="findTitle=='T'.toString()">
-title LIKE '%'||#{userFind}||'%'
-</when> 
-<when test="findTitle='A'.toString()">
-teacher LIKE '%'||#{userFind}||'%'
-</when>
-</choose>
-</trim>
-</foreach>
-</trim>
+SELECT no, poster, title, teacher, price, num
+FROM (SELECT no, poster, title, teacher, price, rownum as num
+FROM (SELECT no, poster, title, teacher, price
+FROM video
+<include refid="review-where"/>
+))
+WHERE num BETWEEN #{start} AND #{end}
 </select>
 <!-- find Totalpage -->
-<!-- <select id="videoFindTotalPage" resultType="int" parameterType="hashmap">
+<select id="videoFindTotalPage" resultType="int" parameterType="hashmap">
 SELECT CEIL(COUNT(*)/9.0) FROM 
 (SELECT no, poster, title, teacher, price, num 
 FROM (SELECT no, poster, title, teacher, price, rownum as num 
 FROM (SELECT no, poster, title, teacher, price
-FROM video WHERE
-<trim prefix="(" suffix=")" prefixOverrides="OR">
-<foreach collection="FuArr" item="findTitle">
-<trim prefix="OR">
-<choose>
-<when test="findTitle=='T'.toString()">
-title LIKE '%'||#{userFind}||'%'
-</when> 
-<when test="findTitle='A'.toString()">
-teacher LIKE '%'||#{userFind}||'%'
-</when>
-</choose>
-</trim>
-</foreach>
-</trim>
+FROM video 
+<include refid="review-where"/>
 )))
-</select> -->
+</select>
 <select id="VideoJjimListData" resultType="com.sist.vo.VideoJjimVO" parameterType="string">
 	SELECT no,cno FROM video_jjim
 	WHERE id=#{id}
