@@ -8,6 +8,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+function onestar(e) {
+	for(let j=1; j<=e; j++){
+		let id = "star"+j;
+		document.getElementById(id).style.color = "gold";
+	}
+	if(e!=5){
+		for(let k=e+1; k<=5; k++){
+			let id = "star"+k;
+			document.getElementById(id).style.color = "gray";
+		}
+	}
+	document.getElementById("score").value = e;
+}
+
+</script>
+
 <style type="text/css">
 .review-img{
 	width:60px;
@@ -17,6 +35,10 @@
 .detail-img{
  width : 400px;
  height : 500px;
+}
+
+#str{
+	color:gray;
 }
 </style>
 </head>
@@ -144,25 +166,27 @@
 										<h5>평점</h5>
 										<h4>${avg }</h4>
 										<h6>${fn:length(slist) } reviews</h6>
+
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="rating_list">
 										<h3>리뷰 통계</h3>
 										<ul class="list">
-										<c:forEach var="score" items="${slist }" varStatus="status">
-											<li><a href="#">${score.cs }
-											<c:forEach var="i" begin="${status.index }" end="4">
-												<i class="fa fa-star"></i>
+											<c:forEach var="score" items="${slist }" varStatus="status">
+												<li><a href="#">${score.cs }
+													<c:forEach var="i" begin="${status.index }" end="4">
+													<i class="fa fa-star"></i>
+													</c:forEach>
+												</a></li>
 											</c:forEach>
-											</a></li>
-										</c:forEach>
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="review_list">
 							<!--  -->
+
 							<c:forEach var="review" items="${rlist }">
 								<div class="review_item">
 									<div class="media">
@@ -179,7 +203,10 @@
 									<p>${review.content }</p>
 								</div>
 							</c:forEach>
+
 							<!--  -->
+
+						<!--  -->
 							</div>
 						</div>
 						
@@ -187,27 +214,35 @@
 							<div class="review_box">
 								<h4>리뷰 쓰기</h4>
 								<p>별:</p>
-								<ul class="list">
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-								</ul>
-								<p>Outstanding</p>
-               					<form action="#/" class="form-contact form-review mt-3">
+								<div class="starRev">
+									<i id="star1" onclick="onestar(1)" class="fa fa-star"></i>
+									<i id="star2" onclick="onestar(2)" class="fa fa-star"></i>
+									<i id="star3" onclick="onestar(3)" class="fa fa-star"></i>
+									<i id="star4" onclick="onestar(4)" class="fa fa-star"></i>
+									<i id="star5" onclick="onestar(5)" class="fa fa-star"></i>
+								</div>	
+								
+               					<form action="bookReplyInsert.do" method="post" class="form-contact form-review mt-3">
+               						<input type="hidden" id="no" name="no" value="${vo.no }">
+               						<input type="hidden" id="score" name="score" value="5">
                   					<div class="form-group">
-                  						<input class="form-control" name="name" type="text" placeholder="Enter your name" required>
+                  						<input class="form-control" name="name" type="text" placeholder="이름" required>
                   					</div>
                   					<div class="form-group">
-                  						<textarea class="form-control different-control w-100" name="textarea" id="textarea" cols="30" rows="5" placeholder="Enter Message"></textarea>
+                  						<textarea class="form-control different-control w-100" name="content" id="textarea" cols="30" rows="5" placeholder="내용을 적어주세요"></textarea>
                   					</div>
                   					<div class="form-group text-center text-md-right mt-3">
-                  						<button type="submit" class="button button--active button-review">Submit Now</button>
+                  						<button type="submit" class="button button--active button-review">쓰기</button>
                 					</div>
                 				</form>
 							</div>
 						</div>
+						
+						
+						
+						
+						
+						
 					</div>
 					<nav class="blog-pagination justify-content-center d-flex">
 		<ul class="pagination">

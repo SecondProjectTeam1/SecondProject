@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.sist.vo.BookReplyVO;
 import com.sist.vo.BookVO;
 import com.sist.vo.BookfReplyVO;
 import com.sist.vo.BookfVO;
@@ -52,6 +53,10 @@ public class BookfDAO extends SqlSessionDaoSupport{
 	
 	public int bookfReplyAverageData(int no) {
 		return getSqlSession().selectOne("bookfReplyAverageData", no);
+	}
+	
+	public void bookfReplyInsert(BookfReplyVO vo) {
+		getSqlSession().insert("bookfReplyInsert", vo);
 	}
 
 }

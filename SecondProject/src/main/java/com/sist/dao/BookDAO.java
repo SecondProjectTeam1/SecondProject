@@ -48,8 +48,12 @@ public class BookDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("bookReplyScoreData", no);
 	}
 	
-	public int bookReplyAverageData(int no) {
+	public double bookReplyAverageData(int no) {
 		return getSqlSession().selectOne("bookReplyAverageData", no);
+	}
+	
+	public void bookReplyInsert(BookReplyVO vo) {
+		getSqlSession().insert("bookReplyInsert", vo);
 	}
 	
 	

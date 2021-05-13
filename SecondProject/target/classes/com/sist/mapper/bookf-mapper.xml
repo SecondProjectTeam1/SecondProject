@@ -35,7 +35,7 @@
 	SELECT no, name, content, poster, score, num
 	FROM (SELECT no, name, content, poster, score, rownum as num
 	FROM (SELECT no, name, content, poster, score
-	FROM bookf_reply WHERE no=#{no} ORDER BY no ASC))
+	FROM bookf_reply WHERE no=#{no} ORDER BY rno DESC))
 	WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -52,7 +52,12 @@
 	</select>
 	
 	<select id="bookfReplyAverageData" resultType="int" parameterType="int">
-	SELECT AVG(score) FROM bookf_reply
+	SELECT NVL(AVG(score),0) FROM bookf_reply
 	WHERE no=#{no}
 	</select>
+	
+	<insert id="bookfReplyInsert" parameterType="BookfReplyVO">
+	INSERT INTO bookf_reply 
+	VALUES((SELECT NVL(MAX(rno),0)+1 FROM bookf_reply), #{no}, #{name}, #{content}, #{poster}, #{score})
+	</insert>
 </mapper>
