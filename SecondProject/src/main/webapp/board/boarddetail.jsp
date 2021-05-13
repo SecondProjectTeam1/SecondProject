@@ -31,7 +31,7 @@ $(function(){
 	$.ajax({
 		type:'GET',
 		url:'reply_list.do',
-		data:{"bno":<c:out value="${vo.no}"/>},
+		data:{"bno":<c:out value="${vo.no}"/>,"type":'<c:out value="${type}"/>'},
 		success:function(result){
 			$('#reply_data').html(result);
 		}
@@ -40,9 +40,9 @@ $(function(){
 function deletepost(){
 	 if (!confirm("게시글을 삭제하시겠습니까?")) {
             alert("취소(아니오)를 누르셨습니다.");
-        } else {
-        	location.href="delete.do?no="+<c:out value="${vo.no}"/>;
-        }
+     } else {
+     	location.href="delete.do?no="+<c:out value="${vo.no}"/>;
+     }
 };
 </script>
 </head>  

@@ -80,6 +80,7 @@ public class BoardController {
 	   
 	   return "redirect:board.do";
    }
+
    @GetMapping("board/detail.do")
    public String board_detail(int no,String type,HttpSession session,Model model) {
 	   BoardVO vo=service.boardDetailData(no);
@@ -155,12 +156,13 @@ public class BoardController {
    }
    
    @GetMapping("board/reply_list.do")
-   public String board_reply_list(int bno,Model model) {
+   public String board_reply_list(int bno,String type,Model model) {
 	   List<ReplyVO> rList=service.replyListData(bno);
 	   List<ReplyVO> aList=service.replyReListData(bno);
 	   model.addAttribute("rList", rList);
 	   model.addAttribute("aList", aList);
 	   model.addAttribute("no", bno);
+	   model.addAttribute("type", type);
 	   return "board/boardreply";
    }
 }

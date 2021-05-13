@@ -231,6 +231,31 @@ function back(re){
 			</c:forEach>
 	</div>
 	<div class="comment-form">
+		<c:choose>
+		<c:when test="${type eq 'q'}">
+			<h4>Leave an Answer</h4>
+			<c:choose>
+			<c:when test="${sessionScope.admin ne 'y' }">
+				<strong>관리자만 댓글 이용 가능합니다.</strong>
+			</c:when>
+			<c:otherwise>
+			<form>
+				<div class="form-group form-inline">
+					<div class="form-group col-lg-6 col-md-6 name">
+						<input type="text" class="form-control" id="name" readonly value="${sessionScope.id}">
+					</div>
+				</div>
+				<div class="form-group">
+					 <input type="hidden" name=bno value="${no}" id="insert_bno">
+					<textarea class="form-control mb-10" rows="5" name="message" id="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
+								required=""></textarea>
+				</div>
+				<a href="javascript:reply()" class="button button-postComment button--active" id="reBtn">Post Comment</a>
+			</form>
+			</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
 			<h4>Leave a Reply</h4>
 			<c:choose>
 			<c:when test="${sessionScope.id eq null }">
@@ -252,6 +277,9 @@ function back(re){
 			</form>
 			</c:otherwise>
 			</c:choose>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 </body>
 </html>
