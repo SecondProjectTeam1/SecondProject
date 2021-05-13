@@ -30,7 +30,7 @@
 					<h1>Shopping Cart</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="../main/main.do">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
             </ol>
           </nav>
@@ -54,10 +54,12 @@
                               <th scope="col">Price</th>
                               <th scope="col">Quantity</th>
                               <th scope="col">Total</th>
+                              <th scope="col">Order</th>
+                              <th scope="col"></th>
                           </tr>
                       </thead>
                       <tbody>
-                      	
+                      	 
                       	 <tr>
                                <c:forEach var="d" items="${dclist }">
                               <td>
@@ -75,17 +77,29 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="${d.qty }" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                      <h5>${d.qty }권</h5>
                                   </div>
                               </td>
                               <td>
-                                  <h5>${d.total_price }</h5>
+                                  <h5>${d.total_price }원</h5>
                               </td>
+                        	<td>
+                              	<c:if test="${d.state=='n' }">
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${d.cartno }">주문하기</a>
+						         </c:if>
+						         <!-- 
+						         <c:if test="${d.state=='y' }">
+						            <span class="btn btn-sm btn-success">주문완료</span>
+						         </c:if>
+						          -->
+                              </td>
+                              
+                              <td>
+                              	<img src="delete.png" style= width:18px;hight:18px;>
+                              </td>
+                              
+                              <tr>
+                              <tr>
                         	</c:forEach>
                           </tr>
                           
@@ -102,21 +116,33 @@
                                   </div>
                               </td>
                               <td>
-                                  <h5>${f.fvo.price }</h5>
+                                  <h5>${f.fvo.price }</h5> 
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="${f.qty }" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                      <h5>${f.qty }권</h5>
                                   </div>
                               </td>
                               <td>
-                                  <h5>${f.total_price }</h5>
+                                  <h5>${f.total_price }원</h5> 
                               </td>
+                        	<td>
+                              	<c:if test="${f.state=='n' }">
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${f.cartno }">주문하기</a>
+						         </c:if>
+						         <!--  
+						         <c:if test="${f.state=='y' }">
+						            <span class="btn btn-sm btn-success">주문완료</span>
+						         </c:if>
+						         -->
+                              </td>
+                              
+                              <td>
+                              	<img src="delete.png" href="delete.do?cartno=${f.cartno }" style= width:18px;hight:18px; >
+                              </td>
+                              
+                              <tr>
+                              <tr>
                         	</c:forEach>
                           </tr>
                           
@@ -139,58 +165,42 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="${u.qty }" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                      <h5>${u.qty }권</h5>
                                   </div>
                               </td>
                               <td>
-                                  <h5>${u.total_price }</h5>
+                                  <h5>${u.total_price }원</h5>
                               </td>
+                        	<td>
+                              	<c:if test="${u.state=='n' }">
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${u.cartno }">주문하기</a>
+						         </c:if>
+						         <!-- 
+						         <c:if test="${u.state=='y' }">
+						            <span class="btn btn-sm btn-success">주문완료</span>
+						         </c:if>
+						          -->
+                              </td>
+                              
+                              <td>
+                              	<a href="../cart/delete.do?cartno=${u.cartno }">
+                              	<img src="delete.png" style= width:18px;hight:18px; alt="" class="delete-img">
+                              	</a>
+                              </td>
+                              
+                              
+                              <tr>
+                              <tr>
                         	</c:forEach>
                           </tr>
                           
-                           <tr>
-                               <c:forEach var="u" items="${uclist }">
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="${u.uvo.poster}" alt="">
-                                      </div>
-                                      <div class="media-body">
-                                          <p>${u.uvo.title}</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>${u.uvo.price }</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="${u.qty }" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>${u.total_price }</h5>
-                              </td>
-                        	</c:forEach>
-                          </tr>
-                          
-                          
+                           
                           <tr>
                                <c:forEach var="v" items="${vclist }">
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="${v.cvo.poster}" alt="">
+                                          <img src="${v.cvo.poster}" style="width:165px; height:220px" alt="">
                                       </div>
                                       <div class="media-body">
                                           <p>${v.cvo.title}</p>
@@ -202,73 +212,43 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="${v.qty }" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                      <h5>${v.qty }개</h5>
                                   </div>
                               </td>
                               <td>
-                                  <h5>${v.total_price }</h5>
+                                  <h5>${v.total_price }원</h5>
                               </td>
+                              
+                              
+                              <td>
+                              	<c:if test="${v.state=='n' }">
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${v.cartno }">주문하기</a>
+						         </c:if>
+						         <!--  
+						         <c:if test="${v.state=='y' }">
+						            <span class="btn btn-sm btn-success">주문완료</span>
+						         </c:if>
+						         -->
+						           
+                              </td>
+                             
+                              
+                              <td>
+                              	<a href="../cart/delete.do?cartno=${v.cartno }">
+                              	<img src="delete.png" style= width:18px;hight:18px; alt="" class="delete-img">
+                              	</a>
+                              </td>
+                              
+                              
+                              <tr>
+                              <tr>
+                              
                         	</c:forEach>
                           </tr>
                           
-                          
+                           
                          
-                          <tr class="bottom_button">
-                              <td>
-                                  <a class="button" href="#">Update Cart</a>
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <div class="cupon_text d-flex align-items-center">
-                                      <input type="text" placeholder="Coupon Code">
-                                      <a class="primary-btn" href="#">Apply</a>
-                                      <a class="button" href="#">Have a Coupon?</a>
-                                  </div>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <h5>Subtotal</h5>
-                              </td>
-                              <td>
-                                  <h5>$2160.00</h5>
-                              </td>
-                          </tr>
-                          <tr class="shipping_area">
-                              <td class="d-none d-md-block">
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <h5>Shipping</h5>
-                              </td>
-                              <td>
-                                  <div class="shipping_box">
-                                      <ul class="list">
-                                          <li><a href="#">Flat Rate: 2,500원</a></li>
-                                          <li><a href="#">Free Shipping</a></li>
-                                      </ul>
-                                  </div>
-                              </td>
-                          </tr>
+                          
                           <tr class="out_button_area">
                               <td class="d-none-l">
 
@@ -281,8 +261,7 @@
                               </td>
                               <td>
                                   <div class="checkout_btn_inner d-flex align-items-center">
-                                      <a class="gray_btn" href="#">Continue Shopping</a>
-                                      <a class="primary-btn ml-2" href="#">Proceed to checkout</a>
+                                     <a class="primary-btn ml-2" href="../main/main.do" style= float:left;>메인으로</a>
                                   </div>
                               </td>
                           </tr>

@@ -68,7 +68,7 @@ $('.update').click(function(){
 		}
 	})
 })
-	
+
 })
 </script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>

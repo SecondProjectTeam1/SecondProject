@@ -3,7 +3,7 @@ package com.sist.vo;
 /*
  *  CARTNO      NOT NULL NUMBER        
 	ID                   VARCHAR2(20)  
-	TYPE                 NUMBER        
+	TYPE                 VARCHAR2(10)  
 	PRODUCTNO            NUMBER        
 	QTY                  NUMBER        
 	REGDATE              DATE          
@@ -11,7 +11,8 @@ package com.sist.vo;
 	ADDRESS     NOT NULL VARCHAR2(700) 
 	TEL         NOT NULL VARCHAR2(20)  
 	EMAIL       NOT NULL VARCHAR2(100) 
-	STATE                VARCHAR2(1)    
+	STATE                VARCHAR2(1)   
+	STATE2               VARCHAR2(1) 
  */
 import java.util.*;
 public class CartVO {
@@ -26,7 +27,15 @@ public class CartVO {
 	private String email;
 	private String state;
 	private int total_price;
+	private String state2;
 	
+	
+	public String getState2() {
+		return state2;
+	}
+	public void setState2(String state2) {
+		this.state2 = state2;
+	}
 	private int price;
 	
 	// 임시 변수

@@ -40,7 +40,18 @@ public class CartController {
 		System.out.println("sp:"+sp);
 		
 		int total=Integer.parseInt(sp)*su;
-		
+		/*
+		 * #{cartno},
+		#{id},
+		#{type},
+		#{productno},
+		#{qty},
+		SYSDATE,
+		#{total_price},
+		#{address},
+		#{tel},
+		#{email},
+		 */
 		CartVO vo=new CartVO();
 		vo.setId(id);
 		vo.setAddress(address);
@@ -54,7 +65,7 @@ public class CartController {
 		
 
 		// 기존에 담았는지 (국내도서)?
-		int dcount = cDao.dBeforeInCart(vo.getType(), id);
+		int dcount = cDao.dBeforeInCart(vo.getProductno(), id);
 		if(dcount == 0)
 		{
 			// insert
@@ -100,7 +111,7 @@ public class CartController {
 		
 		
 		// 기존에 담았는지 (해외도서)?
-		int fcount = cDao.fBeforeInCart(vo.getType(), id);
+		int fcount = cDao.fBeforeInCart(vo.getProductno(), id);
 		if(fcount == 0)
 		{
 			// insert
@@ -147,7 +158,7 @@ public class CartController {
 		
 		
 		// 기존에 담았는지 (중고도서)?
-		int ucount = cDao.uBeforeInCart(vo.getType(), id);
+		int ucount = cDao.uBeforeInCart(vo.getProductno(), id);
 		if(ucount == 0)
 		{
 			// insert
@@ -160,6 +171,10 @@ public class CartController {
 		}
 		
 		return "redirect:../cart/list.do";
+		
+		
+		
+		
 	}
 	
 	@PostMapping("cart/vinput.do")
@@ -193,7 +208,7 @@ public class CartController {
 		
 		
 		// 기존에 담았는지(클래스)?
-		int vcount = cDao.vBeforeInCart(vo.getType(), id);
+		int vcount = cDao.vBeforeInCart(vo.getProductno(), id);
 		if(vcount == 0)
 		{
 			// insert
@@ -209,6 +224,21 @@ public class CartController {
 	
 	
 	// 목록
+	/*
+	@GetMapping("cart/list.do")
+	public String cart_list(HttpSession session, Model model)
+	{
+		String id=(String)session.getAttribute("id"); // 세션에 저장된 id
+		List<CartVO> clist=cDao.CartListData(id); // d 장바구니 정보
+		System.out.println("clist:"+clist.size());
+		
+		model.addAttribute("clist", clist);
+		model.addAttribute("main_jsp","../cart/list.jsp");
+		return "main/main";
+	}
+	*/
+	
+	
 	@GetMapping("cart/list.do")
 	public String cart_list(HttpSession session, Model model)
 	{
@@ -218,7 +248,11 @@ public class CartController {
 		List<CartVO> fclist=cDao.fCartList(id); // f장바구니 정보
 		List<CartVO> vclist=cDao.vCartList(id); // v장바구니 정보
 		
-		System.out.println("uclist:"+uclist);
+		System.out.println("dclist:"+dclist.size());
+		System.out.println("fclist:"+fclist.size());
+		System.out.println("uclist:"+uclist.size());
+		System.out.println("vclist:"+vclist.size());
+		/*
 		if(dclist.size()==0) // 카트에 저장된 상품이 없는 경우
 		{
 			return null; 
@@ -235,6 +269,7 @@ public class CartController {
 		{
 			return null; 
 		}
+		*/
 		//map.put("count", clist.size()); // 장바구니 상품의 유무
 		//session.setAttribute("clist", clist); // 장바구니 정보 세션에 저장?
 		model.addAttribute("dclist", dclist);
@@ -248,57 +283,47 @@ public class CartController {
 	
 	
 	// 삭제
-	@RequestMapping("delete.do")
-	public String delete(@RequestParam int cartno)
+	@GetMapping("cart/delete.do")
+	public String cart_delete(int cartno)
 	{
 		cDao.DeleteCart(cartno);
-		return "redirect:cart/list.do";
+		return "redirect:../cart/list.do";
 	}
 	
 	
-	// 수정
-	/*
-	@RequestMapping("update.do")
-	public String update(@RequestParam int[] qty, @RequestParam int[] dombookno, @RequestParam int[] forbookno, @RequestParam int[] usedbookno, @RequestParam int[] videono, HttpSession session)
+	
+	// 장바구니 내에서 주문하기
+	@GetMapping("cart/order_ok.do")
+	public String cart_order_ok(int cartno)
 	{
-		// 세션 id
-		String id=(String)session.getAttribute("id");
-		// 레코드의 갯수 만큼 반복문 실행?
-		for(int i=0; i<dombookno.length; i++)
-		{
-			CartVO vo = new CartVO();
-			vo.setId(id);
-			vo.setQty(qty[i]);
-			vo.setDombookno(dombookno[i]);
-			cDao.dModifyCart(vo);
-		}
-		for(int j=0; j<forbookno.length; j++)
-		{
-			CartVO vo = new CartVO();
-			vo.setId(id);
-			vo.setQty(qty[j]);
-			vo.setForbookno(forbookno[j]);
-			cDao.fModifyCart(vo);
-		}
-		for(int k=0; k<usedbookno.length; k++)
-		{
-			CartVO vo = new CartVO();
-			vo.setId(id);
-			vo.setQty(qty[k]);
-			vo.setUsedbookno(usedbookno[k]);
-			cDao.uModifyCart(vo);
-		}
-		for(int h=0; h<videono.length; h++)
-		{
-			CartVO vo = new CartVO();
-			vo.setId(id);
-			vo.setQty(qty[h]);
-			vo.setVideono(videono[h]);
-			cDao.cModifyCart(vo);
-		}
-		return "redirect:cart/list.do";
+		cDao.orderOkUpdate(cartno);
+		return "redirect:../cart/list.do";
 	}
-	*/
+	
+	// 관리자 페이지
+	
+	@GetMapping("cart/orderAdmin.do")
+	public String orderAdmin(Model model)
+	{
+		List<CartVO> dalist=cDao.adminPageListDataD();
+		List<CartVO> falist=cDao.adminPageListDataF();
+		List<CartVO> ualist=cDao.adminPageListDataU();
+		List<CartVO> valist=cDao.adminPageListDataV();
+		model.addAttribute("dalist",dalist);
+		model.addAttribute("falist",falist);
+		model.addAttribute("ualist",ualist);
+		model.addAttribute("valist",valist);
+		model.addAttribute("main_jsp", "../cart/orderAdmin.jsp");
+		return "main/main";
+	}
+	
+	@GetMapping("cart/orderAdmin_ok.do")
+	public String cart_admin_ok(int cartno)
+	{
+		cDao.adminOkUpdate(cartno);
+		return "redirect:../cart/orderAdmin.do";
+	}
+	
 }
 
 

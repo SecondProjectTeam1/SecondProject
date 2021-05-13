@@ -28,22 +28,24 @@ public class CartDAO extends SqlSessionDaoSupport{
 	
 	
 	// 기존 확인
-	public int dBeforeInCart(int type, String id)
+	public int dBeforeInCart(int productno, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("type", type);
+		map.put("productno", productno);
 		map.put("id", id);
 		return getSqlSession().selectOne("dBeforeInCart", map);
 	}
 	
-	public int fBeforeInCart(int type, String id)
+	public int fBeforeInCart(int productno, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("type", type);
+		map.put("productno", productno);
 		map.put("id", id);
 		return getSqlSession().selectOne("fBeforeInCart", map);
 	}
 	
+	//uBeforeInCart 수정전
+	/*
 	public int uBeforeInCart(int type, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
@@ -51,14 +53,24 @@ public class CartDAO extends SqlSessionDaoSupport{
 		map.put("id", id);
 		return getSqlSession().selectOne("uBeforeInCart", map);
 	}
+	*/
 	
-	public int vBeforeInCart(int type, String id)
+	public int uBeforeInCart(int productno, String id)
 	{
 		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("type", type);
+		map.put("productno", productno);
+		map.put("id", id);
+		return getSqlSession().selectOne("uBeforeInCart", map);
+	}
+	
+	public int vBeforeInCart(int productno, String id)
+	{
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("productno", productno);
 		map.put("id", id);
 		return getSqlSession().selectOne("vBeforeInCart", map);
 	}
+	
 	
 	
 	// 수량 변경
@@ -81,6 +93,16 @@ public class CartDAO extends SqlSessionDaoSupport{
 	
 	
 	// 카트리스트
+	/*
+	 <select id="CartListData" resultMap="CartMap" parameterType="string">
+	
+	public List<CartVO> CartListData(String id)
+	{
+		return getSqlSession().selectList("CartListData",id);
+	}
+	 */
+	
+	
 	public List<CartVO> dCartList(String id)
 	{
 		return getSqlSession().selectList("dCartList",id);
@@ -103,29 +125,43 @@ public class CartDAO extends SqlSessionDaoSupport{
 	
 	
 	// 삭제
-	public void DeleteCart(int cartno)
+	public int DeleteCart(int cartno)
 	{
-		getSqlSession().delete("DeleteCart",cartno);
+		return getSqlSession().delete("DeleteCart",cartno);
 	}
 	
 	
-	// 수정 (장바구니화면에서 수량변경)
-	public void dModifyCart(CartVO vo)
+	
+	// 주문
+	public void orderOkUpdate(int cartno)
 	{
-		getSqlSession().update("dModifyCart",vo);
-	}
-	public void fModifyCart(CartVO vo)
-	{
-		getSqlSession().update("fModifyCart",vo);
-	}
-	public void uModifyCart(CartVO vo)
-	{
-		getSqlSession().update("uModifyCart",vo);
-	}
-	public void cModifyCart(CartVO vo)
-	{
-		getSqlSession().update("cModifyCart",vo);
+		getSqlSession().update("orderOkUpdate",cartno);
 	}
 	
+	
+	
+	
+	// 관리자페이지
+	public List<CartVO> adminPageListDataD()
+	{
+		return getSqlSession().selectList("adminPageListDataD");
+	}
+	public List<CartVO> adminPageListDataF()
+	{
+		return getSqlSession().selectList("adminPageListDataF");
+	}
+	public List<CartVO> adminPageListDataU()
+	{
+		return getSqlSession().selectList("adminPageListDataU");
+	}
+	public List<CartVO> adminPageListDataV()
+	{
+		return getSqlSession().selectList("adminPageListDataV");
+	}
+	
+	public void adminOkUpdate(int cartno)
+	{
+		getSqlSession().update("adminOkUpdate",cartno);
+	}
 	
 }
