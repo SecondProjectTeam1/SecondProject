@@ -72,7 +72,7 @@ public class BooksController {
    }
    
    @GetMapping("junggo/junggo_detail.do")
-   public String junggo_detail(String no, Model model, String page, String cno)
+   public String junggo_detail(String no, Model model, String page, String cno, String id,HttpSession session)
    {
       int bno=Integer.parseInt(no);
       BooksVO vo=dao.booksDetailData(bno);
@@ -92,6 +92,12 @@ public class BooksController {
     	  }catch(Exception ex){ex.printStackTrace();}
       }
       
+      id=(String)session.getAttribute("id");
+      int count=dao.BooksJjimCheck(Integer.parseInt(no));
+      
+      session.setAttribute("id", id);
+      model.addAttribute("count", count);
+      
       model.addAttribute("nvo", nvo);
       model.addAttribute("page", page);
       model.addAttribute("cno", cno);
@@ -104,7 +110,13 @@ public class BooksController {
       model.addAttribute("main_jsp", "../junggo/junggo_detail.jsp");
       return "main/main";
    }
-   
+   /*
+    * 
+    *  HttpSession session=request.getSession();
+			  String id=(String)session.getAttribute("id");
+			  int count=dao.HotelJjimCheck(Integer.parseInt(no), id);
+			  request.setAttribute("count", count);
+    */
    @PostMapping("junggo/review_insert_ok.do")
 	public String junggo_review_insert(String no, String msg, String star, Model model, RedirectAttributes ra, HttpSession session)
 	{
@@ -144,6 +156,31 @@ public class BooksController {
 		return "redirect:junggo_detail.do";
 	}
    
-   
+   @PostMapping("junggo/jjim.do")
+   public String mypage_jjim(String no,String cno,Model model,HttpSession session,RedirectAttributes ra)
+   {
+	   BooksJjimVO vo=new BooksJjimVO();
+	   String id=(String)session.getAttribute("id");
+	   
+	   vo.setId(id);
+	   vo.setCno(Integer.parseInt(no));
+	   
+	   dao.BooksJjimInsert(vo);
+	   ra.addAttribute("no", Integer.parseInt(no));
+	   
+	   return "redirect:junggo_detail.do";
+   }
    
 }
+
+
+
+
+
+
+
+
+
+
+
+

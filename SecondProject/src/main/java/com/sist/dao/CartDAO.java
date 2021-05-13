@@ -164,4 +164,12 @@ public class CartDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("adminOkUpdate",cartno);
 	}
 	
+	/*public List<CartVO> CartListData(String id)
+	{
+		return getSqlSession().selectList("CartListData", id);
+	}
+	public int CartCount(String id)
+	{
+		return getSqlSession().selectOne("CartCount", id);
+	}*/
 }

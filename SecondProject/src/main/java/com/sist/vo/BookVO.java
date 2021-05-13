@@ -16,6 +16,7 @@ public class BookVO {
 	private String content_list;
 	private String score;
 	private String link;
+	private String pudate;
 	public int getNo() {
 		return no;
 	}
@@ -105,6 +106,12 @@ public class BookVO {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public String getPudate() {
+		return pudate;
+	}
+	public void setPudate(String pudate) {
+		this.pudate = pudate;
 	}
 	
 	

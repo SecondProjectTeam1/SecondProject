@@ -73,5 +73,22 @@ public class BooksDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("findNewBookList",title);
 	}
-	
+	// 찜목록
+	public List<BooksJjimVO> BooksJjimListData(String id)
+	{
+		return getSqlSession().selectList("BooksJjimListData", id);
+	}
+	// 찜개수
+	public int BooksJjimCount(String id)
+	{
+		return getSqlSession().selectOne("BooksJjimCount", id);
+	}
+	public void BooksJjimInsert(BooksJjimVO vo)
+	{
+		getSqlSession().selectOne("BooksJjimInsert",vo);
+	}
+	public int BooksJjimCheck(int cno)
+	{
+		return getSqlSession().selectOne("BooksJjimCheck", cno);
+	}
 }

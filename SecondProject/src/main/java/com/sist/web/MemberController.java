@@ -148,6 +148,64 @@ public class MemberController {
 		return "redirect: ../member/admin.do";
 	}
 	
+	@GetMapping("mypage/list.do")
+	public String mypage_list(Model model,HttpSession session,String id)
+	{
+		id=(String)session.getAttribute(id);
+		MemberVO vo=mDao.MemberAllData(id);
+		String email=vo.getEmail();
+		session.setAttribute("id", id);
+		session.setAttribute("email", email);
+		model.addAttribute("main_jsp", "../mypage/mypage.jsp");
+		return "main/main";
+	}
 	
+	@GetMapping("mypage/mypage_update.do")
+	public String mypage_mypage_update(Model model,HttpSession session,String id,String name)
+	{
+		id=(String)session.getAttribute("id");
+		name=(String)session.getAttribute("name");
+		
+		session.setAttribute("id", id);
+		session.setAttribute("name", name);
+		
+		MemberVO vo=mDao.MemberAllData(id);
+		String pwd=vo.getPwd();
+		String birthday=vo.getBirthday();
+		String email=vo.getEmail();
+		String post=vo.getPost();
+		String addr1=vo.getAddr1();
+		String addr2=vo.getAddr2();
+		String tel=vo.getTel();
+		String content=vo.getContent();
+		
+		session.setAttribute("pwd", pwd);
+		session.setAttribute("birthday", birthday);
+		session.setAttribute("email", email);
+		session.setAttribute("post", post);
+		session.setAttribute("addr1", addr1);
+		session.setAttribute("addr2", addr2);
+		session.setAttribute("tel", tel);
+		session.setAttribute("content", content);
+		model.addAttribute("main_jsp", "../mypage/mypage_update.jsp");
+		return "main/main";
+	}
+	@PostMapping("mypage/mypage_update_ok.do")
+	public String mypage_update_ok(Model model,HttpSession session,String id,String pwd,String email,String post,String addr1,String addr2,String tel,String content)
+	{
+		id=(String)session.getAttribute("id");
+		pwd=(String)session.getAttribute("pwd");
+		MemberVO vo=new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setEmail(email);
+		vo.setPost(post);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setTel(tel);
+		vo.setContent(content);
+		mDao.MypageUpdateData(vo);
+		return "redirect:../mypage/mypage.do";
+	}
 	
 }

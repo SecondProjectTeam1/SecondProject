@@ -63,7 +63,7 @@ public class VideoController {
 	}
 	
 	@GetMapping("video/video_detail.do")
-	public String video_detail(String no, Model model, String page, String cno)
+	public String video_detail(String no, Model model, String page, String cno,String id,HttpSession session)
 	{
 		
 		int vno=Integer.parseInt(no);
@@ -74,6 +74,12 @@ public class VideoController {
 		
 		Double avg=service.starAvgData(vno);
 		int revCount=service.revCountData(vno);
+		
+		id=(String)session.getAttribute("id");
+	    int count=service.VideoJjimCheck(Integer.parseInt(no));
+	      
+	    session.setAttribute("id", id);
+	    model.addAttribute("count", count);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("cno", cno);
@@ -125,4 +131,18 @@ public class VideoController {
 		ra.addAttribute("no", Integer.parseInt(vno));
 		return "redirect:video_detail.do";
 	}
+	@PostMapping("video/jjim.do")
+	   public String video_jjim(String no,String cno,Model model,HttpSession session,RedirectAttributes ra)
+	   {
+		   VideoJjimVO vo=new VideoJjimVO();
+		   String id=(String)session.getAttribute("id");
+		   
+		   vo.setId(id);
+		   vo.setCno(Integer.parseInt(no));
+		   
+		   service.VideoJjimInsert(vo);
+		   ra.addAttribute("no", Integer.parseInt(no));
+		   
+		   return "redirect:video_detail.do";
+	   }
 }

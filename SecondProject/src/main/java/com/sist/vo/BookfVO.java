@@ -13,6 +13,7 @@ public class BookfVO {
 	private String subtitle;
 	private String score;
 	private String link;
+	private String pudate;
 	public int getNo() {
 		return no;
 	}
@@ -84,6 +85,12 @@ public class BookfVO {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public String getPudate() {
+		return pudate;
+	}
+	public void setPudate(String pudate) {
+		this.pudate = pudate;
 	}
 	
 }

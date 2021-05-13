@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.sist.vo.BookJjimVO;
 import com.sist.vo.BookReplyVO;
 import com.sist.vo.BookVO;
 
@@ -55,6 +56,23 @@ public class BookDAO extends SqlSessionDaoSupport{
 	public void bookReplyInsert(BookReplyVO vo) {
 		getSqlSession().insert("bookReplyInsert", vo);
 	}
-	
+	// 찜목록
+			public List<BookJjimVO> BookJjimListData(String id)
+			{
+				return getSqlSession().selectList("BookJjimListData", id);
+			}
+			// 찜개수
+			public int BookJjimCount(String id)
+			{
+				return getSqlSession().selectOne("BookJjimCount", id);
+			}
+			public void BookJjimInsert(BookJjimVO vo)
+			{
+				getSqlSession().selectOne("BookJjimInsert",vo);
+			}
+			public int BookJjimCheck(int cno)
+			{
+				return getSqlSession().selectOne("BookJjimCheck", cno);
+			}
 	
 }

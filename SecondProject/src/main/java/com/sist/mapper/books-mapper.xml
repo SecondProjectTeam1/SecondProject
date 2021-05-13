@@ -66,4 +66,27 @@ WHERE
 </foreach>
 </trim>
 </select>
+<!-- 찜목록 -->
+<select id="BooksJjimListData" resultType="com.sist.vo.BooksJjimVO" parameterType="string">
+	SELECT no,cno FROM books_jjim
+	WHERE id=#{id}
+</select>
+
+<select id="BooksJjimCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM books_jjim
+	WHERE id=#{id}
+</select>
+<insert id="BooksJjimInsert" parameterType="com.sist.vo.BooksJjimVO">
+	
+	INSERT INTO books_jjim
+	VALUES(
+	(SELECT NVL(MAX(no)+1,1) as no FROM books_jjim),
+	#{id},
+	#{cno}
+	)
+</insert>
+<select id="BooksJjimCheck" resultType="int" parameterType="int">
+	SELECT COUNT(*) FROM books_jjim
+	WHERE cno=#{cno}
+</select>
 </mapper>

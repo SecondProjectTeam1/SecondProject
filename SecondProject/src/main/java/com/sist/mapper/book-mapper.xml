@@ -61,4 +61,29 @@
 	INSERT INTO book_reply 
 	VALUES((SELECT NVL(MAX(rno),0)+1 FROM book_reply), #{no}, #{name}, #{content}, #{poster}, #{score})
 	</insert>
+	
+	
+<!-- 찜목록 -->
+<select id="BookJjimListData" resultType="com.sist.vo.BookJjimVO" parameterType="string">
+	SELECT no,cno FROM book_jjim
+	WHERE id=#{id}
+</select>
+
+<select id="BookJjimCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM book_jjim
+	WHERE id=#{id}
+</select>
+<insert id="BookJjimInsert" parameterType="com.sist.vo.BookJjimVO">
+	
+	INSERT INTO book_jjim
+	VALUES(
+	(SELECT NVL(MAX(no)+1,1) as no FROM book_jjim),
+	#{id},
+	#{cno}
+	)
+</insert>
+<select id="BookJjimCheck" resultType="int" parameterType="int">
+	SELECT COUNT(*) FROM book_jjim
+	WHERE cno=#{cno}
+</select>
 </mapper>

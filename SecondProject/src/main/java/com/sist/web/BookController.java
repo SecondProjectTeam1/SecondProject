@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.BookDAO;
+import com.sist.vo.BookJjimVO;
 import com.sist.vo.BookReplyVO;
 import com.sist.vo.BookVO;
 import com.sist.vo.BookfVO;
@@ -69,7 +71,7 @@ public class BookController {
 	}
 	
 	@GetMapping("book/detail.do")
-	public String book_detail(String page, String no, Model model) {
+	public String book_detail(String page, String no, Model model,String id,HttpSession session) {
 		Map map = new HashMap();
 		if (page == null)
 			page = "1";
@@ -102,6 +104,11 @@ public class BookController {
 		} else {
 			avg = 0;
 		}
+		id=(String)session.getAttribute("id");
+	    int count=dao.BookJjimCheck(Integer.parseInt(no));
+	      
+	    session.setAttribute("id", id);
+	    model.addAttribute("count", count);
 		
 		model.addAttribute("fno", fno);
 		model.addAttribute("curpage", curpage);
@@ -129,4 +136,19 @@ public class BookController {
 		ra.addAttribute("no", no);
 		return "redirect:/book/detail.do";
 	}
+	
+	@PostMapping("book/jjim.do")
+	   public String book_jjim(String no,String cno,Model model,HttpSession session,RedirectAttributes ra)
+	   {
+		   BookJjimVO vo=new BookJjimVO();
+		   String id=(String)session.getAttribute("id");
+		   
+		   vo.setId(id);
+		   vo.setCno(Integer.parseInt(no));
+		   
+		   dao.BookJjimInsert(vo);
+		   ra.addAttribute("no", Integer.parseInt(no));
+		   
+		   return "redirect:/book/detail.do";
+	   }
 }

@@ -79,6 +79,22 @@
 		WHERE id=#{id}
 	</delete>
 	
+	<select id="MemberAllData" resultType="com.sist.vo.MemberVO" parameterType="string">
+		SELECT id,pwd,name,sex,birthday,email,post,addr1,addr2,tel,content
+		FROM member WHERE id=#{id}
+	</select>
+	<update id="MypageUpdateData" parameterType="com.sist.vo.MemberVO">
+		UPDATE member SET
+		pwd=#{pwd},
+		email=#{email},
+		post=#{post},
+		addr1=#{addr1},
+		addr2=#{addr2},
+		tel=#{tel},
+		content=#{content}
+		WHERE id=#{id}
+	</update>
+	
 </mapper>
 
 

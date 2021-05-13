@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.vo.BookReplyVO;
 import com.sist.vo.BookVO;
+import com.sist.vo.BookfJjimVO;
 import com.sist.vo.BookfReplyVO;
 import com.sist.vo.BookfVO;
 
@@ -58,5 +59,22 @@ public class BookfDAO extends SqlSessionDaoSupport{
 	public void bookfReplyInsert(BookfReplyVO vo) {
 		getSqlSession().insert("bookfReplyInsert", vo);
 	}
-
+	// 찜목록
+			public List<BookfJjimVO> BookfJjimListData(String id)
+			{
+				return getSqlSession().selectList("BookfJjimListData", id);
+			}
+			// 찜개수
+			public int BookfJjimCount(String id)
+			{
+				return getSqlSession().selectOne("BookfJjimCount", id);
+			}
+			public void BookfJjimInsert(BookfJjimVO vo)
+			{
+				getSqlSession().selectOne("BookfJjimInsert",vo);
+			}
+			public int BookfJjimCheck(int cno)
+			{
+				return getSqlSession().selectOne("BookfJjimCheck", cno);
+			}
 }

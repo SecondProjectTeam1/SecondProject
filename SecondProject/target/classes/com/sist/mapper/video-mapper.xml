@@ -73,4 +73,26 @@ teacher LIKE '%'||#{userFind}||'%'
 </trim>
 )))
 </select> -->
+<select id="VideoJjimListData" resultType="com.sist.vo.VideoJjimVO" parameterType="string">
+	SELECT no,cno FROM video_jjim
+	WHERE id=#{id}
+	</select>
+	
+	<select id="VideoJjimCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM video_jjim
+	WHERE id=#{id}
+	</select>
+	<insert id="VideoJjimInsert" parameterType="com.sist.vo.VideoJjimVO">
+	
+	INSERT INTO video_jjim
+	VALUES(
+	(SELECT NVL(MAX(no)+1,1) as no FROM video_jjim),
+	#{id},
+	#{cno}
+	)
+	</insert>
+<select id="VideoJjimCheck" resultType="int" parameterType="int">
+	SELECT COUNT(*) FROM video_jjim
+	WHERE cno=#{cno}
+</select>
 </mapper>

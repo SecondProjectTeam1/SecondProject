@@ -196,7 +196,19 @@ $('.update').click(function(){
                  </td>
                 </tr>
                 <tr>
-                 <td colspan="3" class="text-right"><a href="video_list.do?cno=${cno }&page=${page}">목록</a>
+                 <td colspan="3" class="text-right">
+	                <c:if test="${sessionScope.id!=null }">
+						<c:if test="${count==0 }">
+							<form name="myForm" action="../video/jjim.do" method="post">
+							<input type="hidden" name="no" value="${vo.no}">
+							</form>
+							<a href="#" onclick="javascript:document.myForm.submit();">찜하기</a>
+						</c:if>
+					 <c:if test="${count!=0 }">
+						<a href="#">찜완료</a>
+					 </c:if>
+					</c:if>
+                 <a href="video_list.do?cno=${cno }&page=${page}">목록</a>
                  </td>
                 </tr>
                </table>

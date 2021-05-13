@@ -79,6 +79,24 @@ public class VideoDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("videoFindTotalPage", map);
 	}
+	// 찜목록
+	public List<VideoJjimVO> VideoJjimListData(String id)
+	{
+		return getSqlSession().selectList("VideoJjimListData", id);
+	}
+	// 찜개수
+	public int VideoJjimCount(String id)
+	{
+		return getSqlSession().selectOne("VideoJjimCount", id);
+	}
+	public void VideoJjimInsert(VideoJjimVO vo)
+	{
+		getSqlSession().selectOne("VideoJjimInsert",vo);
+	}
+	public int VideoJjimCheck(int cno)
+	{
+		return getSqlSession().selectOne("VideoJjimCheck", cno);
+	}
 }
 
 

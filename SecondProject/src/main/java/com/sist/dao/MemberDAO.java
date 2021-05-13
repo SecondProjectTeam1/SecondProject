@@ -102,5 +102,12 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().delete("memberDelete",id);
 	}
-		
+	public MemberVO MemberAllData(String id)
+	{
+		return getSqlSession().selectOne("MemberAllData", id);
+	}
+	public void MypageUpdateData(MemberVO vo)
+	{
+		getSqlSession().update("MypageUpdateData",vo);
+	}
 }

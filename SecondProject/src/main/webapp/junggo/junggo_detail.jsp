@@ -209,9 +209,21 @@ $('.update').click(function(){
 									</td>
 								</tr>
 								<tr>
-                 		<td colspan="3" class="text-right"><a href="junggo_list.do?cno=${cno }&page=${page}">목록</a>
-                 			</td>
-                			</tr>
+			                 		<td colspan="3" class="text-right">
+			                 			<c:if test="${sessionScope.id!=null }">
+											<c:if test="${count==0 }">
+												<form name="myForm" action="../junggo/jjim.do" method="post">
+												<input type="hidden" name="no" value="${vo.no}">
+												</form>
+												<a href="#" onclick="javascript:document.myForm.submit();">찜하기</a>
+											</c:if>
+											<c:if test="${count!=0 }">
+												<a href="#">찜완료</a>
+											</c:if>
+										</c:if>
+			                 			<a href="junggo_list.do?cno=${cno }&page=${page}">목록</a>
+			                 		</td>
+                				</tr>
 							</tbody>
 						</table>
 					</div>

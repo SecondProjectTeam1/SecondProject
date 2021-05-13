@@ -112,6 +112,28 @@ function onestar(e) {
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<p>${vo.title }</p>
 				</div>
+				<div class="table-responsive">
+					<table class="table">
+							<tbody>
+								<tr>
+					                 <td colspan="3" class="text-right">
+							                <c:if test="${sessionScope.id!=null }">
+												<c:if test="${count==0 }">
+													<form name="myForm" action="../bookf/jjim.do" method="post">
+													<input type="hidden" name="no" value="${vo.no}">
+													</form>
+													<a href="#" onclick="javascript:document.myForm.submit();">찜하기</a>
+												</c:if>
+											 	<c:if test="${count!=0 }">
+													<a href="#">찜완료</a>
+											 	</c:if>
+											</c:if>
+						                 
+					                 </td>
+				                </tr>
+				     		</tbody>
+				     </table>
+                </div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">
 						<table class="table">
