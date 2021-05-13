@@ -85,11 +85,11 @@
     <!--================ Hero banner start =================-->
 
 <section class="order_details section-margin--small">
-    <div class="container">
-      <div class="section-intro pb-30px">
+    <div class="container" >
+      <div class="section-intro pb-30px" >
           <h2>Latest <span class="section-intro__style">News</span></h2>
         </div>
-      <div class="order_details_table">
+      <div class="order_details_table"  style="background-color: #f7f8ff;">  
       <table class="table table-hover">
     <thead>
       <tr>
