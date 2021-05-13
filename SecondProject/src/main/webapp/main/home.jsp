@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
       <!--================ Hero banner start =================-->
    <!-- partial:index.partial.html -->
+   
 <div style="height: 80px"></div>
 <div class="book-store">
 <div class="section-intro pb-60px text-center">
@@ -83,6 +84,33 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <!--================ Hero banner start =================-->
 
+<section class="order_details section-margin--small">
+    <div class="container">
+      <div class="section-intro pb-30px">
+          <h2>Latest <span class="section-intro__style">News</span></h2>
+        </div>
+      <div class="order_details_table">
+      <table class="table table-hover">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-center" style="font-size: 20px;"> IT 취업 뉴스</th>
+      </tr>
+    </thead>
+    
+    <c:forEach var="vo" items="${list }" varStatus="s">
+            <c:if test="${s.index<7 }">
+     <tbody>
+      <tr>
+        <th width=15% class="text-center">${vo.author}</th>
+        <td width=85%><a href="${vo.link}">"${vo.description.substring(0,65)}..."</td></a>
+      </tr>
+       </tbody>
+      </c:if>
+      </c:forEach>
+  </table>
+      </div>
+    </div>
+  </section>
     <!--================ Hero Carousel start =================-->
     <!-- <section class="section-margin mt-0">
       <div class="owl-carousel owl-theme hero-carousel">
