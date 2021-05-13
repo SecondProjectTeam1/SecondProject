@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
 		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
+		<typeAlias type="com.sist.vo.RecommendVO" alias="RecommendVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/sist/mapper/book-mapper.xml"/>
@@ -33,5 +34,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/board-mapper.xml"/>
 		<mapper resource="com/sist/mapper/reply-mapper.xml"/>
 		<mapper resource="com/sist/mapper/cart-mapper.xml"/>
+		<mapper resource="com/sist/mapper/recommend-mapper.xml"/>
 	</mappers>
 </configuration>
