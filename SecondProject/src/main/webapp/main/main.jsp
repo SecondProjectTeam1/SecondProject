@@ -46,6 +46,7 @@
                   <li class="nav-item"><a class="nav-link" href="category.html">국내도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="single-product.html">해외도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../junggo/junggo_list.do">중고도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../recommend/list.do">자격증 추천 도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../video/video_list.do">강의</a></li>
                 </ul>
 							</li>

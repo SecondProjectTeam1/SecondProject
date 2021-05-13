@@ -6,6 +6,8 @@
    <!-- partial:index.partial.html -->
    
 <div style="height: 80px"></div>
+
+
 <div class="book-store">
 <div class="section-intro pb-60px text-center">
           <h2><span class="section-intro__style">Best Sellers</span></h2>
@@ -82,6 +84,176 @@
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<div style="height: 50px"></div>
+    <!-- ================ trending product section start ================= -->  
+    <section class="section-margin calc-60px">
+      <div class="container">
+        <div class="section-intro pb-60px">
+          <p>Popular Item in the market</p>
+          <h2>Best <span class="section-intro__style">Lecture</span></h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/wp-content/uploads/web_mvc7.jpg" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=49"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 백기선</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=49"><br><br>스프링 웹 MVC</a></h4>
+                <p class="card-product__price">₩ 110,000</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/course-325248-cover/9cb6375d-6ca4-4e2f-9212-6675f45d7396" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=7"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 1분코딩</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=7"><br>애플 웹사이트<br>인터랙션 클론!</a></h4>
+                <p class="card-product__price">₩ 77,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/course-325684-cover/beb08379-7695-4cec-946c-c4f291d56b69" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=62"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>코딩웍스</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=62"><br>반응형 웹사이트<br>포트폴리오</a></h4>
+                <p class="card-product__price">₩ 61,600</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/courses/324037/course_cover/626bed53-f79c-4fbf-b513-b18772f0ef6c/%E1%84%82%E1%85%A1%E1%86%B7%E1%84%87%E1%85%A1%E1%86%A8%E1%84%89%E1%85%A1_100.png" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=70"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 남박사</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=70"><br>남박사의 파이썬 실전 100% 활용</a></h4>
+                <p class="card-product__price">₩ 66,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/courses/326368/cover/03c66e23-4e7e-480a-8d01-691fa57d7e45" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=33"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 김시훈</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=33"><br>mongoDB 기초부터 <br>실무까지</a></h4>
+                <p class="card-product__price">₩ 77,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/courses/324056/course_cover/d7843f34-f5a0-47e1-abb6-f16ad51fcc6a/ljh_springboot.png" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=144"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 이재환</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=144"><br>예제로 배우는<br>스프링부트 입문</a></h4>
+                <p class="card-product__price">₩ 44,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/courses/324038/course_cover/ad135c4f-a879-4665-9bac-964ddb0e08a6/kky_angular.png" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=145"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 김영태</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=145"><br>Angular(2+) <br>Front에서 Back까지</a></h4>
+                <p class="card-product__price">무료</p>
+              </div> 
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="https://cdn.inflearn.com/public/courses/325641/cover/7cfe4afe-eaf6-44ac-96fb-150fcf44aecd" style="height: 180px">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="../video/video_detail.do?no=6"><button><i class="ti-search"></i></button></a></li>
+                  <li><button><i class="ti-shopping-cart"></i></button></li>
+                  <li><button><i class="ti-heart"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <p>강사 : 코딩일레븐</p>
+                <h4 class="card-product__title"><a href="../video/video_detail.do?no=6"><br>인터랙티브 <br>웹 개발[초급편]</a></h4>
+                <p class="card-product__price">₩ 44,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================ trending product section end ================= -->  
+
+
+    <!-- ================ offer section start ================= --> 
+    <section class="offer" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 20px 30px" data-top-bottom="background-position: 0 20px">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5">
+            <div class="offer__content text-center">
+              <h3>Up To 50% Off</h3>
+              <h4>Bic Sale</h4>
+              <p>새책같은 중고책 저렴하게 구입할 수 있는기회!</p>
+              <a class="button button--active mt-3 mt-xl-4" href="../junggo/junggo_list.do">Shop Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================ offer section end ================= --> 
+
     <!--================ Hero banner start =================-->
 
 <section class="order_details section-margin--small">
@@ -93,7 +265,7 @@
       <table class="table table-hover">
     <thead>
       <tr>
-        <th colspan="2" class="text-center" style="font-size: 20px;"> IT 취업 뉴스</th>
+        <th colspan="2" class="text-center" style="font-size: 20px;">실시간 IT 취업 뉴스</th>
       </tr>
     </thead>
     
@@ -138,173 +310,9 @@
       </div>
     </section> -->
     <!--================ Hero Carousel end =================-->
-<div style="height: 50px"></div>
-    <!-- ================ trending product section start ================= -->  
-    <section class="section-margin calc-60px">
-      <div class="container">
-        <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
-          <h2>Trending <span class="section-intro__style">Product</span></h2>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product1.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Accessories</p>
-                <h4 class="card-product__title"><a href="single-product.html">Quartz Belt Watch</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product2.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Beauty</p>
-                <h4 class="card-product__title"><a href="single-product.html">Women Freshwash</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product3.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Decor</p>
-                <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product4.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Decor</p>
-                <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product5.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Accessories</p>
-                <h4 class="card-product__title"><a href="single-product.html">Man Office Bag</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product6.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Kids Toy</p>
-                <h4 class="card-product__title"><a href="single-product.html">Charging Car</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product7.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Accessories</p>
-                <h4 class="card-product__title"><a href="single-product.html">Blutooth Speaker</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div> 
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                <img class="card-img" src="../img/product/product8.png" alt="">
-                <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
-                  <li><button><i class="ti-shopping-cart"></i></button></li>
-                  <li><button><i class="ti-heart"></i></button></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p>Kids Toy</p>
-                <h4 class="card-product__title"><a href="#">Charging Car</a></h4>
-                <p class="card-product__price">$150.00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ================ trending product section end ================= -->  
 
 
-    <!-- ================ offer section start ================= --> 
-    <section class="offer" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 20px 30px" data-top-bottom="background-position: 0 20px">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-5">
-            <div class="offer__content text-center">
-              <h3>Up To 50% Off</h3>
-              <h4>Winter Sale</h4>
-              <p>Him she'd let them sixth saw light</p>
-              <a class="button button--active mt-3 mt-xl-4" href="#">Shop Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ================ offer section end ================= --> 
+
 
     <!-- ================ Best Selling item  carousel ================= --> 
     <section class="section-margin calc-60px">
