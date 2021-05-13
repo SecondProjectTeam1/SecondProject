@@ -5,7 +5,7 @@
  
  <mapper namespace="com.sist.mapper.cart-mapper">
  	<!-- =====================장바구니 담기===================== -->
- 	<insert id="dInCart" parameterType="CartVO">
+ 	<insert id="productsInCart" parameterType="CartVO">
  	<!-- 
  		CARTNO      NOT NULL NUMBER        
 		ID                   VARCHAR2(20)  
@@ -17,7 +17,7 @@
 		ADDRESS     NOT NULL VARCHAR2(700) 
 		TEL         NOT NULL VARCHAR2(20)  
 		EMAIL       NOT NULL VARCHAR2(100) 
-		STATE                VARCHAR2(1)     
+		STATE                VARCHAR2(1)    
  	 -->
  		<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
 	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
@@ -25,7 +25,7 @@
  		INSERT INTO cart VALUES (
 		#{cartno},
 		#{id},
-		'1',
+		#{type},
 		#{productno},
 		#{qty},
 		SYSDATE,
@@ -37,62 +37,7 @@
 		)
  	</insert>
  	
- 	<insert id="fInCart" parameterType="CartVO">
- 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
-	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
-	</selectKey>
- 		INSERT INTO cart VALUES (
-		#{cartno},
-		#{id},
-		'2',
-		#{productno},
-		#{qty},
-		SYSDATE,
-		#{total_price},
-		#{address},
-		#{tel},
-		#{email},
-		'n'
-		)
- 	</insert>
  	
- 	<insert id="uInCart" parameterType="CartVO">
- 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
-	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
-	</selectKey>
- 		INSERT INTO cart VALUES (
-		#{cartno},
-		#{id},
-		'3',
-		#{productno},
-		#{qty},
-		SYSDATE,
-		#{total_price},
-		#{address},
-		#{tel},
-		#{email},
-		'n'
-		)
- 	</insert>
- 	
- 	<insert id="vInCart" parameterType="CartVO">
- 	<selectKey keyProperty="cartno" resultType="int" order="BEFORE">
-	     SELECT NVL(MAX(cartno)+1,1) as cartno FROM cart
-	</selectKey>
- 		INSERT INTO cart VALUES (
-		#{cartno},
-		#{id},
-		'4',
-		#{productno},
-		#{qty},
-		SYSDATE,
-		#{total_price},
-		#{address},
-		#{tel},
-		#{email},
-		'n'
-		)
- 	</insert>
  	<!-- =====================기존 확인===================== -->
  	<!-- 국내책 -->
  	<select id="dBeforeInCart" resultType="int">
@@ -181,20 +126,28 @@
  		<result property="email" column="email"/>
  		<result property="state" column="state"/>
  		<result property="total_price" column="total_price"/>
+ 		<result property="dvo.poster" column="dposter"/>
+ 		<result property="dvo.title" column="dtitle"/>
+ 		<result property="dvo.price" column="dprice"/>
+ 		<result property="fvo.poster" column="fposter"/>
+ 		<result property="fvo.title" column="ftitle"/>
+ 		<result property="fvo.price" column="fprice"/>
+ 		<result property="uvo.poster" column="uposter"/>
+ 		<result property="uvo.title" column="utitle"/>
+ 		<result property="uvo.price" column="uprice"/>
+ 		<result property="cvo.poster" column="cposter"/>
+ 		<result property="cvo.title" column="ctitle"/>
+ 		<result property="cvo.price" column="cprice"/>
  	</resultMap>
  	
  	<!-- =====================목록===================== -->
  	<select id="dCartList" resultMap="CartMap" parameterType="string">
  		SELECT
-	 		c.cartno,
-	 		d.poster,d.title,d.price,
-	 		c.id,
-	 		c.qty,
-	 		c.address,
-	 		c.tel,
-			c.email,
-			c.regdate,
-			c.total_price
+	 		c.cartno as cartno,
+	 		d.poster as dposter, d.title as dtitle, d.price as dprice,
+	 		c.id as id,
+	 		c.qty as qty,
+			c.total_price as total_price
  		FROM
  			cart c, book d, member m
  		WHERE c.type='1'
@@ -206,15 +159,11 @@
  	
  	<select id="fCartList" resultMap="CartMap" parameterType="string">
  		SELECT
-	 		c.cartno,
-	 		f.poster,f.title,f.price,
-	 		c.id,
-	 		c.qty,
-	 		c.address,
-	 		c.tel,
-			c.email,
-			c.regdate,
-			c.total_price
+	 		c.cartno as cartno,
+	 		f.poster as fposter, f.title as ftitle, f.price as fprice,
+	 		c.id as id,
+	 		c.qty as qty,
+			c.total_price as total_price
  		FROM
  			cart c, book_f f, member m
  		WHERE c.type='2'
@@ -227,18 +176,14 @@
  	
  	<select id="uCartList" resultMap="CartMap" parameterType="string">
  		SELECT
-	 		c.cartno,
-	 		u.poster, u.title, u.price,
-	 		c.id,
-	 		c.qty,
-	 		c.address,
-	 		c.tel,
-			c.email,
-			c.regdate,
-			c.total_price
+	 		c.cartno as cartno,
+	 		u.poster as uposter, u.title as utitle, u.price as uprice,
+	 		c.id as id,
+	 		c.qty as qty,
+			c.total_price as total_price
  		FROM
  			cart c, book_s u, member m
- 		WHERE c.type=3
+ 		WHERE c.type='3'
  			AND c.productno=u.no
  			AND m.id=c.id
  			AND c.id=#{id}
@@ -246,15 +191,11 @@
  	
  	<select id="vCartList" resultMap="CartMap" parameterType="string">
  		SELECT
-	 		c.cartno,
-	 		v.poster,v.title,v.price,
-	 		c.id,
-	 		c.qty,
-	 		c.address,
-	 		c.tel,
-			c.email,
-			c.regdate,
-			c.total_price
+	 		c.cartno as cartno,
+	 		v.poster as vposter, v.title as vtitle, v.price as vprice,
+	 		c.id as id,
+	 		c.qty as qty,
+			c.total_price as total_price
  		FROM
  			cart c, video v, member m
  		WHERE c.type='4'

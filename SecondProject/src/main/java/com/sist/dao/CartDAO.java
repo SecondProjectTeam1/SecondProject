@@ -19,25 +19,12 @@ public class CartDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	// 담기
-	public void dInCart(CartVO vo)
+	public void productsInCart(CartVO vo)
 	{
-		getSqlSession().insert("dInCart", vo);
+		getSqlSession().insert("productsInCart", vo);
 	}
 	
-	public void fInCart(CartVO vo)
-	{
-		getSqlSession().insert("fInCart", vo);
-	}
 	
-	public void uInCart(CartVO vo)
-	{
-		getSqlSession().insert("uInCart", vo);
-	}
-	
-	public void vInCart(CartVO vo)
-	{
-		getSqlSession().insert("vInCart", vo);
-	}
 	
 	
 	// 기존 확인

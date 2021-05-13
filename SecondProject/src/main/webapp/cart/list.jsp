@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -8,6 +9,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Cart</title>
+  <link rel="icon" href="img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
+	<link rel="stylesheet" href="vendors/linericon/style.css">
+  <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<!-- ================ start banner area ================= -->	
@@ -46,20 +58,84 @@
                       </thead>
                       <tbody>
                       	
-                          <tr>
-                              <c:forEach var="u" items="${uclist }">
+                      	 <tr>
+                               <c:forEach var="d" items="${dclist }">
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="${u.poster}" alt="">
+                                          <img src="${d.dvo.poster}" alt="">
                                       </div>
                                       <div class="media-body">
-                                          <p>${u.title}</p>
+                                          <p>${d.dvo.title}</p>
                                       </div>
                                   </div>
                               </td>
                               <td>
-                                  <h5>${u.price }</h5>
+                                  <h5>${d.dvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <input type="text" name="qty" id="sst" maxlength="12" value="${d.qty }" title="Quantity:"
+                                          class="input-text qty">
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${d.total_price }</h5>
+                              </td>
+                        	</c:forEach>
+                          </tr>
+                          
+                          <tr>
+                              <c:forEach var="f" items="${fclist }">
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${f.fvo.poster}" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${f.fvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${f.fvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <input type="text" name="qty" id="sst" maxlength="12" value="${f.qty }" title="Quantity:"
+                                          class="input-text qty">
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${f.total_price }</h5>
+                              </td>
+                        	</c:forEach>
+                          </tr>
+                          
+                          
+                          
+                           <tr>
+                               <c:forEach var="u" items="${uclist }">
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${u.uvo.poster}" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${u.uvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${u.uvo.price }</h5>
                               </td>
                               <td>
                                   <div class="product_count">
@@ -72,10 +148,75 @@
                                   </div>
                               </td>
                               <td>
-                                  <h5>099999</h5>
+                                  <h5>${u.total_price }</h5>
                               </td>
                         	</c:forEach>
                           </tr>
+                          
+                           <tr>
+                               <c:forEach var="u" items="${uclist }">
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${u.uvo.poster}" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${u.uvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${u.uvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <input type="text" name="qty" id="sst" maxlength="12" value="${u.qty }" title="Quantity:"
+                                          class="input-text qty">
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${u.total_price }</h5>
+                              </td>
+                        	</c:forEach>
+                          </tr>
+                          
+                          
+                          <tr>
+                               <c:forEach var="v" items="${vclist }">
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${v.cvo.poster}" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${v.cvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${v.cvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <input type="text" name="qty" id="sst" maxlength="12" value="${v.qty }" title="Quantity:"
+                                          class="input-text qty">
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${v.total_price }</h5>
+                              </td>
+                        	</c:forEach>
+                          </tr>
+                          
+                          
                          
                           <tr class="bottom_button">
                               <td>
@@ -152,5 +293,13 @@
       </div>
   </section>
   <!--================End Cart Area =================-->
+  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="vendors/skrollr.min.js"></script>
+  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
+  <script src="vendors/jquery.ajaxchimp.min.js"></script>
+  <script src="vendors/mail-script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
