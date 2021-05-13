@@ -161,7 +161,7 @@
                                   </div>
                               </td>
                               <td>
-                                  <h5>${u.uvo.price }</h5>
+                                  <h5>${u.uvo.sale_price }</h5>
                               </td>
                               <td>
                                   <div class="product_count">

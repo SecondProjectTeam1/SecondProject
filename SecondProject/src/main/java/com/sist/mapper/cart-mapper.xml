@@ -164,7 +164,7 @@
  		<result property="fvo.price" column="fprice"/>
  		<result property="uvo.poster" column="uposter"/>
  		<result property="uvo.title" column="utitle"/>
- 		<result property="uvo.price" column="uprice"/>
+ 		<result property="uvo.sale_price" column="uprice"/>
  		<result property="cvo.poster" column="vposter"/>
  		<result property="cvo.title" column="vtitle"/>
  		<result property="cvo.price" column="vprice"/>
@@ -252,7 +252,7 @@
  	<select id="uCartList" resultMap="CartMap" parameterType="string">
  		SELECT
 	 		c.cartno as cartno,
-	 		u.poster as uposter, u.title as utitle, u.price as uprice,
+	 		u.poster as uposter, u.title as utitle, u.sale_price as uprice,
 	 		c.id as id,
 	 		c.type as type,
 	 		c.qty as qty,
