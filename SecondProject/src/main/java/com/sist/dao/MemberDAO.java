@@ -110,4 +110,21 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().update("MypageUpdateData",vo);
 	}
+	public void MemberContentsCheck(Map map)
+	{
+		getSqlSession().insert("MemberContentsCheck",map);
+	}
+	public List<MemberVO> userCheckedData(Map map)
+	{
+		return getSqlSession().selectList("userCheckedData",map);
+	}
+	public int usersLike(String id)
+	{
+		return getSqlSession().selectOne("recomToMain",id);
+	}
+	
+	public List<VideoVO> mainedVideoData(int cno)
+	{
+		return getSqlSession().selectList("mainedVideoData",cno);
+	}
 }

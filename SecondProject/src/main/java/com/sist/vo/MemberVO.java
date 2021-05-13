@@ -28,6 +28,27 @@ public class MemberVO {
 	private String content;
 	private String admin;
 	private String msg;
+	private int cno;
+	private int counted;
+	
+	
+
+	public int getCno() {
+		return cno;
+	}
+
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+
+	public int getCounted() {
+		return counted;
+	}
+
+	public void setCounted(int counted) {
+		this.counted = counted;
+	}
+
 	public String getMsg() {
 		return msg;
 	}

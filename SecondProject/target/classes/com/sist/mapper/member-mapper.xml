@@ -94,6 +94,36 @@
 		content=#{content}
 		WHERE id=#{id}
 	</update>
+	<insert id="MemberContentsCheck" parameterType="hashmap">
+		INSERT INTO member_conlog VALUES(
+			#{id},
+			#{category},
+			#{cno}
+		)	
+	</insert>
+	<select id="userCheckedData" resultType="com.sist.vo.MemberVO" parameterType="string">
+		SELECT COUNT(cno) as counted, cno 
+		FROM (SELECT * FROM member_conlog WHERE id=#{id} AND CATEGORY ='video') 
+		GROUP BY cno 
+		ORDER BY cno ASC
+	</select>
+	<!-- for chart -->
+	<select id="recomToMain" resultType="int" parameterType="string">
+		SELECT cno FROM (SELECT rownum ,counted,cno 
+		FROM(SELECT COUNT(cno) as counted, cno 
+		FROM (SELECT * FROM member_conlog WHERE id=#{id} AND CATEGORY ='video') 
+		GROUP BY cno 
+        ORDER BY counted DESC) WHERE rownum &lt; 2 ) 
+	</select>
+	<!--  for recom -->
+	 <select id="mainedVideoData" resultType="com.sist.vo.VideoVO" parameterType="int">
+		SELECT no,cno,category,title,poster,teacher,num 
+		FROM (SELECT no,cno,category,title,poster,teacher,rownum as num  
+		FROM (select no,cno,category,title,poster,teacher  
+		FROM video) WHERE cno=#{cno}) 
+		WHERE rownum &lt; 11
+	
+	</select> 
 	
 </mapper>
 

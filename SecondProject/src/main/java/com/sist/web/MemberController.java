@@ -125,7 +125,7 @@ public class MemberController {
 		return "main/main";
 	}
 	
-	@PostMapping("member/member_find.do")
+	/*@PostMapping("member/member_find.do")
 	public String admin_member(Model model,String ss,String data)
 	{
 		System.out.println("data:"+data);
@@ -146,7 +146,7 @@ public class MemberController {
 		
 		mDao.memberDelete(id);
 		return "redirect: ../member/admin.do";
-	}
+	}*/
 	
 	@GetMapping("mypage/list.do")
 	public String mypage_list(Model model,HttpSession session,String id)

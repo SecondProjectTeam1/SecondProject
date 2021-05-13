@@ -5,6 +5,63 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+/* $(function(){
+	$('#letsfind').click(function(){
+		
+		let ss= $('#ss').val();
+		let data=$('#data').val();
+		
+		  $.ajax({
+			type:'post',
+			url:'member_find.do',
+			data:{"ss":ss, "data":data},
+			success:function(result)
+			{
+				console.log("ajaxsuccess")
+				 let json=JSON.parse(result);
+				let memdata=""; 
+				
+				 for(let i=0; i<json.length; i++)
+				{
+					 console.log(12345)
+					 
+					 memdata+='<table class=table width=100%>'
+						 	+'<tr>'
+								+'<td calss="uid" width=10%>'+json[i].id+ '</td>'
+								+'<td calss="text-center" width=15%>'+json[i].name+ '</td>'
+								
+								+'<td calss="text-center" width=10%>'+json[i].sex+ '</td>'
+								+'<td calss="text-center" width=20%>'+json[i].email+ '</td>'
+								+'<td calss="text-center" width=25%>'+json[i].address+ '</td>'
+								+'<td calss="text-center" width=20%>'+json[i].tel+ '</td>'
+							+'</tr>'
+							+'</table>'
+				} 
+				$('#memcontainer').html(memdata);
+			
+				 $('#memcontainer td').click(function(){
+					 
+					 let test_point = $(this)
+					 id_data=test_point.text();
+						console.log('id_data :'+id_data)
+					 	
+					 
+						
+					 
+				}) 
+			} 
+		})  
+		
+	})
+}); */
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,32 +89,34 @@
     <div class="container">
         <div class="returning_customer">
             <div class="check_title">
-                <h2>회원 정보 검색 </h2>
+                <h2>회원 정보 조회 </h2>
             </div>
             
         </div>
         <div class="cupon_area">
-            <div class="container">
+            <div class="mycontainer">
             	<div class="search_row" width=100%>
-            	<form action="member_find.do" method="post">
+            	
             		<table class="table">
        					<tr>
             				<td style="width:30px; margin-top:px;" valign="middle">
-            				<select class="member_type" style="margin-top:25px;" >
-            					<option name=data value="id">아이디</option>
-            					<option name =data value="name">이름</option>
+            				<select class="member_type" style="margin-top:25px;" id="data" v-model="stype">
+            					<option value="id">아이디</option>
+            					<option value="name">이름</option>
+            					<option value="idname">아이디+이름</option>
             				</select>
             				</td>
-            				<td><input type="text" name="ss"  class="input-sm"  width=40% style="margin-bottom:10px; "></td>
-            				<td style="margin-left: 10px;"><button type="submit" class="btn btn-sm btn-primary" style="margin-left: 20px; margin-top:25px;">검색</button></td>
+            				<td><input type="text" id="ss"  class="input-sm"  width=40% style="margin-bottom:10px;" v-model="ss"></td>
+            				<td style="margin-left: 10px;"><button id="letsfind" class="btn btn-sm btn-primary" style="margin-left: 20px; margin-top:25px;" v-on:click="memberFound">검색</button></td>
             			</tr>
             		</table>
-            	</form>
+            	
             	</div>
             	<div>
-            	<div class="member_container">
-            			<table>
-            			<tr width=100%>	
+            	<div class="member_container" style="margin:0px auto;">
+            			<table width=100%>
+            			
+            			<tr class="text-center">	
             				<th calss="text-center" width=10%>ID</th>
             				<th calss="text-center" width=15%>이름</th>
             				<th calss="text-center" width=10%>성별</th>
@@ -66,7 +125,8 @@
             				<th calss="text-center" width=20%>전화번호</th>
             			</tr>
             			
-            			<c:forEach var="mvo" items="${mList }">
+            			
+            			<%-- <c:forEach var="mvo" items="${mList }">
             				<tr>
             					<td>${mvo.id }</td>
             					<td>${mvo.name }</td>
@@ -76,132 +136,171 @@
             					<td>${mvo.tel }</td>
             				</tr>
             				<a href=""><button class="btn btn-sm btn warning">회원탈퇴</button></a>
-            			</c:forEach>
+            			</c:forEach> --%>
             			
             		</table>
+            		<div class="container-fluid" id="memcontainer" style="margin:0px auto;">
+            		</div>
+            		<div class="container" id="membercontainer">
+            		
+            		</div>
             		</div>
             	</div>
-            </div>
-        <div class="check_title">
-                <h2>회원 기록 조회 </h2>
+            	<div class="" >
+            		<table class="table">
+            			<tr>
+            			  
+            			</tr>
+            		</table>
+            	</div>
+            	<div class="check_title" style="text-align:center;">
+                <h2 style="text-align:center;">회원 정보 </h2>
             </div>    
-        </div>
-        <div class="billing_details">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Billing Details</h3>
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="First name"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Last name"></span>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="company" name="company" placeholder="Company name">
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Phone number"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Email Address"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Country</option>
-                                <option value="2">Country</option>
-                                <option value="4">Country</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Address line 01"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add2" name="add2">
-                            <span class="placeholder" data-placeholder="Address line 02"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">District</option>
-                                <option value="2">District</option>
-                                <option value="4">District</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Create an account?</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group mb-0">
-                            <div class="creat_account">
-                                <h3>Shipping Details</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Ship to a different address?</label>
-                            </div>
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Your Order</h2>
-                        <ul class="list">
-                            <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
-                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                            <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                            <li><a href="#">Total <span>$2210.00</span></a></li>
-                        </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Check payments</label>
-                                <div class="check"></div>
-                            </div>
-                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
-                                Store Postcode.</p>
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Paypal </label>
-                                <img src="img/product/card.jpg" alt="">
-                                <div class="check"></div>
-                            </div>
-                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                account.</p>
-                        </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms & conditions*</a>
-                        </div>
-                        <div class="text-center">
-                          <a class="button button-paypal" href="#">Proceed to Paypal</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="printmembers" style="height:100px;" v-for="vo in member_data">
+            	<table class="table">
+            		<tr style="margin:0px auto;" v-on:click="checkedData(vo.id)">
+            		   <td calss="text-center">{{vo.id}}</td>
+            		   <td calss="text-center">{{vo.name}}</td>
+            		   <td calss="text-center">{{vo.sex}}</td>
+            	   	   <td calss="text-center">{{vo.email}}</td>
+            		   <td calss="text-center">{{vo.addr1}}</td>
+            		   <td calss="text-center">{{vo.tel}}</td>
+            		   <td><button class="btn btn-sm btn-danger" v-on:click="memberDelete(vo.id)">탈퇴</button></td>
+            		</tr>            	
+            	</table>
             </div>
+            
+        
+            
+            </div>
+        
         </div>
+        <c:if test="${sessionScope.id != null }">
+        <div class="testcontainer">
+       		<table class="table" v-for="vo in recommed">
+       			<tr>
+       				<td>{{vo.no}}</td>
+       				<td>{{vo.title}}</td>
+       				<td>{{vo.teacher}}</td>
+       			</tr>
+       			
+       			
+       		</table>
+       </div>
+       <div class="charttest">
+       		
+       </div> 
+       </c:if>
     </div>
+    <script>
+    new Vue({
+    	el:'.mycontainer',
+    	data:{
+    		ss:'',
+    		stype:'id',
+    		id:'',
+    		member_data:[],
+    		chart_data:[],
+    		member_detail:{}
+    		
+    	},
+    	mounted:function(){
+    		let _this=this;
+    		//console.log(12345);
+    		//console.log(_this);
+    		
+    	},
+    	methods:{
+    		
+    		memberFdData:function(){
+    			let _this=this;
+    		//	console.log(this.ss);
+    		//	console.log(this.stype);
+    			axios.get("http://localhost/main/member/member_find.do",{
+    				params:{
+    					ss:_this.ss,
+    					stype:_this.stype
+    				}
+    			}).then(function(response){
+    				_this.member_data=response.data;
+    				console.log(response.data);
+    				
+    			})
+    		},
+    		memberFound:function(){
+    			this.memberFdData();
+    			console.log(1234)
+    		},
+    		memberDelete:function(id){
+    			let _this=this;
+    		//	console.log(12345555555)
+    		//	console.log(id)
+    			axios.get("http://localhost/main/member/delete.do",{
+    				params:{
+						id:id 					
+						
+    				}
+    			}).then(function(response){
+    				
+    			})
+    	
+    		},
+	    	
+    		
+    		
+    		checkedData:function(id){
+    			let this_=this;
+    			
+    			axios.get("http://localhost/main/member/admin_mem.do",{
+    				params:{
+    					id:id		
+    				}
+    			
+    			}).then(function(response){
+    				this_.chart_data=response.data
+    				console.log(response.data);
+    				
+    			})
+    		}
+	    
+    	}
+    	
+    	
+    })
+     new Vue({
+    	el:'.testcontainer',
+    	data:{
+    		recommed:[],
+    		id:''
+    	},
+    	mounted:function(){
+    		console.log('test mounted');
+    		this.videoListed()
+    	},
+    	 methods:{
+    		
+    		videoListed:function(){
+    			let ttis=this;
+    			console.log('testfunction');
+    			console.log('testttis  '+this);
+    			axios.get("http://localhost/main/main/mainrecom.do",{
+    				params:{
+    					
+    				}
+    			}).then(function(response){
+    				ttis.recommed=response.data
+    				//console.log(response.data);
+    				
+    			})
+    			
+    		}
+    	} 
+    
+    }) 
+    
+    </script>
   </section>
   <!--================End Checkout Area =================-->
 </body>
+
 </html>

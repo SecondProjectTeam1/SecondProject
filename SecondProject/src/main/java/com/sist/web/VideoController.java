@@ -63,7 +63,7 @@ public class VideoController {
 	}
 	
 	@GetMapping("video/video_detail.do")
-	public String video_detail(String no, Model model, String page, String cno)
+	public String video_detail(String no, Model model, String page, String cno,HttpSession session)
 	{
 		
 		int vno=Integer.parseInt(no);
