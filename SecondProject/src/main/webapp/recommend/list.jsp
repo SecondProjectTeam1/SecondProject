@@ -58,19 +58,19 @@ function recommend(rdata)
                 	+'<div class="card-product__img">'
                 	+'<img class="card-img" src="'+json[i].poster+'" style="width:320px;height: 200px">'
                 	+'<ul class="card-product__imgOverlay">'
-                	+'<li><button><i class="ti-search"></i></button></li>'
+                	+'<li><a href="../book/detail.do?no='+json[i].no+'"><button><i class="ti-search"></i></button></a></li>'
                 	+'<li><button><i class="ti-shopping-cart"></i></button></li>'
                 	+'<li><button><i class="ti-heart"></i></button></li>'
                 	+'</ul>'
                 	+'</div>'
                 	+'<div class="card-body" style="width:175px;height: 100px">'
-                	+'<p class="card-product__title" style="font-size: 14px"><a href="#">'+json[i].title+'</a></p>'
+                	+'<p class="card-product__title" style="font-size: 14px"><a href="../book/detail.do?no='+json[i].no+'">'+json[i].title+'</a></p>'
                 	+'<p class="card-product__price" style="font-size: 12px">￦ '+json[i].price+'</p>'
                 	+'</div>'
                 	+'</div>'
                 	+'</div>'
 					
-				
+                	
 			}
 			
 			$('#blogg').html(html)

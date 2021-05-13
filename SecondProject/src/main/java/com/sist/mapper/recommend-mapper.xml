@@ -18,7 +18,7 @@
 	</select> -->
 	
 	<select id="recommendGetTitleData" resultType="string" >
-		SELECT title FROM book WHERE title LIKE '%'||#{title}||'%' AND cno=12 ORDER BY no ASC
+		SELECT no,title FROM book WHERE title LIKE '%'||#{title}||'%' AND cno=12 ORDER BY no ASC
 	</select>
 	
 </mapper>
