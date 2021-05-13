@@ -21,7 +21,7 @@
      <div class="book-title">파이썬을 이용한 머신러닝, 딥러닝 실전 앱 개발</div>
      <div class="book-author">￦ 24,300</div><br>
      <div class="book-sum">실무에서 즉시 활용 가능한 머신러닝, 딥러닝 실전 앱 개발 </div><br>
-     <div class="book-see">See The Book</div>
+     <div class="book-see"><a href="../book/detail.do?no=13840">See The Book</a></div>
     </div>
    </div>
    
@@ -34,7 +34,7 @@
      <div class="book-title">모두의 인공지능 with 파이썬</div>
      <div class="book-author">￦  19,800</div><br>
      <div class="book-sum">누구나 쉽게 시작하는 딥러닝 기초 프로그래밍</div><br><br>
-     <div class="book-see book-blue">See The Book</div>
+     <div class="book-see book-blue"><a href="../book/detail.do?no=7962">See The Book</a></div>
     </div>
    </div>
    
@@ -47,7 +47,7 @@
      <div class="book-title">구글 클라우드 플랫폼 뽀개기</div>
      <div class="book-author">￦  36,000</div><br>
      <div class="book-sum">인프라, 데이터베이스, 머신러닝 개발을 위한 최적 솔루션</div><br>
-     <div class="book-see book-pink">See The Book</div>
+     <div class="book-see book-pink"><a href="../book/detail.do?no=35944">See The Book</a></div>
     </div>
    </div>
    
@@ -59,7 +59,7 @@
      <div class="book-title">코틀린 마이크로서비스 개발</div>
      <div class="book-author">￦  29,700</div><br>
      <div class="book-sum">스프링 5와 스프링 부트 2.0을 활용해 코틀린으로 구축하는 리액티브 마이크로서비스</div><br>
-     <div class="book-see book-yellow">See The Book</div>
+     <div class="book-see book-yellow"><a href="../book/detail.do?no=36231">See The Book</a></div>
     </div>
    </div>
    
@@ -72,7 +72,7 @@
      <div class="book-title">기계는 어떻게 생각하는가?</div>
      <div class="book-author">￦  16,200</div><br>
      <div class="book-sum">알파고부터 자율 주행차까지! 기계 학습의 실제 사례와 작동 원리</div><br>
-     <div class="book-see book-purple">See The Book</div>
+     <div class="book-see book-purple"><a href="../book/detail.do?no=36400">See The Book</a></div>
     </div>
    </div>
   </div>
