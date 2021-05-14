@@ -67,16 +67,21 @@ $(function(){
 							<div id="image_container"></div>
 						</div>
 					</div>
-
 					<div class="col-lg-12 col-md-9 blog_details">
 						<input type="hidden" name=id value="${sessionScope.id}">
 						<input type="hidden" name="poster" value="">
-							<div class="form-group">
 							<span>TITLE</span>
+							<div class="form-group">
+							
+						 <select name="isFree" style="float:left;">
+					      <option value="1">자유</option>
+					      <option value="0">문의</option>
+					    </select>
 								<input type="text" class="form-control" name='title' id="title" placeholder="Insert Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Title'">
 							</div>
-						<div class="form-group">
 							<span>CONTENT</span>
+						<div class="form-group">
+							
 							<textarea class="form-control mb-10" rows="20" name="content" id='content' placeholder="Insert Content" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert Content'"
 										required=""></textarea>
 						</div>

@@ -164,7 +164,7 @@ $(function(){
                                       <a href="../board/detail.do?type=${type}&no=${vo.no}">
                                           <h2>${vo.title}</h2>
                                       </a>
-                                      <p>${vo.content}</p>
+                                      <p>${vo.content.substring(0,200)}</p>
                                       <a class="button button-blog" href="../board/detail.do?type=${type}&no=${vo.no}">View More</a>
                                   </div>
                               </div>

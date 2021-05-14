@@ -9,6 +9,9 @@
       <when test="type=='q'.toString()">
         WHERE isfree=0
       </when>
+      <when test="type=='m'.toString()">
+        WHERE id=#{id}
+      </when>
     </choose>
 </sql>
 <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
@@ -39,7 +42,7 @@
       #{id},
       SYSDATE,
       0,
-      1,
+      #{isFree},
       #{poster}
     )
 </insert>

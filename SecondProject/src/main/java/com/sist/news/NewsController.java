@@ -11,11 +11,6 @@ import com.sist.news.*;
 public class NewsController {
 	@Autowired
 	private NewsManager mgr;
-//	
-//	@RequestMapping("news/main.do")
-//	public String news_main() {
-//		return "news/main";
-//	}
 	@RequestMapping("news/main.do")
 	public String news_list(String fd,String word,String page,Model model) {
 		if (page == null) page = "1";
@@ -65,7 +60,8 @@ public class NewsController {
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("list", res);
 		model.addAttribute("fd", fd.toUpperCase());
-		return "news/main";
+		model.addAttribute("main_jsp", "../news/main.jsp");
+		return "main/main";
 	}
 }
 

@@ -21,9 +21,10 @@ public class BoardController {
    private BoardService service;
    
    @GetMapping("board/board.do")
-   public String board_list(String page,String type,Model model) {
+   public String board_list(String page,String type,Model model,HttpSession session) {
 	   if(type==null) type="f";
 	   if(page==null) page="1";
+	   String id=(String)session.getAttribute("id");
 	   int curpage=Integer.parseInt(page);
 	   Map map=new HashMap();
 	   int rowSize=6;
@@ -32,6 +33,7 @@ public class BoardController {
 	   map.put("start", start);
 	   map.put("end", end);
 	   map.put("type",type);
+	   map.put("id",id);
 	   
 	   List<BoardVO> list=service.boardListData(map);
 	   for(BoardVO vo:list){
@@ -76,6 +78,10 @@ public class BoardController {
    }
    @PostMapping("board/insert_ok.do")
    public String board_insert_ok(BoardVO vo) {
+	   System.out.println(vo.getIsFree());
+	   if(!vo.getPoster().startsWith("https"))
+		   if(vo.getIsFree()==0) vo.setPoster("https://i.imgur.com/8h0VLTG.gif");
+		   else vo.setPoster("https://i.imgur.com/h7sVrmZ.png");
 	   service.boardInsert(vo);
 	   
 	   return "redirect:board.do";

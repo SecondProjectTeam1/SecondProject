@@ -46,7 +46,7 @@ $(function(){
              </a>
          </li>
          <li>
-             <a href="#" class="d-flex justify-content-between">
+             <a href="../board/board.do?type=m" class="d-flex justify-content-between">
                  <p>내가 쓴 글</p>
                  <p>59</p>
              </a>
