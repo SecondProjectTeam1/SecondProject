@@ -19,6 +19,14 @@
 .fa {
 	color:orange;
 }
+.comment-block{
+	border: 1px solid #c2ade7;
+}
+#dev{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -78,15 +86,16 @@ $('.update').click(function(){
 </head>
 <body>
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="blog">
+	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
+		 <img src="dev.jpg" id="dev">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>Shop Single</h1>
+					<h1 style="color:white;">중고책 구매</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Shop Single</li>
+              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Shop Category</li> -->
             </ol>
           </nav>
 				</div>
@@ -245,52 +254,39 @@ $('.update').click(function(){
 									<div class="rating_list">
 										<h3>Based on ${revCount } Reviews</h3>
 										<ul class="list">
-										 <c:forEach var="j" begin="1" end="5">
-											<li><a href="#">${j} Star 
-											<c:if test="${j==1 }">
-											<i class="fa fa-star"></i>
+										<c:forEach var="tvo" items="${sList }">
+											<li><a href="#">${tvo.star } Star 
+											<c:if test="${tvo.star==1 }">
+											<i class="fa fa-star"></i> 
 											</c:if>
-											<c:if test="${j==2 }">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
+											<c:if test="${tvo.star==2 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i>  
 											</c:if>
-											<c:if test="${j==3 }">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											<c:if test="${tvo.star==3 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>   
 											</c:if>
-											<c:if test="${j==4 }">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											<c:if test="${tvo.star==4 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+											  
 											</c:if>
-											<c:if test="${j==5 }">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+											<c:if test="${tvo.star==5 }">
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+											    
 											</c:if>
-											 01</a></li>
+											${tvo.starCount }</a></li> 
 										</c:forEach>
-										<%-- <c:forEach var="svo" items="${sList }">
-										<c:if test="${svo.star==1 }">
-										<i class="fa fa-star"></i> ${svo.starCount }
-										</c:if>
-										<c:if test="${svo.star==2 }">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
-										</c:if>
-										<c:if test="${svo.star==3 }">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
-										</c:if>
-										<c:if test="${svo.star==4 }">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
-										</c:if>
-										<c:if test="${svo.star==5 }">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> ${svo.starCount }
-										</c:if>
-										</c:forEach> --%>
 										</ul>
 									</div>
 								</div>
 							</div>
+							<br><br><br>
 							<div class="review_list">
 							<c:forEach var="rvo" items="${list }">
 							<div class="comment-wrap">
 						<div class="photo">
 						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
 						</div>
+						
 						<div class="comment-block">
 						<p class="comment-text">${rvo.msg }</p>
 						<div class="bottom-comment">
@@ -299,7 +295,7 @@ $('.update').click(function(){
 											</c:forEach>
 											<br><br>
 								<div class="comment-date">id:&nbsp;${rvo.id }</div>			
-								<br><br><div class="comment-date">${rvo.dbday }</div>			
+								<br><div class="comment-date">${rvo.dbday }</div>			
 								<c:if test="${sessionScope.id==rvo.id }">
 								<ul class="comment-actions">
 										<li class="complain uBtn" data-no="${rvo.no }" data-vno="${rvo.vno }">수정</li>
@@ -307,7 +303,7 @@ $('.update').click(function(){
 									</ul>
 								</c:if>
 								</div>
-								<br>
+								
 								<br>
 								<%-- 수정 데이터 --%>
 								<div class="comment-wrap" style="display:none" id="m${rvo.no }">
@@ -321,6 +317,7 @@ $('.update').click(function(){
 							</div>
 						</div>
 							</div>
+							<br><br>
 						</div>
 						</c:forEach>
 							
@@ -355,7 +352,9 @@ $('.update').click(function(){
                     <textarea class="form-control different-control w-100" name="msg" id="textarea" cols="30" rows="5" placeholder="Enter Message"></textarea>
                   </div>
                   <div class="form-group text-center text-md-right mt-3">
+                    <c:if test="${sessionScope.id!=null }">
                     <button type="submit" class="button button--active button-review">Submit Now</button>
+                  </c:if>
                   </div>
                 </form>
 							</div>
