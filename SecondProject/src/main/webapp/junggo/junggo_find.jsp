@@ -161,7 +161,7 @@
 			
 			junggoTotalPage:function(){
 				let _this=this;
-				axios.get("http://211.238.142.211/main/junggo/find.do",{
+				axios.get("http://211.238.142.211/main/junggo/junggo_find_total.do",{
 					params:{
 						type:_this.findTitle,
 						userFind:_this.userFind
