@@ -76,7 +76,7 @@
 	                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 	                  aria-expanded="false">관리자 페이지</a>
 	                <ul class="dropdown-menu">
-	                  <li class="nav-item"><a class="nav-link" href="cart/orderAdmin.do">회원 구매 승인</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="../cart/orderAdmin.do">회원 구매 승인</a></li>
 	                  <li class="nav-item"><a class="nav-link" href="../member/admin.do">회원 관리</a></li>
 	                </ul>
 				</li>
