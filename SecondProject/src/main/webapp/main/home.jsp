@@ -279,7 +279,7 @@
          <c:forEach var="vo" items="${list }" varStatus="s">
          <c:if test="${s.index<7 }">
          <tr>
-            <td width=60% ><a href="${vo.link}">"${vo.description.substring(0,50)}..."</td></a>
+            <td width=60% ><a href="${vo.link}">"${vo.description.substring(0,50)}..."</a></td>
         	<td width=10% class="text-left">${vo.author}</td>
          </tr>
          </c:if>

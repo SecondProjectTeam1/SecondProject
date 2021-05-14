@@ -39,17 +39,26 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
               <li class="nav-item active"><a class="nav-link" href="../main/main.do">Home</a></li>
+              
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">개발자를 위한 도서 & 강의</a>
+                  aria-expanded="false">도서구매</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="../book/list.do">국내도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../bookf/list.do">해외도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../junggo/junggo_list.do">중고도서</a></li>
-                  <li class="nav-item"><a class="nav-link" href="../recommend/list.do">자격증 추천 도서</a></li>
-                  <li class="nav-item"><a class="nav-link" href="../video/video_list.do">강의</a></li>
+                </ul> 
+            
+              
+              <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">인강&자격증</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="../video/video_list.do">인강</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../recommend/list.do">자격증 도서 추천</a></li>
                 </ul>
-							</li>
+              </li>
+              
               
 				
 				<li class="nav-item submenu dropdown">
