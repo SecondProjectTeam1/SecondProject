@@ -150,4 +150,43 @@ public class BookfController {
 		   
 		   return "redirect:/bookf/detail.do";
 	   }
+	
+	@GetMapping("bookf/listSearch.do")
+	public String list_search(String page, String sText, Model model){
+		Map map = new HashMap();
+		if (page == null)
+			page = "1";
+		
+		int curpage = Integer.parseInt(page);
+		
+		int rowSize = 9;
+		int start = (rowSize * curpage) - (rowSize - 1);
+		int end = (rowSize * curpage);
+		
+		map.put("sText", sText);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<BookfVO> list = dao.bookfSearchList(map);
+		List<String> cList = dao.bookfCategoryListData();
+		
+		int totalpage = dao.bookfSearchTotalPage(sText);
+		int BLOCK = 10;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		int allPage = totalpage;
+		if (endPage > allPage)
+			endPage = allPage;
+		
+		model.addAttribute("cList", cList);
+		model.addAttribute("list", list);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("allPage", allPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("main_jsp", "../bookf/list.jsp");
+		
+		return "main/main";
+	}
 }

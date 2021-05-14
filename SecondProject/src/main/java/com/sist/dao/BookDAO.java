@@ -56,6 +56,15 @@ public class BookDAO extends SqlSessionDaoSupport{
 	public void bookReplyInsert(BookReplyVO vo) {
 		getSqlSession().insert("bookReplyInsert", vo);
 	}
+	
+	public List<BookVO> bookSearchList(Map map) {
+		return getSqlSession().selectList("bookSearchList", map);
+	}
+	
+	public int bookSearchTotalPage(String sText) {
+		return getSqlSession().selectOne("bookSearchTotalPage", sText);
+	}
+	
 	// 찜목록
 			public List<BookJjimVO> BookJjimListData(String id)
 			{
