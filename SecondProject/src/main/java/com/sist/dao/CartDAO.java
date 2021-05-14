@@ -138,9 +138,6 @@ public class CartDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("orderOkUpdate",cartno);
 	}
 	
-	
-	
-	
 	// 관리자페이지
 	public List<CartVO> adminPageListDataD()
 	{

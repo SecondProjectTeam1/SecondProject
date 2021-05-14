@@ -143,7 +143,7 @@ $('.update').click(function(){
 					          <input type=hidden name="no" value="${vo.no }">
 					          <input type=hidden name="price" value="${vo.sale_price }">
 					        <c:if test="${sessionScope.id!=null }">
-					          <input type="submit" value="장바구니" class="btn btn-sm btn-danger">
+					          <input type="submit" value="장바구니" class="btn btn-sm btn-danger" onclick="alert('장바구니에 담겼습니다.');">
 					        </c:if>
 					       </td>
 					     </tr>    

@@ -85,7 +85,7 @@
                               </td>
                         	<td>
                               	<c:if test="${d.state=='n' }">
-						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${d.cartno }">주문하기</a>
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${d.cartno }" onclick="alert('국내도서가 주문되었습니다.');">주문하기</a>
 						         </c:if>
 						         <!-- 
 						         <c:if test="${d.state=='y' }">
@@ -128,7 +128,7 @@
                               </td>
                         	<td>
                               	<c:if test="${f.state=='n' }">
-						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${f.cartno }">주문하기</a>
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${f.cartno }" onclick="alert('해외도서가 주문되었습니다.');">주문하기</a>
 						         </c:if>
 						         <!--  
 						         <c:if test="${f.state=='y' }">
@@ -138,7 +138,9 @@
                               </td>
                               
                               <td>
-                              	<img src="delete.png" href="delete.do?cartno=${f.cartno }" style= width:18px;hight:18px; >
+                              	<a href="../cart/delete.do?cartno=${f.cartno }">
+                              	<img src="delete.png" style= width:18px;hight:18px; alt="" class="delete-img">
+                              	</a>
                               </td>
                               
                               <tr>
@@ -173,7 +175,7 @@
                               </td>
                         	<td>
                               	<c:if test="${u.state=='n' }">
-						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${u.cartno }">주문하기</a>
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${u.cartno }" onclick="alert('중고도서가 주문되었습니다.');">주문하기</a>
 						         </c:if>
 						         <!-- 
 						         <c:if test="${u.state=='y' }">
@@ -222,7 +224,7 @@
                               
                               <td>
                               	<c:if test="${v.state=='n' }">
-						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${v.cartno }">주문하기</a>
+						           <a class="btn btn-sm btn-danger" href="../cart/order_ok.do?cartno=${v.cartno }" onclick="alert('강의 구매가 완료되었습니다.');">주문하기</a>
 						         </c:if>
 						         <!--  
 						         <c:if test="${v.state=='y' }">

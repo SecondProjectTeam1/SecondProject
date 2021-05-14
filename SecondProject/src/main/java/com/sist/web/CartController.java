@@ -300,8 +300,9 @@ public class CartController {
 		return "redirect:../cart/list.do";
 	}
 	
-	// 관리자 페이지
 	
+	// 관리자 페이지
+
 	@GetMapping("cart/orderAdmin.do")
 	public String orderAdmin(Model model)
 	{
