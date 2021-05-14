@@ -144,7 +144,7 @@ $('.update').click(function(){
 				           </c:forEach>
 				          </select>
              			</td>
-             			</tr>
+             			</tr> 
              			
              			<tr>
 					       <td colspan="2" class="text-right">

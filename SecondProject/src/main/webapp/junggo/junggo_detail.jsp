@@ -137,7 +137,7 @@ $('.update').click(function(){
 				          </select>
              			</td>
              			</tr>
-             			
+             			 
              			<tr>
 					       <td colspan="2" class="text-right">
 					          <input type=hidden name="no" value="${vo.no }">

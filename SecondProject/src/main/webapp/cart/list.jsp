@@ -80,7 +80,7 @@
                                       <h5>${d.qty }권</h5>
                                   </div>
                               </td>
-                              <td>
+                              <td>  
                                   <h5>${d.total_price }원</h5>
                               </td>
                         	<td>
