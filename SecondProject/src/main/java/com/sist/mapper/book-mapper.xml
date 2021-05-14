@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="bookReplyAverageData" resultType="double" parameterType="int">
-	SELECT NVL(AVG(score),0) FROM book_reply
+	SELECT NVL(TRUNC(AVG(score),0),1) FROM book_reply
 	WHERE no=#{no}
 	</select>
 	
