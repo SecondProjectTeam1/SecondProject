@@ -114,7 +114,7 @@ $(function(){
 		      	</c:choose>
          </c:when>
          <c:otherwise>
-            <img src="${vo.poster}" alt="post">
+            <img src="${vo.poster}" alt="post" style="width:45px;height:45px">
          </c:otherwise>
       </c:choose>
          <div class="media-body">
