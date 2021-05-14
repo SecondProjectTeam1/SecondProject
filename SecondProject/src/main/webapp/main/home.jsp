@@ -257,31 +257,35 @@
     <!-- ================ offer section end ================= --> 
 
     <!--================ Hero banner start =================-->
-
 <section class="order_details section-margin--small">
     <div class="container" >
       <div class="section-intro pb-30px" >
-          <h2>Latest <span class="section-intro__style">News</span></h2>
-        </div>
+         <h2>Latest <span class="section-intro__style">News</span></h2>
+      </div>
       <div class="order_details_table"  style="background-color: #f7f8ff;">  
-      <table class="table table-hover">
-    <thead>
-      <tr>
-        <th colspan="2" class="text-center" style="font-size: 20px;">실시간 IT 취업 뉴스</th>
-      </tr>
-    </thead>
-    
-    <c:forEach var="vo" items="${list }" varStatus="s">
-            <c:if test="${s.index<7 }">
-     <tbody>
-      <tr>
-        <th width=15% class="text-center">${vo.author}</th>
-        <td width=85%><a href="${vo.link}">"${vo.description.substring(0,65)}..."</td></a>
-      </tr>
-       </tbody>
-      </c:if>
-      </c:forEach>
-  </table>
+       <table class="table">
+        <tr>
+          <td width=30% class="text-center" rowspan="8">
+          <br>
+            <a href="http://www.hkbs.co.kr/news/articleView.html?idxno=632012">
+            <img src="https://imgnews.pstatic.net/image/thumb140/5164/2021/05/13/348191.jpg" width=100% height="270px">
+         	<br><br>교육은 IT전공자 대상 심화교육, IT비전공자 대상 친화교육, 투트랙(Two-Track)으로 추진하고..</a>
+          </td>
+          <td colspan="2">
+            <h3> IT 취업 뉴스</h3>
+          </td>
+        </tr>
+        
+         <c:forEach var="vo" items="${list }" varStatus="s">
+         <c:if test="${s.index<7 }">
+         <tr>
+            <td width=60% ><a href="${vo.link}">"${vo.description.substring(0,50)}..."</td></a>
+        	<td width=10% class="text-left">${vo.author}</td>
+         </tr>
+         </c:if>
+         </c:forEach>
+        
+       </table>
       </div>
     </div>
   </section>
@@ -414,29 +418,7 @@
     </section> -->
     <!-- ================ Blog section end ================= -->  
 
-    <!-- ================ Subscribe section start ================= --> 
-    <section class="subscribe-position">
-      <div class="container">
-        <div class="subscribe text-center">
-          <h3 class="subscribe__title">Get Update From Anywhere</h3>
-          <p>Bearing Void gathering light light his eavening unto dont afraid</p>
-          <div id="mc_embed_signup">
-            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe-form form-inline mt-5 pt-1">
-              <div class="form-group ml-sm-auto">
-                <input class="form-control mb-1" type="email" name="EMAIL" placeholder="Enter your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" >
-                <div class="info"></div>
-              </div>
-              <button class="button button-subscribe mr-auto mb-1" type="submit">Subscribe Now</button>
-              <div style="position: absolute; left: -5000px;">
-                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-              </div>
-
-            </form>
-          </div>
-          
-        </div>
-      </div>
-    </section>
+    
     <!-- ================ Subscribe section end ================= --> 
 <script>
 new Vue({
