@@ -40,44 +40,7 @@
       </div>
       <div class="container">
           <div class="row">
-              <div class="col-lg-0">
-                  <div class="blog_left_sidebar">
-                  
-                     <!--  <nav class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Previous">
-                                      <span aria-hidden="true">
-                                          <span class="lnr lnr-chevron-left"></span>
-                                      </span>
-                                  </a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">01</a>
-                              </li>
-                              <li class="page-item active">
-                                  <a href="#" class="page-link">02</a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">03</a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">04</a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">09</a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Next">
-                                      <span aria-hidden="true">
-                                          <span class="lnr lnr-chevron-right"></span>
-                                      </span>
-                                  </a>
-                              </li>
-                          </ul>
-                      </nav> -->
-                  </div>
-              </div>
+              
               <div class="col-lg-12">
                   <div class="blog_right_sidebar">
                      
@@ -284,42 +247,217 @@
 			                  </table>
 			              </div>
 			          </div>
-			          
-                      <aside class="single_sidebar_widget popular_post_widget">
-                          <h3 class="widget_title">구매 목록</h3>
-                          <div class="media post_item">
-                             <div style="height:400px;width:1000px;overflow-y:auto">
-							  <table class="table">
-							    <tr>
-							     <th>구매번호</th>
-							     <th>상품명</th>
-							     <th>구매일</th>
-							     <th>구매갯수</th>
-							     <th>구매금액</th>
-							     <th>상태</th>
-							    </tr>
-							  <%--   <c:forEach var="cvo" items="${cList }" varStatus="s">
-							       <tr>
-							      <td>${cvo.no }</td>
-							     <td><img src="${cvo.poster }" style="width:40px;height:40px;" class="img-circle"></td>
-							     <td>${cvo.title }</td>
-							     <td>${cvo.inday }</td>
-							     <td>${cvo.intime }</td>
-							     <td>${cvo.outday }</td>
-							     <td>${cvo.outtime }</td>
-							     <td>${cvo.inwon }</td>
-							     <td>${cvo.state==0?"예약대기":"예약완료"}</td>
-							    </tr>
-							    </c:forEach> --%>
-							   </table>
-							  </div>
-                          </div>
+			       </div>
+              </div>
+          </div>
+      </div>
+  </section>
+<section class="cart_area">
+      <div class="container">
+          <div class="cart_inner">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">구매번호</th>
+                              <th scope="col">상품명</th>
+                              <th scope="col">가격</th>
+                              <th scope="col">구매갯수</th>
+                              <th scope="col">총가격</th>
+                              <th scope="col">상태</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      	 
+                      	 <tr>
+                               <c:forEach var="d" items="${dclist }">
+                                <td>${d.cartno}</td>
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${d.dvo.poster}" alt="" style="width:165px; height:220px">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${d.dvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${d.dvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <h5>${d.qty }권</h5>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${d.total_price }원</h5>
+                              </td>
+                        	<td>
+                              	<c:if test="${d.state=='n' }">
+						           <h5>주문대기</h5>
+						         </c:if>
+						           
+						         <c:if test="${d.state=='y' }">
+						           <h5>주문완료</h5>
+						         </c:if>
+                              </td>
+                              
+                              
+                              
+                              <tr>
+                              <tr>
+                        	</c:forEach>
+                          </tr>
                           
-                          <div class="br"></div>
-                      </aside>
-                   
-                      
-                  </div>
+                          <tr>
+                              <c:forEach var="f" items="${fclist }">
+                               <td>${f.cartno}</td>
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${f.fvo.poster}" alt="" style="width:165px; height:220px">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${f.fvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${f.fvo.price }</h5> 
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <h5>${f.qty }권</h5>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${f.total_price }원</h5> 
+                              </td>
+                        	<td>
+                              	<td>
+                              	<c:if test="${f.state=='n' }">
+						           <h5>주문대기</h5>
+						         </c:if>
+						           
+						         <c:if test="${f.state=='y' }">
+						           <h5>주문완료</h5>
+						         </c:if>
+						        
+						           
+                              
+                              </td>
+                              
+                              
+                              
+                              <tr>
+                              <tr>
+                        	</c:forEach>
+                          </tr>
+                          
+                          
+                          
+                           <tr>
+                               <c:forEach var="u" items="${uclist }">
+                                <td>${u.cartno}</td>
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${u.uvo.poster}" alt="" style="width:165px; height:220px">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${u.uvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${u.uvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <h5>${u.qty }권</h5>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${u.total_price }원</h5>
+                              </td>
+                        	<td>
+                              	<td>
+                              	<c:if test="${u.state=='n' }">
+						           <h5>주문대기</h5>
+						         </c:if>
+						           
+						         <c:if test="${u.state=='y' }">
+						           <h5>주문완료</h5>
+						         </c:if>
+						        
+						           
+                              
+                              </td>
+                              
+                              
+                              
+                              
+                              <tr>
+                              <tr>
+                        	</c:forEach>
+                          </tr>
+                          
+                           
+                          <tr>
+                               <c:forEach var="v" items="${vclist }">
+                               <td>${v.cartno}</td>
+                              <td>
+                                  <div class="media">
+                                      <div class="d-flex">
+                                          <img src="${v.cvo.poster}" style="width:165px; height:220px" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <p>${v.cvo.title}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${v.cvo.price }</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <h5>${v.qty }개</h5>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>${v.total_price }원</h5>
+                              </td>
+                              
+                              
+                              <td>
+                              	<c:if test="${v.state=='n' }">
+						           <h5>주문대기</h5>
+						         </c:if>
+						           
+						         <c:if test="${v.state=='y' }">
+						           <h5>주문완료</h5>
+						         </c:if>
+						        
+						           
+                              </td>
+                             
+                              
+                             
+                              
+                              
+                              <tr>
+                              <tr>
+                              
+                        	</c:forEach>
+                          </tr>
+                          
+                           
+                         
+                          
+                          
+                      </tbody>
+                  </table>
               </div>
           </div>
       </div>

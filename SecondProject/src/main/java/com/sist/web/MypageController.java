@@ -20,10 +20,17 @@ public class MypageController {
 	@Autowired
 	private JjimService service;
 	
+	@Autowired
+	private CartDAO cDao;
+	
 	@GetMapping("mypage/mypage.do")
 	public String mypage_mypage(Model model,HttpSession session)
 	{
 		String id=(String)session.getAttribute("id");
+		List<CartVO> dclist=cDao.dCartList(id); // d 장바구니 정보
+		List<CartVO> uclist=cDao.uCartList(id); // u장바구니 정보
+		List<CartVO> fclist=cDao.fCartList(id); // f장바구니 정보
+		List<CartVO> vclist=cDao.vCartList(id); // v장바구니 정보
 		
 		// 국내도서 찜목록
 		Map map=new HashMap();
@@ -73,6 +80,12 @@ public class MypageController {
 		
 		//model.addAttribute("cList", cList);
 		//model.addAttribute("CartCount", CartCount);
+		
+		model.addAttribute("dclist", dclist);
+		model.addAttribute("uclist", uclist);
+		model.addAttribute("fclist", fclist);
+		model.addAttribute("vclist", vclist);
+		
 		session.setAttribute("id", id);
 		model.addAttribute("List", List);
 		model.addAttribute("jList", jList);
