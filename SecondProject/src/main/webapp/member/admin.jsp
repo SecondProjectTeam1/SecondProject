@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<script src="https://unpkg.com/chart.js@3.0.2"></script>
+<script src="https://unpkg.com/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.js"></script>
+<script src="https://unpkg.com/chartkick@4.0.2"></script>
+<script src="https://unpkg.com/vue-chartkick@1.1.0"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
@@ -66,7 +71,7 @@
 </head>
 <body>
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
+	<section class="blog-banner-area" id="category" style="height:150px;">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
@@ -169,29 +174,17 @@
             		</tr>            	
             	</table>
             </div>
+            <div>
+            	
+            	
             
+            </div>
         
             
             </div>
         
         </div>
-        <c:if test="${sessionScope.id != null }">
-        <div class="testcontainer">
-       		<table class="table" v-for="vo in recommed">
-       			<tr>
-       				<td>{{vo.no}}</td>
-       				<td>{{vo.title}}</td>
-       				<td>{{vo.teacher}}</td>
-       			</tr>
-       			
-       			
-       		</table>
-       </div>
-       <div class="charttest">
-       		
-       </div> 
-       </c:if>
-    </div>
+           </div>
     <script>
     new Vue({
     	el:'.mycontainer',
@@ -258,10 +251,12 @@
     			
     			}).then(function(response){
     				this_.chart_data=response.data
+    				
     				console.log(response.data);
     				
     			})
     		}
+    		
 	    
     	}
     	

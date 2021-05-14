@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>    
       <!--================ Hero banner start =================-->
    <!-- partial:index.partial.html -->
    
@@ -243,8 +245,8 @@
         <div class="row">
           <div class="col-xl-5">
             <div class="offer__content text-center">
-              <h3>Up To 50% Off</h3>
-              <h4>Bic Sale</h4>
+              <h3>최대 70%까지!</h3>
+              <h4>Big Sale</h4>
               <p>새책같은 중고책 저렴하게 구입할 수 있는기회!</p>
               <a class="button button--active mt-3 mt-xl-4" href="../junggo/junggo_list.do">Shop Now</a>
             </div>
@@ -314,148 +316,42 @@
 
 
 
-    <!-- ================ Best Selling item  carousel ================= --> 
+    <!-- ================ Best Selling item  carousel ================= -->   
+    
+    <c:if test="${sessionScope.id != null }">
+    <div class="testcontainer">
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
-          <h2>Best <span class="section-intro__style">Sellers</span></h2>
+          <p></p>
+          <h2>당신이 <span class="section-intro__style">관심가질만한 강의</span></h2>
         </div>
         <div class="owl-carousel owl-theme" id="bestSellerCarousel">
-          <div class="card text-center card-product">
+          
+          <div class="" v-for="rvo in recommed">
+        <span>
+          <div class="card text-center card-product"  >
+          
             <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product1.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
+              <img class="img-fluid" :src="rvo.poster" alt="" width=250 height=250>
+              
             </div>
             <div class="card-body">
-              <p>Accessories</p>
-              <h4 class="card-product__title"><a href="single-product.html">Quartz Belt Watch</a></h4>
-              <p class="card-product__price">$150.00</p>
+              <h4 class="card-product__title"><a href="single-product.html">{{rvo.title}}</a></h4>
+              <p class="card-product__price">{{rvo.teacher}}</p>
             </div>
           </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product2.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Beauty</p>
-              <h4 class="card-product__title"><a href="single-product.html">Women Freshwash</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product3.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Decor</p>
-              <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product4.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Decor</p>
-              <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product1.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Accessories</p>
-              <h4 class="card-product__title"><a href="single-product.html">Quartz Belt Watch</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product2.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Beauty</p>
-              <h4 class="card-product__title"><a href="single-product.html">Women Freshwash</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product3.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Decor</p>
-              <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
-
-          <div class="card text-center card-product">
-            <div class="card-product__img">
-              <img class="img-fluid" src="../img/product/product4.png" alt="">
-              <ul class="card-product__imgOverlay">
-                <li><button><i class="ti-search"></i></button></li>
-                <li><button><i class="ti-shopping-cart"></i></button></li>
-                <li><button><i class="ti-heart"></i></button></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <p>Decor</p>
-              <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-              <p class="card-product__price">$150.00</p>
-            </div>
-          </div>
+		</span>
+         </div>
         </div>
       </div>
     </section>
+    </div>
+    </c:if>
     <!-- ================ Best Selling item  carousel end ================= --> 
 
     <!-- ================ Blog section start ================= -->  
-    <section class="blog">
+    <!-- <section class="blog">
       <div class="container">
         <div class="section-intro pb-60px">
           <p>Popular Item in the market</p>
@@ -515,7 +411,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- ================ Blog section end ================= -->  
 
     <!-- ================ Subscribe section start ================= --> 
@@ -542,5 +438,36 @@
       </div>
     </section>
     <!-- ================ Subscribe section end ================= --> 
+<script>
+new Vue({
+	el:'.testcontainer',
+	data:{
+		recommed:[],
+		id:''
+	},
+	mounted:function(){
+		console.log('test mounted');
+		this.videoListed()
+	},
+	 methods:{
+		
+		videoListed:function(){
+			let ttis=this;
+			console.log('testfunction');
+			console.log('testttis  '+this);
+			axios.get("http://localhost/main/main/mainrecom.do",{
+				params:{
+					
+				}
+			}).then(function(response){
+				ttis.recommed=response.data
+				//console.log(response.data);
+				
+			})
+			
+		}
+	} 
 
+}) 
+</script>
     

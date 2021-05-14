@@ -43,22 +43,15 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">개발자를 위한 도서 & 강의</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="category.html">국내도서</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-product.html">해외도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../book/list.do">국내도서</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../bookf/list.do">해외도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../junggo/junggo_list.do">중고도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../recommend/list.do">자격증 추천 도서</a></li>
                   <li class="nav-item"><a class="nav-link" href="../video/video_list.do">강의</a></li>
                 </ul>
 							</li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                </ul>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              
+				
 				<li class="nav-item submenu dropdown">
                 <a href="../board/board.do" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">게시판</a>
@@ -69,6 +62,17 @@
                 </ul>
               </li>
               
+              	<c:if test="${sessionScope.id == 'admin' }">
+	             <li class="nav-item submenu dropdown">
+	                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+	                  aria-expanded="false">관리자 페이지</a>
+	                <ul class="dropdown-menu">
+	                  <li class="nav-item"><a class="nav-link" href="cart/orderAdmin.do">회원 구매 승인</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="../member/admin.do">회원 관리</a></li>
+	                </ul>
+				</li>
+				</c:if>
+              
             </ul>
 				
 			<c:if test="${sessionScope.id == null }">
@@ -76,19 +80,12 @@
 				<a href="../member/join.do"><h6>회원가입</h6></a>
 			</c:if>
 			<c:if test="${sessionScope.id != null }">
-				<h6>${sessionScope.id }로 로그인됨</h6>
-				${sessionScope.name }
-				${sessionScope.admin }
-				${sessionScope.address }
-				${sessionScope.tel }
-				${sessionScope.email }
-				<a href=""><h6>마이페이지 임시</h6></a>&nbsp;|&nbsp;
+				<h6>${sessionScope.id }으로 로그인됨</h6>&nbsp;&nbsp;&nbsp;
+				<a href="../mypage/mypage.do?id=${sessionScope.id }"><h6>마이페이지</h6></a>&nbsp;|&nbsp;<br>
 				<a href="../cart/list.do"><h6>장바구니</h6></a>&nbsp;|&nbsp;
 				<a href="../member/logout.do"><h6>로그아웃</h6></a>
 			</c:if>
-			<c:if test="${sessionScope.id == 'admin' }">
-				<a href=""><h6>관리자페이지</h6></a>
-			</c:if>
+			
             
           </div>
         </div>
