@@ -79,4 +79,22 @@ public class VideoService {
 	{
 		return rDao.starCount(vno);
 	}
+	
+	public List<VideoJjimVO> VideoJjimListData(String id)
+	{
+		return vDao.VideoJjimListData(id);
+	}
+	// 찜개수
+	public int VideoJjimCount(String id)
+	{
+		return vDao.VideoJjimCount(id);
+	}
+	public int VideoJjimCheck(int cno)
+	{
+		return vDao.VideoJjimCheck(cno);
+	}
+	public void VideoJjimInsert(VideoJjimVO vo)
+	{
+		vDao.VideoJjimInsert(vo);
+	}
 }

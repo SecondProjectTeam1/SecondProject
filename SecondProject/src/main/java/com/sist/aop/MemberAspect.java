@@ -97,7 +97,7 @@ public class MemberAspect{
 	*/
 	
 	//public String video_detail(String no, Model model, String page, String cno,HttpSession session)
-	@After("execution(* com.sist.web.VideoController.video_detail(..))")
+	/*@After("execution(* com.sist.web.VideoController.video_detail(..))")
 	public void session_detail_test(JoinPoint jp)
 	{
 		HttpSession session=null;
@@ -118,7 +118,7 @@ public class MemberAspect{
 		mDao.MemberContentsCheck(map);
 		
 				
-	}
+	}*/
 	
  
 

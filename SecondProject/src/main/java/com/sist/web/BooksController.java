@@ -72,7 +72,7 @@ public class BooksController {
    }
    
    @GetMapping("junggo/junggo_detail.do")
-   public String junggo_detail(String no, Model model, String page, String cno)
+   public String junggo_detail(String no, Model model, String page, String cno,String id,HttpSession session)
    {
       int bno=Integer.parseInt(no);
       BooksVO vo=dao.booksDetailData(bno);
@@ -84,6 +84,12 @@ public class BooksController {
       Double avg=rDao.booksStarAvgData(bno);
       int revCount=rDao.booksRevCountData(bno);
       List<BooksStarVO> sList=rDao.booksStarCount(bno);
+      
+      id=(String)session.getAttribute("id");
+	    int count=dao.BooksJjimCheck(Integer.parseInt(no));
+	      
+	    session.setAttribute("id", id);
+	    model.addAttribute("count", count);
       
       model.addAttribute("nvo", nvo);
       model.addAttribute("page", page);
@@ -146,6 +152,21 @@ public class BooksController {
 		model.addAttribute("main_jsp", "../junggo/junggo_find.jsp");
 		return "main/main";
 	}
+	
+	@PostMapping("junggo/jjim.do")
+	   public String bookf_jjim(String no,String cno,Model model,HttpSession session,RedirectAttributes ra)
+	   {
+		   BooksJjimVO vo=new BooksJjimVO();
+		   String id=(String)session.getAttribute("id");
+		   
+		   vo.setId(id);
+		   vo.setCno(Integer.parseInt(no));
+		   
+		   dao.BooksJjimInsert(vo);
+		   ra.addAttribute("no", Integer.parseInt(no));
+		   
+		   return "redirect:/junggo/junggo_detail.do";
+	   }
    
    
 }
