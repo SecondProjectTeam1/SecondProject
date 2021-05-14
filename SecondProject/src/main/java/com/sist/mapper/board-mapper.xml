@@ -29,7 +29,7 @@
    SELECT COUNT(*) FROM board_reply WHERE bno=#{bno} 
 </select>
 <select id="boardTotalPage" resultType="int" parameterType="hashmap">
-   SELECT CEIL(COUNT(*)/10.0) FROM board <include refid="boardType"/>
+   SELECT CEIL(COUNT(*)/6.0) FROM board <include refid="boardType"/>
 </select>
 <insert id="boardInsert" parameterType="BoardVO">
     <selectKey keyProperty="no" resultType="int" order="BEFORE">
