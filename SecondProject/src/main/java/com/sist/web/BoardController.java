@@ -38,6 +38,11 @@ public class BoardController {
 	   List<BoardVO> list=service.boardListData(map);
 	   for(BoardVO vo:list){
 		   vo.setReplyCount(service.boardReplyCount(vo.getNo()));
+		   if(vo.getContent().length()>200){
+			   String s = vo.getContent().substring(0,200);
+			   vo.setContent(s);
+		   }
+		   
 	   }
 	   int totalPage=service.boardTotalPage(map);
 	   final int BLOCK = 5;
