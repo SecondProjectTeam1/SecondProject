@@ -80,7 +80,7 @@
 	                  <li class="nav-item"><a class="nav-link" href="../member/admin.do">회원 관리</a></li>
 	                </ul>
 				</li>
-				</c:if>
+				</c:if>    
               
             </ul>
 				
