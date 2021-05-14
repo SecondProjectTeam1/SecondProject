@@ -437,7 +437,7 @@ new Vue({
 			let ttis=this;
 			console.log('testfunction');
 			console.log('testttis  '+this);
-			axios.get("http://localhost/main/main/mainrecom.do",{
+			axios.get("http://211.238.142.211/main/main/mainrecom.do",{
 				params:{
 					
 				}

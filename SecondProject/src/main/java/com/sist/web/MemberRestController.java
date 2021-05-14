@@ -96,6 +96,8 @@ public class MemberRestController {
 	@GetMapping(value="member/admin_mem.do",produces="text/plain;charset=UTF-8")
 	public String memberCheckData(String id)
 	{
+		System.out.println(" admin mem  "+id);
+		String strCate="";
 		String json="";
 		String category="video";
 		Map map = new HashMap();
@@ -104,11 +106,77 @@ public class MemberRestController {
 		
 		List<MemberVO> mList=mDao.userCheckedData(map);
 		JSONArray marr= new JSONArray();
-		for(MemberVO vo:mList)
+		/*for(MemberVO vo:mList)
 		{
+			else if(0<vo.getCno() || vo.getCno()<13)
+			{
+				else if(vo.getCno()==1)
+				{
+					strCate = "웹개발";
+				}
+				else else if(vo.getCno()==2)
+				{
+					strCate="모바일 웹개발";
+				}
+				
+				
+				
+			}
 			JSONObject obj=new JSONObject();
-			obj.put("cno", vo.getCno());
-			obj.put("counted", vo.getCounted());
+			
+		}*/
+		for(int i=0;i<mList.size();i++)
+		{
+			JSONObject obj= new JSONObject();
+			MemberVO vo=mList.get(i);
+			if(vo.getCno()==1)
+			{
+				obj.put("웹개발", vo.getCounted());
+			}
+			else if(vo.getCno()==2)
+			{
+				obj.put("모바일 앱 개발", vo.getCounted());
+			}
+			else if(vo.getCno()==3)
+			{
+				obj.put("게임 개발", vo.getCounted());
+			}
+			else if(vo.getCno()==4)
+			{
+				obj.put("프로그래밍 언어", vo.getCounted());
+			}
+			else if(vo.getCno()==5)
+			{
+				obj.put("알고리즘", vo.getCounted());
+			}
+			else if(vo.getCno()==6)
+			{
+				obj.put("프레임워크 및 라이브러리", vo.getCounted());
+			}
+			else if(vo.getCno()==7)
+			{
+				obj.put("데이터사이언스", vo.getCounted());
+			}
+			else if(vo.getCno()==8)
+			{
+				obj.put("데이터베이스", vo.getCounted());
+			}
+			else if(vo.getCno()==9)
+			{
+				obj.put("서버개발", vo.getCounted());
+			}
+			else if(vo.getCno()==10)
+			{
+				obj.put("블록체인 개발", vo.getCounted());
+			}
+			else if(vo.getCno()==11)
+			{
+				obj.put("개발 도구", vo.getCounted());
+			}
+			else if(vo.getCno()==12)
+			{
+				obj.put("교양 기타", vo.getCounted());
+			}
 			marr.add(obj);
 		}
 		json = marr.toJSONString();

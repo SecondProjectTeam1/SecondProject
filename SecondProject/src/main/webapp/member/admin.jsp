@@ -209,7 +209,7 @@
     			let _this=this;
     		//	console.log(this.ss);
     		//	console.log(this.stype);
-    			axios.get("http://localhost/main/member/member_find.do",{
+    			axios.get("http://211.238.142.211/main/member/member_find.do",{
     				params:{
     					ss:_this.ss,
     					stype:_this.stype
@@ -228,7 +228,7 @@
     			let _this=this;
     		//	console.log(12345555555)
     		//	console.log(id)
-    			axios.get("http://localhost/main/member/delete.do",{
+    			axios.get("http://211.238.142.211/main/member/delete.do",{
     				params:{
 						id:id 					
 						
@@ -244,7 +244,7 @@
     		checkedData:function(id){
     			let this_=this;
     			
-    			axios.get("http://localhost/main/member/admin_mem.do",{
+    			axios.get("http://211.238.142.211/main/member/admin_mem.do",{
     				params:{
     					id:id		
     				}
@@ -278,7 +278,7 @@
     			let ttis=this;
     			console.log('testfunction');
     			console.log('testttis  '+this);
-    			axios.get("http://localhost/main/main/mainrecom.do",{
+    			axios.get("http://211.238.142.211/main/main/mainrecom.do",{
     				params:{
     					
     				}
