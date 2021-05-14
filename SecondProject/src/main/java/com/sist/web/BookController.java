@@ -27,7 +27,7 @@ public class BookController {
 	@Autowired
 	private BookDAO dao;
 	
-	@GetMapping("book/list.do")
+	@RequestMapping(value="book/list.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String book_list(String page, String cno, Model model){
 		Map map = new HashMap();
 		
@@ -151,4 +151,43 @@ public class BookController {
 		   
 		   return "redirect:/book/detail.do";
 	   }
+	
+	@GetMapping("book/listSearch.do")
+	public String list_search(String page, String sText, Model model){
+		Map map = new HashMap();
+		if (page == null)
+			page = "1";
+		
+		int curpage = Integer.parseInt(page);
+		
+		int rowSize = 9;
+		int start = (rowSize * curpage) - (rowSize - 1);
+		int end = (rowSize * curpage);
+		
+		map.put("sText", sText);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<BookVO> list = dao.bookSearchList(map);
+		List<String> cList = dao.bookCategoryListData();
+		
+		int totalpage = dao.bookSearchTotalPage(sText);
+		int BLOCK = 10;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		int allPage = totalpage;
+		if (endPage > allPage)
+			endPage = allPage;
+		
+		model.addAttribute("cList", cList);
+		model.addAttribute("list", list);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("allPage", allPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("main_jsp", "../book/list.jsp");
+		
+		return "main/main";
+	}
 }

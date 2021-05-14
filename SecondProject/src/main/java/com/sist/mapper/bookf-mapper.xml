@@ -25,6 +25,11 @@
 	WHERE cno = #{cno}
 	</select>
 	
+	<select id="bookfSearchTotalPage" resultType="int" parameterType="String">
+	SELECT CEIL(count(*)/9.0) FROM book_f
+	WHERE title LIKE '%'||#{sText}||'%'
+	</select>
+	
 	<select id="bookfDetailData" resultType="BookfVO" parameterType="int">
 	SELECT no, cno, category, title, poster, author, pudate, publisher, price, bookpage, link, subtitle 
 	FROM book_f
@@ -60,6 +65,14 @@
 	INSERT INTO bookf_reply 
 	VALUES((SELECT NVL(MAX(rno),0)+1 FROM bookf_reply), #{no}, #{name}, #{content}, #{poster}, #{score})
 	</insert>
+	
+	<select id="bookfSearchList" resultType="BookfVo" parameterType="hashmap">
+	SELECT no, cno, category, title, poster, price, num
+	FROM (SELECT no, category, cno, title, poster, price, rownum as num
+	FROM (SELECT no, category, cno, title, poster, price
+	FROM book_f WHERE title LIKE '%'||#{sText}||'%' ORDER BY no ASC))
+	WHERE num BETWEEN #{start} AND #{end}
+	</select>
 	
 	<!-- 찜목록 -->
 <select id="BookfJjimListData" resultType="com.sist.vo.BookfJjimVO" parameterType="string">
